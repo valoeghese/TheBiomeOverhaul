@@ -7,13 +7,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.layer.AddHillsLayer;
 import net.minecraft.world.biome.layer.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.LayerSampler;
 import valoeghese.biomeoverhaul.api.BiomeLayersRevamped;
 import valoeghese.biomeoverhaul.api.BiomeModifier;
 import valoeghese.biomeoverhaul.api.Layer;
+import valoeghese.biomeoverhaul.util.math.MathUtils;
 import valoeghese.biomeoverhaul.world.layer.BiomeHumidity;
 import valoeghese.biomeoverhaul.world.layer.BiomeLayersFunctions;
 import valoeghese.biomeoverhaul.world.layer.GenerationCategory;
@@ -33,7 +33,7 @@ public class BiomesMixin
 
 	public int coreSample(LayerRandomnessSource rand, LayerSampler layerSampler_1, LayerSampler layerSampler_2, int int_1, int int_2)
 	{
-		BiomeLayersFunctions.initNoise(MathHelper.fastFloor(3218731280712L * rand.getNoiseSampler().originX + 64207987541L * rand.getNoiseSampler().originZ), rand.getNoiseSampler().originZ);
+		BiomeLayersFunctions.initNoise(MathUtils.fastFloor(3218731280712L * rand.getNoiseSampler().originX + 64207987541L * rand.getNoiseSampler().originZ), rand.getNoiseSampler().originZ);
 		
 		//Get information of biome gen at position
 		int temp = BiomeLayersFunctions.getTemperatureAtPos(int_1, int_2);
