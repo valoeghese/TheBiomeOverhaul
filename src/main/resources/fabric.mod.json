@@ -1,0 +1,17 @@
+{
+  "id": "tbo",
+  "name": "TheBiomeOverhaul",
+  "description": "Overhaul of biome generation. Adds some new biomes as well.",
+  "version": "0.1-Alpha",
+  "side": "universal",
+  "initializers": [
+    "valoeghese.biomeoverhaul.Main"
+  ],
+  "requires": {
+    "fabric": "*"
+  },
+  "mixins": {
+    "client": "modid.client.json",
+    "common": "modid.common.json"
+  }
+}
