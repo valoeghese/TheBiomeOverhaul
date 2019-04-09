@@ -3,15 +3,18 @@ package valoeghese.biomeoverhaul.api;
 import java.util.ArrayList;
 import java.util.List;
 
-import valoeghese.biomeoverhaul.world.layer.GenerationCategory;
+import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
 
 public class Categories {
-	public static final List<Layer> bDEFAULT = new ArrayList<>();
-
+	public static final List<Layer> bPLAINS = new ArrayList<>();
+	
 	public static final List<Layer> bMOUNTAIN = new ArrayList<>();
 	public static final List<Layer> bISLAND = new ArrayList<>();
 	public static final List<Layer> bMEDITERRANEAN = new ArrayList<>();
 	public static final List<Layer> bBOREAL = new ArrayList<>();
+	public static final List<Layer> bWOODLAND = new ArrayList<>();
+	public static final List<Layer> bRAINFOREST = new ArrayList<>();
+	public static final List<Layer> bFOOTHILLS = new ArrayList<>();
 	
 	public static List<Layer> getListForCategory(GenerationCategory category)
 	{
@@ -25,8 +28,14 @@ public class Categories {
 			return bMOUNTAIN;
 		case BOREAL:
 			return bBOREAL;
+		case WOODLAND:
+			return bWOODLAND;
+		case RAINFOREST:
+			return bRAINFOREST;
+		case FOOTHILLS:
+			return bFOOTHILLS;
 		default:
-			return bDEFAULT;
+			return bPLAINS;
 		}
 	}
 }

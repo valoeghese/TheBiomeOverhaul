@@ -14,18 +14,20 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.feature.RandomRandomFeatureConfig;
+import net.minecraft.world.gen.feature.VillageFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class BiomeChapparal extends Biome
+public class ChaparralBiome extends Biome
 {
 	
-	public BiomeChapparal()
+	public ChaparralBiome()
 	{
-		super(new Biome.Settings().configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG).precipitation(Biome.Precipitation.RAIN).category(Biome.Category.PLAINS).depth(0.23F).scale(0.4F).temperature(0.7F).downfall(0.6F).waterColor(4159204).waterFogColor(329011).parent((String)null));
+		super(new Biome.Settings().configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG).precipitation(Biome.Precipitation.RAIN).category(Biome.Category.PLAINS).depth(0.23F).scale(0.37F).temperature(0.7F).downfall(0.6F).waterColor(4159204).waterFogColor(329011).parent((String)null));
 		
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
 		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
+		this.addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/plains/town_centers", 4));
 		DefaultBiomeFeatures.addLandCarvers(this);
 		DefaultBiomeFeatures.addDefaultStructures(this);
 		DefaultBiomeFeatures.addDefaultLakes(this);

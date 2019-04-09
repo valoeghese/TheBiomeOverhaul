@@ -3,10 +3,8 @@ package valoeghese.biomeoverhaul.api;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biomes;
-import valoeghese.biomeoverhaul.world.layer.BiomeHumidity;
-import valoeghese.biomeoverhaul.world.layer.BiomeTemperature;
+import valoeghese.biomeoverhaul.api.enums.BiomeHumidity;
+import valoeghese.biomeoverhaul.api.enums.BiomeTemperature;
 import valoeghese.biomeoverhaul.world.layer.DefaultBiomeLayers;
 
 public class BiomeLayersRevamped
@@ -84,9 +82,9 @@ public class BiomeLayersRevamped
 	{
 		//Adds default biomes
 		
-		mesaFeatureList.add(new Layer(Registry.BIOME.getRawId(Biomes.BADLANDS_PLATEAU), Registry.BIOME.getRawId(Biomes.BADLANDS), Registry.BIOME.getRawId(Biomes.MODIFIED_BADLANDS_PLATEAU), Registry.BIOME.getRawId(Biomes.BADLANDS)));
-		mesaFeatureList.add(new Layer(Registry.BIOME.getRawId(Biomes.BADLANDS_PLATEAU), Registry.BIOME.getRawId(Biomes.BADLANDS_PLATEAU), Registry.BIOME.getRawId(Biomes.MODIFIED_BADLANDS_PLATEAU), Registry.BIOME.getRawId(Biomes.MODIFIED_BADLANDS_PLATEAU)));
-		mesaFeatureList.add(new Layer(Registry.BIOME.getRawId(Biomes.BADLANDS), Registry.BIOME.getRawId(Biomes.BADLANDS_PLATEAU), Registry.BIOME.getRawId(Biomes.BADLANDS), Registry.BIOME.getRawId(Biomes.MODIFIED_BADLANDS_PLATEAU)));
+		mesaFeatureList.add(DefaultBiomeLayers.mesa_0);
+		mesaFeatureList.add(DefaultBiomeLayers.mesa_1);
+		mesaFeatureList.add(DefaultBiomeLayers.mesa_2);
 		
 		desertBiomesDry.add(DefaultBiomeLayers.desert_badlands);
 		desertBiomesDry.add(DefaultBiomeLayers.desert_standard);
@@ -97,45 +95,54 @@ public class BiomeLayersRevamped
 		tropicalBiomesDry.add(DefaultBiomeLayers.tropical_savanna_forest);
 		tropicalBiomesDry.add(DefaultBiomeLayers.tropical_savanna);
 		
+		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_brushland);
 		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_jungle);
 		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_darkforest);
-		//TODO Rainforest
+		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_rainforest);
 		
 		tropicalBiomesSwamp.add(DefaultBiomeLayers.tropical_bayou);
 		
-		temperateBiomesDry.add(DefaultBiomeLayers.temperate_plains);
+		temperateBiomesDry.add(DefaultBiomeLayers.temperate_plains_dry);
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_plains_plus);
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_forest);
 		
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_meditteranean_plains);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_meditteranean_forest);
 		
+		temperateBiomesWet.add(DefaultBiomeLayers.temperate_plains_humid);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_forest_humid);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_forest);
+		temperateBiomesWet.add(DefaultBiomeLayers.temperate_subtropical_rainforest);
 		
 		//Mountains
+		temperateBiomesWet.add(DefaultBiomeLayers.temperate_foothills);
+		temperateBiomesDry.add(DefaultBiomeLayers.temperate_foothills);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_mountains);
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_mountains);
 		
 		temperateBiomesSwamp.add(DefaultBiomeLayers.temperate_swamp);
 		
+		coolBiomesDry.add(DefaultBiomeLayers.cool_plains_dry);
 		coolBiomesDry.add(DefaultBiomeLayers.cool_forest_dry);
-		coolBiomesDry.add(DefaultBiomeLayers.cool_mountainous_taiga);
 		coolBiomesDry.add(DefaultBiomeLayers.cool_boreal_plains);
 		
-		coolBiomesWet.add(DefaultBiomeLayers.cool_plains);
+		coolBiomesWet.add(DefaultBiomeLayers.cool_plains_humid);
 		coolBiomesWet.add(DefaultBiomeLayers.cool_forest_humid);
 		coolBiomesWet.add(DefaultBiomeLayers.cool_boreal_forest);
 		
 		//Mountains
-		coolBiomesDry.add(DefaultBiomeLayers.cool_mountains);
-		coolBiomesWet.add(DefaultBiomeLayers.cool_mountains);
+		coolBiomesDry.add(DefaultBiomeLayers.cool_dry_foothills);
+		coolBiomesWet.add(DefaultBiomeLayers.cool_humid_foothills);
+		coolBiomesDry.add(DefaultBiomeLayers.cool_dry_mountains);
+		coolBiomesWet.add(DefaultBiomeLayers.cool_humid_mountains);
 		
 		frozenBiomesDry.add(DefaultBiomeLayers.frozen_plains_dry);
-		frozenBiomesDry.add(DefaultBiomeLayers.frozen_mountains);
 		
 		frozenBiomesWet.add(DefaultBiomeLayers.frozen_forest);
 		frozenBiomesWet.add(DefaultBiomeLayers.frozen_plains_humid);
+		
+		//Mountains
+		frozenBiomesDry.add(DefaultBiomeLayers.frozen_mountains);
 	}
 
 }

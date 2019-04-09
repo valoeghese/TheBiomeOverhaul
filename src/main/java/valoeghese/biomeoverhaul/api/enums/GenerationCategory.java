@@ -1,15 +1,19 @@
-package valoeghese.biomeoverhaul.world.layer;
+package valoeghese.biomeoverhaul.api.enums;
 
 public enum GenerationCategory
 {
 	/**
-	 * The default generation. Likely to be replaced in a future update with FOREST, SPARSE, etc.
+	 * The default generation. Denotes plains-style biomes.
 	 */
-	DEFAULT,
+	PLAINS,
 	/**
 	 * Mountain ranges that generate on a two-octave noise basis
 	 */
 	MOUNTAIN,
+	/**
+	 * Edges of a mountain range
+	 */
+	FOOTHILLS,
 	/**
 	 * Islands in the sea. None of the current default biomes use this, but it generates similarly to MOUNTAIN
 	 */
@@ -21,5 +25,13 @@ public enum GenerationCategory
 	/**
 	 * In cool (1) and frozen (0) climates. "Boreal" style region. I'm mostly referring to colder sub-arctic regions by this.
 	 */
-	BOREAL;
+	BOREAL,
+	/**
+	 * The default generation. Denotes plains-style biomes.
+	 */
+	WOODLAND,
+	/**
+	 * The default generation. Denotes plains-style biomes.
+	 */
+	RAINFOREST;
 }

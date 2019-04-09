@@ -13,10 +13,10 @@ import net.minecraft.world.biome.layer.LayerSampler;
 import valoeghese.biomeoverhaul.api.BiomeLayersRevamped;
 import valoeghese.biomeoverhaul.api.BiomeModifier;
 import valoeghese.biomeoverhaul.api.Layer;
+import valoeghese.biomeoverhaul.api.enums.BiomeHumidity;
+import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
 import valoeghese.biomeoverhaul.util.math.MathUtils;
-import valoeghese.biomeoverhaul.world.layer.BiomeHumidity;
 import valoeghese.biomeoverhaul.world.layer.BiomeLayersFunctions;
-import valoeghese.biomeoverhaul.world.layer.GenerationCategory;
 
 @Mixin(value = AddHillsLayer.class)
 public class BiomesMixin
@@ -56,7 +56,8 @@ public class BiomesMixin
 
 			if (BiomeLayersFunctions.isSwamp(int_1, int_2))
 				biomes = BiomeLayersFunctions.addSwamp(temp, biomes, rand);
-			if (BiomeLayersFunctions.isBadlands(temp, humidity, int_1, int_2))
+			
+			if (BiomeLayersFunctions.isBadlands(temp, int_1, int_2))
 				biomes = BiomeLayersRevamped.mesaFeatureList;
 
 			layer = (Layer) biomes.toArray()[rand.nextInt(biomes.size())];
@@ -65,7 +66,7 @@ public class BiomesMixin
 		double hillsNoise = BiomeLayersFunctions.hills(int_1, int_2);
 		double mutationNoise = BiomeLayersFunctions.mutation(int_1, int_2);
 
-		if (hillsNoise > 0.38D)
+		if (hillsNoise > 0.51D || hillsNoise < -0.51D)
 		{
 			if (mutationNoise > 0.55 || rand.nextInt(16) == 0) return this.returnBiome(layer.hillmut, rand, temp, true, true, int_1, int_2);
 			else return this.returnBiome(layer.hill, rand, temp, false, true, int_1, int_2);

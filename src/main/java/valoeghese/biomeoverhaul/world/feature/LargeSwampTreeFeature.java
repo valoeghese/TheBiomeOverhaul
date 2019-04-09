@@ -1,4 +1,4 @@
-package valoeghese.biomeoverhaul.world;
+package valoeghese.biomeoverhaul.world.feature;
 
 import java.util.Random;
 import java.util.Set;

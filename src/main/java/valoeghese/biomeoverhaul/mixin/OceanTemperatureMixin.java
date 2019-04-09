@@ -41,7 +41,7 @@ public class OceanTemperatureMixin
 
 			if (counter > 3)
 			{
-				if (layerRandomnessSource_1.nextInt(3) > 0)
+				if (layerRandomnessSource_1.nextInt(5) > 3)
 				{
 					if (biome == WARM_OCEAN_ID)
 					{

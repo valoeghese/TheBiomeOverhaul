@@ -1,4 +1,4 @@
-package valoeghese.biomeoverhaul.world;
+package valoeghese.biomeoverhaul.world.feature;
 
 import java.util.Random;
 import java.util.Set;
@@ -30,7 +30,7 @@ public class BushFeature extends AbstractTreeFeature<DefaultFeatureConfig> imple
 
 	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1)
 	{
-		int height = random_1.nextInt(7) + 5;
+		int height = 3;
 		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);
 
 		BlockGenerator generator = new BlockGenerator(world);

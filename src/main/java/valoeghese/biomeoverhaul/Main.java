@@ -12,6 +12,9 @@ import valoeghese.biomeoverhaul.world.layer.BiomeLayersFunctions;
 public class Main implements ModInitializer
 {
 
+	public static final int PLAINS = Registry.BIOME.getRawId(Biomes.PLAINS);
+	public static final int FOREST = Registry.BIOME.getRawId(Biomes.FOREST);
+	
 	@Override
 	public void onInitialize()
 	{
@@ -32,7 +35,7 @@ public class Main implements ModInitializer
 				if (random.nextInt(8) > 0)
 				if (biome == Registry.BIOME.getRawId(Biomes.TAIGA) || biome == Registry.BIOME.getRawId(Biomes.TAIGA_HILLS) || biome == Registry.BIOME.getRawId(Biomes.TAIGA_MOUNTAINS))
 				{
-					OpenSimplexNoise noise = BiomeLayersFunctions.NOISE_GENERATION_CATEGORY;
+					OpenSimplexNoise noise = BiomeLayersFunctions.NOISE_GENERATION_CATEGORY_A;
 					double eval = 0.82D*noise.eval(this.int_1 / 10D, this.int_2 / 10D) + 0.18D*noise.eval(this.int_1 / 6.5D, this.int_2 / 6.5D, 1D);
 					
 					if (eval > 0.37D)
@@ -111,6 +114,44 @@ public class Main implements ModInitializer
 					if (random.nextInt(100) == 0)
 					{
 						biome_1 = Registry.BIOME.getRawId(Biomes.MUSHROOM_FIELDS);
+					}
+				}
+				return biome_1;
+			}
+
+		}, BiomeModifier.ModifierPriority.STANDARD);
+		BiomeModifier.addBiomeModifier(new BiomeModifier() {
+
+			@Override
+			public int apply(LayerRandomnessSource random, int biome, int unmodifiedBiome, int temperature,
+					boolean mutation, boolean hills) {
+
+				int biome_1 = biome;
+				
+				if (biome == Registry.BIOME.getRawId(Biomes.DESERT_LAKES))
+				{
+					if (random.nextInt(30) == 0)
+					{
+						biome_1 = Registry.BIOME.getRawId(ModBiomes.OASIS);
+					}
+				}
+				return biome_1;
+			}
+
+		}, BiomeModifier.ModifierPriority.STANDARD);
+		BiomeModifier.addBiomeModifier(new BiomeModifier() {
+
+			@Override
+			public int apply(LayerRandomnessSource random, int biome, int unmodifiedBiome, int temperature,
+					boolean mutation, boolean hills) {
+
+				int biome_1 = biome;
+				
+				if (biome == Registry.BIOME.getRawId(Biomes.DESERT))
+				{
+					if (random.nextInt(50) == 0)
+					{
+						biome_1 = Registry.BIOME.getRawId(ModBiomes.OASIS);
 					}
 				}
 				return biome_1;

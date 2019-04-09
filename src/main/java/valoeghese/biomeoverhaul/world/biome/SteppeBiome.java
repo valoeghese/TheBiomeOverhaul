@@ -1,32 +1,37 @@
 package valoeghese.biomeoverhaul.world.biome;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.CountDecoratorConfig;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.feature.BoulderFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
 
-public class BiomeTundra extends Biome
+public class SteppeBiome extends TBOBiome
 {
 
-	public BiomeTundra()
+	public SteppeBiome()
 	{
-		super((new Biome.Settings()).configureSurfaceBuilder(CustomSurfaceBuilders.TUNDRA_BUILDER, SurfaceBuilder.GRASS_CONFIG).precipitation(Biome.Precipitation.RAIN).category(Biome.Category.PLAINS).depth(0.125F).scale(0.08F).temperature(0.3F).downfall(0.5F).waterColor(4159204).waterFogColor(329011).parent((String)null));
-		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
-		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
-		DefaultBiomeFeatures.addLandCarvers(this);
-		DefaultBiomeFeatures.addDefaultStructures(this);
+		super(BiomeFactory.create(0.4F, 0.09F, Biome.Category.PLAINS).setTemperatureDownfall(0.3F, 0.1F));
+
+		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDesertLakes(this);
-		DefaultBiomeFeatures.addDungeons(this);
-		DefaultBiomeFeatures.addMineables(this);
-		DefaultBiomeFeatures.addDefaultOres(this);
-		DefaultBiomeFeatures.addDefaultDisks(this);
-		DefaultBiomeFeatures.addForestGrass(this);
+		this.theBiomeFactory.addDefaultMineables();
+		DefaultBiomeFeatures.addInfestedStone(this);
+		this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, Biome.configureFeature(Feature.FOREST_ROCK, new BoulderFeatureConfig(Blocks.STONE.getDefaultState(), 0), Decorator.FOREST_ROCK, new CountDecoratorConfig(1)));
+		CustomBiomeFeatures.addSteppeTrees(this);
+		DefaultBiomeFeatures.addDefaultGrass(this);
+		DefaultBiomeFeatures.addPlainsTallGrass(this);
+		DefaultBiomeFeatures.addDefaultMushrooms(this);
+		DefaultBiomeFeatures.addDefaultVegetation(this);
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addFrozenTopLayer(this);
 		this.addSpawn(EntityCategory.CREATURE, new Biome.SpawnEntry(EntityType.SHEEP, 12, 4, 4));
@@ -47,8 +52,10 @@ public class BiomeTundra extends Biome
 	}
 	
 	@Override
-	public float getMaxSpawnLimit()
+	@Environment(EnvType.CLIENT)
+	public int getGrassColorAt(BlockPos pos)
 	{
-	      return 0.05F;
+		return Biomes.DESERT.getGrassColorAt(pos);
 	}
+
 }

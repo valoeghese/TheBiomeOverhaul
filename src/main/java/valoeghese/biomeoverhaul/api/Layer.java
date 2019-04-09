@@ -4,7 +4,7 @@ package valoeghese.biomeoverhaul.api;
 import java.util.ArrayList;
 import java.util.List;
 
-import valoeghese.biomeoverhaul.world.layer.GenerationCategory;
+import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
 
 public class Layer
 {

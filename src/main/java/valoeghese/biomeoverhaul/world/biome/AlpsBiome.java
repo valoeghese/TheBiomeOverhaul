@@ -11,9 +11,9 @@ import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
 
-public class BiomeAlps extends Biome
+public class AlpsBiome extends Biome
 {
-	public BiomeAlps()
+	public AlpsBiome()
 	{
 		super(new Biome.Settings().configureSurfaceBuilder(SurfaceBuilder.DEFAULT, CustomSurfaceBuilders.ALPS_CONFIG).precipitation(Biome.Precipitation.SNOW).category(Biome.Category.EXTREME_HILLS).depth(3.8F).scale(0.12F).temperature(-0.5F).downfall(0.4F).waterColor(4159204).waterFogColor(329011).parent((String)null));
 		
