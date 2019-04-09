@@ -60,6 +60,9 @@ public class DefaultBiomeLayers
 	
 	//TODO Ice spikes as modification
 	public static final Layer frozen_plains_dry = new Layer(Registry.BIOME.getRawId(Biomes.SNOWY_TUNDRA), Registry.BIOME.getRawId(Biomes.SNOWY_MOUNTAINS), Registry.BIOME.getRawId(Biomes.SNOWY_TUNDRA), Registry.BIOME.getRawId(Biomes.ICE_SPIKES)).withCategories(GenerationCategory.PLAINS);
+	
+	//TODO Alps Edge
+	public static final Layer frozen_foothills = new Layer(Registry.BIOME.getRawId(Biomes.SNOWY_MOUNTAINS)).withCategories(GenerationCategory.MOUNTAIN);
 	public static final Layer frozen_mountains = new Layer(Registry.BIOME.getRawId(ModBiomes.ALPS)).withCategories(GenerationCategory.MOUNTAIN);
 	
 	public static final Layer frozen_forest = new Layer(Registry.BIOME.getRawId(Biomes.SNOWY_TAIGA), Registry.BIOME.getRawId(Biomes.SNOWY_TAIGA_HILLS), Registry.BIOME.getRawId(Biomes.SNOWY_TAIGA_MOUNTAINS), Registry.BIOME.getRawId(Biomes.SNOWY_TAIGA)).withCategories(GenerationCategory.WOODLAND);
