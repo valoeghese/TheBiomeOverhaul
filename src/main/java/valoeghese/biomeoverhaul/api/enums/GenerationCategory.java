@@ -27,11 +27,11 @@ public enum GenerationCategory
 	 */
 	BOREAL,
 	/**
-	 * The default generation. Denotes plains-style biomes.
+	 * Woodland and Forest style generation
 	 */
 	WOODLAND,
 	/**
-	 * The default generation. Denotes plains-style biomes.
+	 * Rainforest areas
 	 */
 	RAINFOREST;
 }

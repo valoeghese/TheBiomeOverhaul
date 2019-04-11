@@ -10,13 +10,13 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
-import valoeghese.biomeoverhaul.util.math.Tuple;
+import valoeghese.biomeoverhaul.util.math.Triple;
 
 public class BlockGenerator
 {
 	protected ModifiableTestableWorld world;
 	protected boolean canGenerate = true;
-	protected List<Tuple<BlockPos, BlockState>> gen = new ArrayList<>();
+	protected List<Triple<BlockPos, BlockState, Boolean>> gen = new ArrayList<>();
 
 	public BlockGenerator(ModifiableTestableWorld world)
 	{
@@ -25,9 +25,11 @@ public class BlockGenerator
 
 	public void setBlock(BlockPos pos, BlockState state, boolean ignore)
 	{
-		if (!ignore) this.canGenerate = this.canGenerate && canTreeReplace(this.world, pos);
+		boolean replaceable = canTreeReplace(this.world, pos);
+		
+		if (!ignore) this.canGenerate = this.canGenerate && replaceable;
 
-		this.gen.add(new Tuple<BlockPos, BlockState>(pos, state));
+		this.gen.add(new Triple<BlockPos, BlockState, Boolean>(pos, state, replaceable || ignore));
 	}
 
 	public boolean generate(int flag)
@@ -44,8 +46,9 @@ public class BlockGenerator
 	{
 		if (this.canGenerate || forceGeneration)
 		{
-			for (Tuple<BlockPos, BlockState> pair : this.gen)
-				world.setBlockState(pair.getA(), pair.getB(), flag);
+			for (Triple<BlockPos, BlockState, Boolean> pair : this.gen)
+				if (pair.getC())
+					world.setBlockState(pair.getA(), pair.getB(), flag);
 
 			return true;
 		}
@@ -56,8 +59,9 @@ public class BlockGenerator
 	{
 		if (this.canGenerate || forceGeneration)
 		{
-			for (Tuple<BlockPos, BlockState> pair : this.gen)
-				generator.setWorldBlockState(this.world, pair.getA(), pair.getB());
+			for (Triple<BlockPos, BlockState, Boolean> pair : this.gen)
+				if (pair.getC())
+					generator.setWorldBlockState(this.world, pair.getA(), pair.getB());
 
 			return true;
 		}

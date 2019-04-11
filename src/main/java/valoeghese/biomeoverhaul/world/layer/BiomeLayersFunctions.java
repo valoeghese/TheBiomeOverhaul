@@ -153,7 +153,7 @@ public class BiomeLayersFunctions
 					return GenerationCategory.BOREAL;
 			}
 			
-			if (generation_noise_2 > 0.23F)
+			if (generation_noise_2 > 0.26F)
 				return GenerationCategory.RAINFOREST;
 			
 			if (forest_noise > 0.1F)

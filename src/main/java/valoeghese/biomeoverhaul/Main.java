@@ -87,14 +87,52 @@ public class Main implements ModInitializer
 					boolean mutation, boolean hills) {
 
 				int biome_1 = biome;
-
+				
+				boolean alter = random.nextInt(5) == 0;
+				
 				if (unmodifiedBiome == Registry.BIOME.getRawId(Biomes.JUNGLE))
 				{
-					if (random.nextInt(5) == 0) biome_1 = Registry.BIOME.getRawId(Biomes.BAMBOO_JUNGLE);
+					if (alter) biome_1 = Registry.BIOME.getRawId(Biomes.BAMBOO_JUNGLE);
 				};
 				if (unmodifiedBiome == Registry.BIOME.getRawId(Biomes.JUNGLE_HILLS))
 				{
-					if (random.nextInt(5) == 0) biome_1 = Registry.BIOME.getRawId(Biomes.BAMBOO_JUNGLE_HILLS);
+					if (alter) biome_1 = Registry.BIOME.getRawId(Biomes.BAMBOO_JUNGLE_HILLS);
+				};
+
+				return biome_1;
+			}
+
+		}, BiomeModifier.ModifierPriority.STANDARD);
+		BiomeModifier.addBiomeModifier(new BiomeModifier() {
+
+			@Override
+			public int apply(LayerRandomnessSource random, int biome, int unmodifiedBiome, int temperature,
+					boolean mutation, boolean hills) {
+
+				int biome_1 = biome;
+				
+				boolean alter = random.nextInt(10) == 0;
+				
+				if (unmodifiedBiome == Registry.BIOME.getRawId(ModBiomes.FEN))
+				{
+					if (alter) biome_1 = Registry.BIOME.getRawId(ModBiomes.FORESTED_FEN);
+				};
+
+				return biome_1;
+			}
+
+		}, BiomeModifier.ModifierPriority.STANDARD);
+		BiomeModifier.addBiomeModifier(new BiomeModifier() {
+
+			@Override
+			public int apply(LayerRandomnessSource random, int biome, int unmodifiedBiome, int temperature,
+					boolean mutation, boolean hills) {
+
+				int biome_1 = biome;
+
+				if (biome == Registry.BIOME.getRawId(Biomes.WOODED_MOUNTAINS))
+				{
+					if (random.nextInt(8) == 0) biome_1 = Registry.BIOME.getRawId(Biomes.BAMBOO_JUNGLE);
 				};
 
 				return biome_1;

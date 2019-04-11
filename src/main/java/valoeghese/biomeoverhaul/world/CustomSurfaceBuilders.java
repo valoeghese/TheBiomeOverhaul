@@ -21,7 +21,11 @@ public class CustomSurfaceBuilders
 	public static final SurfaceBuilder<TernarySurfaceConfig> TUNDRA_BUILDER;
 	public static final SurfaceBuilder<TernarySurfaceConfig> GROVE_BUILDER;
 	public static final SurfaceBuilder<TernarySurfaceConfig> RAINFOREST_BUILDER;
+	public static final SurfaceBuilder<TernarySurfaceConfig> GLACIER_BUILDER;
+	
 	public static final TernarySurfaceConfig ALPS_CONFIG;
+	public static final TernarySurfaceConfig ICY_CONFIG;
+	public static final TernarySurfaceConfig ICY_SNOWY_CONFIG;
 	public static final TernarySurfaceConfig TERRACOTTA_RED_CONFIG;
 	public static final TernarySurfaceConfig TERRACOTTA_ORANGE_CONFIG;
 	public static final TernarySurfaceConfig TERRACOTTA_YELLOW_CONFIG;
@@ -37,6 +41,8 @@ public class CustomSurfaceBuilders
 	static
 	{
 		ALPS_CONFIG = new TernarySurfaceConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState());
+		ICY_CONFIG = new TernarySurfaceConfig(Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.BLUE_ICE.getDefaultState());
+		ICY_SNOWY_CONFIG = new TernarySurfaceConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.BLUE_ICE.getDefaultState());
 		TERRACOTTA_RED_CONFIG = new TernarySurfaceConfig(Blocks.RED_TERRACOTTA.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState());
 		TERRACOTTA_ORANGE_CONFIG = new TernarySurfaceConfig(Blocks.ORANGE_TERRACOTTA.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState());
 		TERRACOTTA_YELLOW_CONFIG = new TernarySurfaceConfig(Blocks.YELLOW_TERRACOTTA.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState());
@@ -48,6 +54,7 @@ public class CustomSurfaceBuilders
 		TUNDRA_BUILDER = register("tbo:valoeghese_tundra", new TundraSurfaceBuilder(TernarySurfaceConfig::deserialize));
 		GROVE_BUILDER = register("tbo:valoeghese_grove", new GroveSurfaceBuilder(TernarySurfaceConfig::deserialize));
 		RAINFOREST_BUILDER = register("tbo:valoeghese_rainforest", new RainforestSurfaceBuilder(TernarySurfaceConfig::deserialize));
+		GLACIER_BUILDER = register("tbo:valoeghese_glacier", new GlacierBuilder(TernarySurfaceConfig::deserialize));
 	}
 
 	public static class ShieldSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
@@ -95,6 +102,30 @@ public class CustomSurfaceBuilders
 			else
 			{
 				SurfaceBuilder.DEFAULT.generate(random1, chunk1, biome1, int1, int2, seaLevel, noiseVal, blockState1, blockState_2, int_4, long1, SurfaceBuilder.COARSE_DIRT_CONFIG);
+			}
+		}
+	}
+	public static class GlacierBuilder extends SurfaceBuilder<TernarySurfaceConfig>
+	{
+		public GlacierBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function1)
+		{
+			super(function1);
+		}
+
+		@Override
+		public void generate(Random random1, Chunk chunk1, Biome biome1, int int1, int int2, int seaLevel, double noiseVal,
+				BlockState blockState1, BlockState blockState_2, int int_4, long long1, TernarySurfaceConfig var14) {
+			if (noiseVal > 3.1D)
+			{
+				SurfaceBuilder.DEFAULT.generate(random1, chunk1, biome1, int1, int2, seaLevel, noiseVal, blockState1, blockState_2, int_4, long1, ALPS_CONFIG);
+			}
+			else if (noiseVal > 1.4D)
+			{
+				SurfaceBuilder.DEFAULT.generate(random1, chunk1, biome1, int1, int2, seaLevel, noiseVal, blockState1, blockState_2, int_4, long1, ICY_SNOWY_CONFIG);
+			}
+			else
+			{
+				SurfaceBuilder.DEFAULT.generate(random1, chunk1, biome1, int1, int2, seaLevel, noiseVal, blockState1, blockState_2, int_4, long1, ICY_CONFIG);
 			}
 		}
 	}
@@ -149,11 +180,10 @@ public class CustomSurfaceBuilders
 				OpenSimplexNoise noise = new OpenSimplexNoise(seed);
 				
 				double dampNoise = noise.eval(x / 20D, z / 20D, 6D);
-				double clayNoise2 = noise.eval(x / 14D, z / 14D, 3D);
+				double clayNoise = noise.eval(x / 14D, z / 14D, 3D);
 				TernarySurfaceConfig config = RAINFOREST_CONFIG;
 				
-				if (noise.eval(x / 16D, z / 16D, 3D) > 0.65D) config = CLAY_CONFIG;
-				else if (clayNoise2 < -0.5D && clayNoise2 > -0.8D) config = CLAY_CONFIG;
+				if (clayNoise < -0.5D && clayNoise > -0.8D) config = CLAY_CONFIG;
 				else if (noise.eval(x / 18D, z / 18D, 6D) > 0.84D) config = SurfaceBuilder.STONE_CONFIG;
 				else if (dampNoise < -0.23D && dampNoise > -0.28D) config = SurfaceBuilder.PODZOL_CONFIG;
 				

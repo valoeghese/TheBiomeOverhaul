@@ -2,7 +2,7 @@
   "id": "tbo",
   "name": "TheBiomeOverhaul",
   "description": "Overhaul of biome generation. Adds some new biomes as well.",
-  "version": "0.1-Alpha",
+  "version": "1.0 Beta",
   "side": "universal",
   "initializers": [
     "valoeghese.biomeoverhaul.Main"

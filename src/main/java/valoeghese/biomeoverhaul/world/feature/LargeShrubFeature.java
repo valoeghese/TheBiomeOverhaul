@@ -18,16 +18,18 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import valoeghese.biomeoverhaul.util.BlockGenerator;
 import valoeghese.biomeoverhaul.util.PublicWorldModifier;
 
-public class ShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements PublicWorldModifier
+public class LargeShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements PublicWorldModifier
 {
 	private static final int[][] coords = {{1,1},{1,-1},{-1,1},{-1,-1}};
 	
 	private static final BlockState LOG = Blocks.OAK_LOG.getDefaultState();
-	private static final BlockState LEAVES = Blocks.OAK_LEAVES.getDefaultState().with(LeavesBlock.PERSISTENT, Boolean.valueOf(true));
+	private final BlockState LEAVES;
 
-	public ShrubFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1)
+	public LargeShrubFeature(BlockState leaves, Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1)
 	{
 		super(function_1, false);
+		
+		LEAVES = leaves.with(LeavesBlock.PERSISTENT, Boolean.valueOf(true));
 	}
 
 	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random rand, BlockPos blockPos_1)
@@ -40,8 +42,6 @@ public class ShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig> impl
 		if (blockPos_1.getY() >= 1 && blockPos_1.getY() + height + 1 <= 256 && super.isNaturalDirtOrGrass(world, blockPos_1.down()))
 		{
 			generator.setBlock(blockPos_1.down(), Blocks.DIRT.getDefaultState(), true);
-
-			generator.setBlock(blockPos_1.add(0, 0, 0), LOG, false);
 			
 			for (int i = -2; i <= 2; ++i)
 			{
@@ -71,7 +71,9 @@ public class ShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig> impl
 				}
 				else if (c0 > 1) --c0;
 			}
-
+			
+			generator.setBlock(blockPos_1, LOG, false);
+			
 			return generator.generate(this);
 		}
 		else

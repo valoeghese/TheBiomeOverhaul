@@ -90,7 +90,6 @@ public class BiomeLayersRevamped
 		desertBiomesDry.add(DefaultBiomeLayers.desert_standard);
 		
 		desertBiomesWet.add(DefaultBiomeLayers.desert_humid);
-		//TODO Oasis. In modificaton code
 		
 		tropicalBiomesDry.add(DefaultBiomeLayers.tropical_savanna_forest);
 		tropicalBiomesDry.add(DefaultBiomeLayers.tropical_savanna);
@@ -112,7 +111,9 @@ public class BiomeLayersRevamped
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_plains_humid);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_forest_humid);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_forest);
+		
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_subtropical_rainforest);
+		temperateBiomesDry.add(DefaultBiomeLayers.temperate_temperate_rainforest);
 		
 		//Mountains
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_foothills);
@@ -121,6 +122,7 @@ public class BiomeLayersRevamped
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_mountains);
 		
 		temperateBiomesSwamp.add(DefaultBiomeLayers.temperate_swamp);
+		temperateBiomesSwamp.add(DefaultBiomeLayers.temperate_forested_swamp);
 		
 		coolBiomesDry.add(DefaultBiomeLayers.cool_plains_dry);
 		coolBiomesDry.add(DefaultBiomeLayers.cool_forest_dry);
@@ -136,6 +138,9 @@ public class BiomeLayersRevamped
 		coolBiomesDry.add(DefaultBiomeLayers.cool_dry_mountains);
 		coolBiomesWet.add(DefaultBiomeLayers.cool_humid_mountains);
 		
+		coolBiomesSwamp.add(DefaultBiomeLayers.cool_swamp);
+		coolBiomesSwamp.add(DefaultBiomeLayers.cool_forested_swamp);
+		
 		frozenBiomesDry.add(DefaultBiomeLayers.frozen_plains_dry);
 		
 		frozenBiomesWet.add(DefaultBiomeLayers.frozen_forest);
@@ -143,6 +148,9 @@ public class BiomeLayersRevamped
 		
 		//Mountains
 		frozenBiomesDry.add(DefaultBiomeLayers.frozen_mountains);
+		frozenBiomesWet.add(DefaultBiomeLayers.frozen_mountains);
+		frozenBiomesDry.add(DefaultBiomeLayers.frozen_foothills);
+		frozenBiomesWet.add(DefaultBiomeLayers.frozen_foothills);
 	}
 
 }
