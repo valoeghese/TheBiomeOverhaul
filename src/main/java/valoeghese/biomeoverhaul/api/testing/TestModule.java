@@ -1,9 +1,7 @@
-package valoeghese.biomeoverhaul.api;
+package valoeghese.biomeoverhaul.api.testing;
 
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.LayerRandomnessSource;
-import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
+import valoeghese.biomeoverhaul.api.layer.Layer;
 
 /**
  * 
@@ -15,9 +13,6 @@ import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
  */
 public interface TestModule
 {
-	/**
-	 * To test a single biome, return TestModule.LayerSingle.get(biome)
-	 */
 	public Layer getTestBiomeLayer(LayerRandomnessSource random, int int_1, int int_2);
 	
 	default public boolean disableModifiers()
@@ -34,12 +29,4 @@ public interface TestModule
 	 * @return whether the module is enabled
 	 */
 	public boolean isEnabled();
-	
-	public static class LayerSingle
-	{
-		public Layer get(Biome biome)
-		{
-			return new Layer(Registry.BIOME.getRawId(biome)).withCategories(GenerationCategory.PLAINS);
-		}
-	}
 }

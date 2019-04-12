@@ -1,10 +1,11 @@
-package valoeghese.biomeoverhaul.api;
+package valoeghese.biomeoverhaul.api.layer;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
+import valoeghese.biomeoverhaul.world.layer.Categories;
 
 public class Layer
 {

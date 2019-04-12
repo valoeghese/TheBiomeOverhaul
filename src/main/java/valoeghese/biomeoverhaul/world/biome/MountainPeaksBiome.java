@@ -11,7 +11,7 @@ public class MountainPeaksBiome extends TBOBiome
 
 	public MountainPeaksBiome()
 	{
-		super(BiomeFactory.create(2.95F, 0.4F, Biome.Category.EXTREME_HILLS).setTemperatureDownfall(0.2F, 0.4F).setSpawnChance(0.04F).setBaseBiome("mountains"));
+		super(BiomeFactory.create(3.2F, 0.4F, Biome.Category.EXTREME_HILLS).setTemperatureDownfall(0.2F, 0.4F).setSpawnChance(0.04F).setBaseBiome("mountains"));
 		
 		this.setTopBlock(Blocks.STONE.getDefaultState());
 		this.setFillerBlock(Blocks.STONE.getDefaultState());

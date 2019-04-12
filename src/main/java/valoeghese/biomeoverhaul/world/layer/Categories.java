@@ -1,9 +1,10 @@
-package valoeghese.biomeoverhaul.api;
+package valoeghese.biomeoverhaul.world.layer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
+import valoeghese.biomeoverhaul.api.layer.Layer;
 
 public class Categories {
 	public static final List<Layer> bPLAINS = new ArrayList<>();

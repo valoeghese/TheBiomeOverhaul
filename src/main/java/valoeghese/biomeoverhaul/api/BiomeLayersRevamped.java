@@ -5,6 +5,7 @@ import java.util.List;
 
 import valoeghese.biomeoverhaul.api.enums.BiomeHumidity;
 import valoeghese.biomeoverhaul.api.enums.BiomeTemperature;
+import valoeghese.biomeoverhaul.api.layer.Layer;
 import valoeghese.biomeoverhaul.world.layer.DefaultBiomeLayers;
 
 public class BiomeLayersRevamped

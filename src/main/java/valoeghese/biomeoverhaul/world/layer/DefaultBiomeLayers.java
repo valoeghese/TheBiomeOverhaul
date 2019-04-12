@@ -3,8 +3,8 @@ package valoeghese.biomeoverhaul.world.layer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biomes;
 import valoeghese.biomeoverhaul.ModBiomes;
-import valoeghese.biomeoverhaul.api.Layer;
 import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
+import valoeghese.biomeoverhaul.api.layer.Layer;
 
 public class DefaultBiomeLayers
 {
@@ -66,7 +66,7 @@ public class DefaultBiomeLayers
 	//TODO Ice spikes as modification
 	public static final Layer frozen_plains_dry = new Layer(Registry.BIOME.getRawId(Biomes.SNOWY_TUNDRA), Registry.BIOME.getRawId(Biomes.SNOWY_MOUNTAINS), Registry.BIOME.getRawId(Biomes.SNOWY_TUNDRA), Registry.BIOME.getRawId(Biomes.ICE_SPIKES)).withCategories(GenerationCategory.PLAINS);
 	
-	public static final Layer frozen_foothills = new Layer(Registry.BIOME.getRawId(ModBiomes.ALPS_EDGE)).withCategories(GenerationCategory.MOUNTAIN);
+	public static final Layer frozen_foothills = new Layer(Registry.BIOME.getRawId(ModBiomes.ALPS_EDGE)).withCategories(GenerationCategory.FOOTHILLS);
 	public static final Layer frozen_mountains = new Layer(Registry.BIOME.getRawId(ModBiomes.ALPS)).withCategories(GenerationCategory.MOUNTAIN);
 	
 	public static final Layer frozen_forest = new Layer(Registry.BIOME.getRawId(Biomes.SNOWY_TAIGA), Registry.BIOME.getRawId(Biomes.SNOWY_TAIGA_HILLS), Registry.BIOME.getRawId(Biomes.SNOWY_TAIGA_MOUNTAINS), Registry.BIOME.getRawId(Biomes.SNOWY_TAIGA)).withCategories(GenerationCategory.WOODLAND);

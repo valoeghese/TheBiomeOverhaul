@@ -10,10 +10,11 @@ public class GlacierBiome extends TBOBiome
 {
 	public GlacierBiome()
 	{
-		super(BiomeFactory.create(1.6F, 0.28F, Biome.Precipitation.SNOW, Biome.Category.ICY).setSurfaceBuilder(CustomSurfaceBuilders.GLACIER_BUILDER));
+		super(BiomeFactory.create(1.6F, 0.28F, Biome.Precipitation.SNOW, Biome.Category.ICY).setSurfaceBuilder(CustomSurfaceBuilders.GLACIER_BUILDER).setTemperatureDownfall(-0.1F, 0.2F));
 		this.theBiomeFactory.addDefaultGeneration();
 		this.theBiomeFactory.addDefaultMineables();
 		DefaultBiomeFeatures.addSprings(this);
+		DefaultBiomeFeatures.addFrozenTopLayer(this);
 		this.addSpawn(EntityCategory.CREATURE, new Biome.SpawnEntry(EntityType.RABBIT, 8, 2, 3));
 		this.addSpawn(EntityCategory.AMBIENT, new Biome.SpawnEntry(EntityType.BAT, 10, 8, 8));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SPIDER, 100, 4, 4));

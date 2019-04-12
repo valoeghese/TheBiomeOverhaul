@@ -6,11 +6,10 @@ import java.util.Random;
 
 import net.minecraft.world.biome.layer.LayerRandomnessSource;
 import valoeghese.biomeoverhaul.api.BiomeLayersRevamped;
-import valoeghese.biomeoverhaul.api.Categories;
-import valoeghese.biomeoverhaul.api.Layer;
 import valoeghese.biomeoverhaul.api.enums.BiomeHumidity;
 import valoeghese.biomeoverhaul.api.enums.BiomeTemperature;
 import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
+import valoeghese.biomeoverhaul.api.layer.Layer;
 import valoeghese.biomeoverhaul.util.noise.OpenSimplexNoise;
 
 public class BiomeLayersFunctions
@@ -42,7 +41,7 @@ public class BiomeLayersFunctions
 	public static final double SWAMP_SCALE = 9D;
 	public static final double HUMIDITY_SCALE = 15D;
 	public static final double OCEAN_SIZE = 17.5D;
-	public static final double CLIMATE_SIZE = 30D; //The input is already scaled in some way, so this doesn't need to be super large.
+	public static final double CLIMATE_SIZE = 29D; //The input is already scaled in some way, so this doesn't need to be super large.
 
 
 	/**
@@ -53,14 +52,13 @@ public class BiomeLayersFunctions
 	 */
 	public static int getTemperatureAtPos(double x, double z)
 	{
-
 		double val = NOISE_1.eval((x / CLIMATE_SIZE) - temperatureOffset, (z / CLIMATE_SIZE) - temperatureOffset);
 		
 		if (val > 0.62D) return 4;
 		else if (val > 0.28D) return 3;
 		else if (val > -0.28D) return 2;
 		else if (val > -0.62D) return 1;
-		else return 0;
+		else return 0; // */
 	}
 
 	public static boolean isOcean(double int_1, double int_2)
@@ -135,11 +133,11 @@ public class BiomeLayersFunctions
 		
 		if (!isOcean)
 		{
-			height_noise = 0.76D * n.eval(int_1 / 25D, int_2 / 25D) + 0.21D * n.eval(int_1 / 16D, int_2 / 16D, -2D) + 0.03D * n.eval(int_1 / 4D, int_2 / 4D, 2D);
+			height_noise = 0.75D * n.eval(int_1 / 21.5D, int_2 / 21.5D) + 0.24D * n.eval(int_1 / 16D, int_2 / 16D) + 0.03D * n.eval(int_1 / 4D, int_2 / 4D, 2D);
 			
-			if (height_noise > 0.25D && height_noise < 0.32D)
+			if (height_noise > 0.23D && height_noise < 0.32D)
 				return GenerationCategory.MOUNTAIN;
-			else if (height_noise > 0.2D && height_noise < 0.37D)
+			else if (height_noise > 0.17D && height_noise < 0.38D)
 				return GenerationCategory.FOOTHILLS;
 			
 			if (temperature == 2)

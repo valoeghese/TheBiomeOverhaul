@@ -1,5 +1,7 @@
 package valoeghese.biomeoverhaul.world.biome;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -36,11 +38,14 @@ public abstract class TBOBiome extends Biome
 	}
 	
 	@Override
+	@Environment(EnvType.CLIENT)
 	public int getGrassColorAt(BlockPos pos)
 	{
 		return this.hasCustomColours() ? this.theBiomeFactory.getGrassColour() : super.getGrassColorAt(pos);
 	}
+	
 	@Override
+	@Environment(EnvType.CLIENT)
 	public int getFoliageColorAt(BlockPos pos)
 	{
 		return this.hasCustomColours() ? this.theBiomeFactory.getFoliageColour() : super.getFoliageColorAt(pos);

@@ -12,11 +12,13 @@ import net.minecraft.world.biome.layer.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.LayerSampler;
 import valoeghese.biomeoverhaul.api.BiomeLayersRevamped;
 import valoeghese.biomeoverhaul.api.BiomeModifier;
-import valoeghese.biomeoverhaul.api.Layer;
-import valoeghese.biomeoverhaul.api.TestModule;
-import valoeghese.biomeoverhaul.api.TestModuleApplier;
 import valoeghese.biomeoverhaul.api.enums.BiomeHumidity;
 import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
+import valoeghese.biomeoverhaul.api.layer.Layer;
+import valoeghese.biomeoverhaul.api.modifier.BiomeModifiers;
+import valoeghese.biomeoverhaul.api.testing.SoloBiome;
+import valoeghese.biomeoverhaul.api.testing.TestModule;
+import valoeghese.biomeoverhaul.api.testing.TestModuleApplier;
 import valoeghese.biomeoverhaul.util.math.MathUtils;
 import valoeghese.biomeoverhaul.world.layer.BiomeLayersFunctions;
 
@@ -28,8 +30,13 @@ public class BiomesMixin
 	private void addSample(LayerRandomnessSource layerRandomnessSource_1, LayerSampler layerSampler_1, LayerSampler layerSampler_2, int int_1, int int_2,
 			CallbackInfoReturnable<Integer> info)
 	{
-		int int_3 = this.coreSample(layerRandomnessSource_1, layerSampler_1, layerSampler_2, int_1, int_2);
-
+		int int_3;
+		
+		if (SoloBiome.isActive())
+			int_3 = SoloBiome.getBiome();
+		else
+			int_3 = this.coreSample(layerRandomnessSource_1, layerSampler_1, layerSampler_2, int_1, int_2);
+		
 		info.setReturnValue(int_3);
 	}
 
@@ -60,7 +67,7 @@ public class BiomesMixin
 			else
 			{
 				List<Layer> biomes = BiomeLayersFunctions.getListForClimateCategory(temp, humidity, category);
-
+				
 				if (BiomeLayersFunctions.isSwamp(int_1, int_2))
 					biomes = BiomeLayersFunctions.addSwamp(temp, biomes, rand);
 
@@ -96,17 +103,17 @@ public class BiomesMixin
 		
 		if (!TestModuleApplier.areModifiersEnabled()) return biome;
 		
-		for (BiomeModifier b : BiomeModifier.initial_modifiers)
+		for (BiomeModifier b : BiomeModifiers.initial_modifiers)
 		{
 			biome_1 = b.setInts(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
 			if (b.cancel()) break;
 		}
-		for (BiomeModifier b : BiomeModifier.standard_modifiers)
+		for (BiomeModifier b : BiomeModifiers.standard_modifiers)
 		{
 			biome_1 = b.setInts(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
 			if (b.cancel()) break;
 		}
-		for (BiomeModifier b : BiomeModifier.final_modifiers)
+		for (BiomeModifier b : BiomeModifiers.final_modifiers)
 		{
 			biome_1 = b.setInts(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
 			if (b.cancel()) break;
