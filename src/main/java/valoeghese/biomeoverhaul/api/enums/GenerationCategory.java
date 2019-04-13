@@ -33,5 +33,13 @@ public enum GenerationCategory
 	/**
 	 * Rainforest areas
 	 */
-	RAINFOREST;
+	RAINFOREST,
+	/**
+	 *  Meadow areas (Untested)
+	 */
+	MEADOW,
+	/**
+	 *  Badlands areas. Not used by mesa. (Untested)
+	 */
+	BADLANDS;
 }

@@ -20,7 +20,7 @@ public class TemperateRainforestFeature extends MegaTreeFeature<DefaultFeatureCo
 
 	public TemperateRainforestFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1)
 	{
-		super(function_1, false, 28, 6, LOG, LEAVES);
+		super(function_1, false, 25, 7, LOG, LEAVES);
 	}
 
 	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld modifiableTestableWorld_1, Random random_1, BlockPos blockPos_1)

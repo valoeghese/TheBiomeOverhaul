@@ -6,7 +6,8 @@ import java.util.List;
 import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
 import valoeghese.biomeoverhaul.api.layer.Layer;
 
-public class Categories {
+public class Categories
+{
 	public static final List<Layer> bPLAINS = new ArrayList<>();
 	
 	public static final List<Layer> bMOUNTAIN = new ArrayList<>();
@@ -16,6 +17,8 @@ public class Categories {
 	public static final List<Layer> bWOODLAND = new ArrayList<>();
 	public static final List<Layer> bRAINFOREST = new ArrayList<>();
 	public static final List<Layer> bFOOTHILLS = new ArrayList<>();
+	public static final List<Layer> bMEADOW = new ArrayList<>();
+	public static final List<Layer> bBADLANDS = new ArrayList<>();
 	
 	public static List<Layer> getListForCategory(GenerationCategory category)
 	{
@@ -35,6 +38,10 @@ public class Categories {
 			return bRAINFOREST;
 		case FOOTHILLS:
 			return bFOOTHILLS;
+		case MEADOW:
+			return bMEADOW;
+		case BADLANDS:
+			return bBADLANDS;
 		default:
 			return bPLAINS;
 		}

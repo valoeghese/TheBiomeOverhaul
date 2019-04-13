@@ -130,6 +130,7 @@ public class BiomeLayersFunctions
 		double forest_noise = 0.9D * n.eval(int_1 / 6.5D, int_2 / 6.5D) + 0.1D * n.eval(int_1, int_2, -2D);
 		double generation_noise_1 = 0.9D * n.eval(int_1 / 8D, int_2 / 8D) + 0.1D * n.eval(int_1 / 4.5D, int_2 / 4.5D);
 		double generation_noise_2 = 0.9D * m.eval(int_1 / 8.2D, int_2 / 8.2D) + 0.1D * m.eval(int_1 / 4.3D, int_2 / 4.3D);
+		double generation_noise_3 = 0.9D * m.eval(int_1 / 11.5D, int_2 / 11.5D) + 0.1D * n.eval(int_1 / 6D, int_2 / 5D);
 		
 		if (!isOcean)
 		{
@@ -147,18 +148,27 @@ public class BiomeLayersFunctions
 			}
 			else if (temperature < 2)
 			{
-				if (generation_noise_1 < -0.32)
+				if (generation_noise_1 < -0.32D)
 					return GenerationCategory.BOREAL;
 			}
 			
-			if (generation_noise_2 > 0.26F)
+			if (generation_noise_2 > 0.26D)
 				return GenerationCategory.RAINFOREST;
 			
-			if (forest_noise > 0.1F)
+			if (forest_noise > 0.1D)
 			{
 				return GenerationCategory.WOODLAND;
 			}
-					
+			
+			if (height_noise > -0.25D && forest_noise < -0.36D)
+			{
+				return GenerationCategory.BADLANDS;
+			}
+			
+			if (forest_noise > -0.2D && generation_noise_3 > 0.3D)
+			{
+				return GenerationCategory.MEADOW;
+			}
 		}
 		else
 		{

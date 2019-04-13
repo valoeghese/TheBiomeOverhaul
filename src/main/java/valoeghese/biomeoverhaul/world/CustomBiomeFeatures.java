@@ -105,7 +105,7 @@ public class CustomBiomeFeatures
 
 	public static void addTemperateRainforestTrees(Biome biome_1)
 	{
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{TBOFeatures.LARGE_BOREAL_FEATURE, TBOFeatures.BOREAL_FEATURE, Feature.SPRUCE_TREE, Feature.PINE_TREE, TBOFeatures.LARGE_SHRUB}, new FeatureConfig[]{FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT}, new float[]{0.05F, 0.3F, 0.2F, 0.25F, 0.15F}, Feature.FANCY_TREE, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(6, 0.3F, 6)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{TBOFeatures.LARGE_BOREAL_FEATURE, TBOFeatures.BOREAL_FEATURE, Feature.SPRUCE_TREE, Feature.PINE_TREE, TBOFeatures.LARGE_SHRUB}, new FeatureConfig[]{FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT}, new float[]{0.03F, 0.3F, 0.2F, 0.25F, 0.15F}, Feature.FANCY_TREE, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(6, 0.3F, 6)));
 	}
 
 	public static void addMarshShrubs(Biome biome_1)
