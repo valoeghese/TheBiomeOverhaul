@@ -54,26 +54,27 @@ public class BiomesMixin
 		{
 			//Get further information of biome gen at position
 			BiomeHumidity humidity = BiomeLayersFunctions.getHumidityAtPos(int_1, int_2, rand);
+			
+			double oceanNoise = BiomeLayersFunctions.oceanNoise(int_1, int_2);
+			boolean isOceanBiome = BiomeLayersFunctions.isOcean(oceanNoise);
 
-			boolean isOceanBiome = BiomeLayersFunctions.isOcean(int_1, int_2);
-
-			GenerationCategory category = BiomeLayersFunctions.getCategoryAtPos(int_1, int_2, isOceanBiome, temp);
+			GenerationCategory category = BiomeLayersFunctions.getCategoryAtPos(int_1, int_2, oceanNoise, temp);
 
 			//Test for ocean first
 			if (isOceanBiome)
 			{
-				layer = BiomeLayersFunctions.addOcean(temp);
+				layer = BiomeLayersFunctions.addOcean(temp, category == GenerationCategory.ISLAND, rand, BiomeLayersFunctions.getListForClimate(temp, humidity), oceanNoise);
 			}
 			else
 			{
-				List<Layer> biomes = BiomeLayersFunctions.getListForClimateCategory(temp, humidity, category);
+				List<Layer> biomes = BiomeLayersFunctions.getListForClimateCategory(temp, humidity, category, int_1, int_2, oceanNoise);
 				
 				if (BiomeLayersFunctions.isSwamp(int_1, int_2))
-					biomes = BiomeLayersFunctions.addSwamp(temp, biomes, rand);
-
+					biomes = BiomeLayersFunctions.addSwamp(temp, biomes);
+				
 				if (BiomeLayersFunctions.isBadlands(temp, int_1, int_2))
 					biomes = BiomeLayersRevamped.mesaFeatureList;
-
+				
 				layer = (Layer) biomes.toArray()[rand.nextInt(biomes.size())];
 			}
 		}

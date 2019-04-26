@@ -4,6 +4,8 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.layer.LayerRandomnessSource;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import valoeghese.biomeoverhaul.api.BiomeModifier;
 import valoeghese.biomeoverhaul.api.modifier.BiomeModifiers;
 import valoeghese.biomeoverhaul.util.OceanManipulation;
@@ -22,8 +24,6 @@ public class Main implements ModInitializer
 	{
 
 		System.out.println("TheBiomeOverhaul has been enabled!");
-
-		ModBiomes.injectBiomes();
 
 		//Biome Modifiers
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
@@ -67,17 +67,20 @@ public class Main implements ModInitializer
 				if (unmodifiedBiome == Registry.BIOME.getRawId(Biomes.BADLANDS))
 				{
 					if (random.nextInt(8) == 0) biome_1 = Registry.BIOME.getRawId(Biomes.ERODED_BADLANDS);
-				};
-				if (unmodifiedBiome == Registry.BIOME.getRawId(Biomes.BADLANDS_PLATEAU))
+				}
+				else if (unmodifiedBiome == Registry.BIOME.getRawId(Biomes.BADLANDS_PLATEAU))
 				{
 					if (random.nextInt(4) == 0) biome_1 = Registry.BIOME.getRawId(Biomes.BADLANDS);
 					if (random.nextInt(4) == 0) biome_1 = Registry.BIOME.getRawId(Biomes.WOODED_BADLANDS_PLATEAU);
-				};
-				if (unmodifiedBiome == Registry.BIOME.getRawId(Biomes.MODIFIED_BADLANDS_PLATEAU))
+				}
+				else if (unmodifiedBiome == Registry.BIOME.getRawId(Biomes.MODIFIED_BADLANDS_PLATEAU))
 				{
 					if (random.nextInt(4) == 0) biome_1 = Registry.BIOME.getRawId(Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU);
+				}
+				else if (unmodifiedBiome == Registry.BIOME.getRawId(ModBiomes.OUTBACK))
+				{
+					if (random.nextInt(75) == 0) biome_1 = Registry.BIOME.getRawId(ModBiomes.OUTBACK_ULURU);
 				};
-
 				return biome_1;
 			}
 
@@ -205,5 +208,7 @@ public class Main implements ModInitializer
 			}
 
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
+		
+		Biomes.GIANT_TREE_TAIGA.addStructureFeature(Feature.WOODLAND_MANSION, FeatureConfig.DEFAULT);
 	}
 }

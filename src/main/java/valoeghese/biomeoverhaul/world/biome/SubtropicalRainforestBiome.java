@@ -21,6 +21,7 @@ public class SubtropicalRainforestBiome extends TBOBiome
 	{
 		super(BiomeFactory.create(0.21F, 0.26F, Category.FOREST).setSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA).setTemperatureDownfall(0.7F, 0.99F).setSpawnChance(0.23F));
 		
+		this.addStructureFeature(Feature.WOODLAND_MANSION, FeatureConfig.DEFAULT);
 		this.addStructureFeature(Feature.JUNGLE_TEMPLE, FeatureConfig.DEFAULT);
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDefaultLakes(this);

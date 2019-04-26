@@ -19,6 +19,8 @@ public class Categories
 	public static final List<Layer> bFOOTHILLS = new ArrayList<>();
 	public static final List<Layer> bMEADOW = new ArrayList<>();
 	public static final List<Layer> bBADLANDS = new ArrayList<>();
+	public static final List<Layer> bBLUFF = new ArrayList<>();
+	public static final List<Layer> bCANOPY = new ArrayList<>();
 	
 	public static List<Layer> getListForCategory(GenerationCategory category)
 	{
@@ -42,6 +44,10 @@ public class Categories
 			return bMEADOW;
 		case BADLANDS:
 			return bBADLANDS;
+		case BLUFF:
+			return bBLUFF;
+		case CANOPY:
+			return bCANOPY;
 		default:
 			return bPLAINS;
 		}

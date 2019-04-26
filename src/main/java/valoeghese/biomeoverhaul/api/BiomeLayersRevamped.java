@@ -94,6 +94,10 @@ public class BiomeLayersRevamped
 		
 		tropicalBiomesDry.add(DefaultBiomeLayers.tropical_savanna_forest);
 		tropicalBiomesDry.add(DefaultBiomeLayers.tropical_savanna);
+		tropicalBiomesDry.add(DefaultBiomeLayers.tropical_outback);
+		
+		tropicalBiomesDry.add(DefaultBiomeLayers.tropical_island);
+		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_island);
 		
 		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_brushland);
 		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_jungle);
@@ -105,6 +109,10 @@ public class BiomeLayersRevamped
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_plains_dry);
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_plains_plus);
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_forest);
+		temperateBiomesDry.add(DefaultBiomeLayers.temperate_dry_thicket);
+		
+		temperateBiomesDry.add(DefaultBiomeLayers.ocean_cliffs);
+		temperateBiomesWet.add(DefaultBiomeLayers.ocean_cliffs);
 		
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_meditteranean_plains);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_meditteranean_forest);
@@ -112,6 +120,7 @@ public class BiomeLayersRevamped
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_plains_humid);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_forest_humid);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_forest);
+		temperateBiomesWet.add(DefaultBiomeLayers.temperate_redwoods);
 		
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_subtropical_rainforest);
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_temperate_rainforest);
@@ -129,6 +138,8 @@ public class BiomeLayersRevamped
 		coolBiomesDry.add(DefaultBiomeLayers.cool_forest_dry);
 		coolBiomesDry.add(DefaultBiomeLayers.cool_boreal_plains);
 		
+		coolBiomesDry.add(DefaultBiomeLayers.ocean_cliffs);
+		
 		coolBiomesWet.add(DefaultBiomeLayers.cool_plains_humid);
 		coolBiomesWet.add(DefaultBiomeLayers.cool_forest_humid);
 		coolBiomesWet.add(DefaultBiomeLayers.cool_boreal_forest);
@@ -141,6 +152,7 @@ public class BiomeLayersRevamped
 		
 		coolBiomesSwamp.add(DefaultBiomeLayers.cool_swamp);
 		coolBiomesSwamp.add(DefaultBiomeLayers.cool_forested_swamp);
+		coolBiomesSwamp.add(DefaultBiomeLayers.cool_swamp_mountains);
 		
 		frozenBiomesDry.add(DefaultBiomeLayers.frozen_plains_dry);
 		

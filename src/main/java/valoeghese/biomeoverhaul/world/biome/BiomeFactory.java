@@ -45,7 +45,9 @@ public class BiomeFactory
 	public final float scale;
 	public final Biome.Precipitation precipitation;
 	public final Biome.Category category;
-
+	
+	private RiverType riverType = RiverType.WATER;
+	
 	private BiomeFactory(float baseHeight, float scale, Biome.Category category, Biome.Precipitation precipitation)
 	{
 		this.baseHeight = baseHeight;
@@ -89,6 +91,11 @@ public class BiomeFactory
 		this.waterFogColour = waterFogColour;
 		return this;
 	}
+	
+	public BiomeFactory setDarkWaterProperties()
+	{
+		return this.setWaterProperties(0x524ed8, 0x518abc);
+	}
 
 	public BiomeFactory setColourProperties(int grassColour, int foliageColour)
 	{
@@ -107,6 +114,12 @@ public class BiomeFactory
 	public BiomeFactory setBaseBiome(String baseBiome)
 	{
 		this.baseBiome = baseBiome;
+		return this;
+	}
+	
+	public BiomeFactory setRiverType(RiverType riverType)
+	{
+		this.riverType = riverType;
 		return this;
 	}
 	
@@ -133,6 +146,11 @@ public class BiomeFactory
 	public float getSpawnChance()
 	{
 		return this.spawnChance;
+	}
+	
+	public RiverType getRiverType()
+	{
+		return riverType;
 	}
 	
 	//==================================================//
@@ -167,7 +185,7 @@ public class BiomeFactory
 		DefaultBiomeFeatures.addDefaultOres(this.parent);
 		DefaultBiomeFeatures.addDefaultDisks(this.parent);
 	}
-	
+
 	public static class BiomePopulator
 	{
 		public final TBOBiome parent;
@@ -193,14 +211,20 @@ public class BiomeFactory
 		
 		public void buildTreeFeatures()
 		{
-			float n = 1 / this.weightSum;
 			float tpc = (float) this.treesPerChunk;
 			for (Tuple<Feature<DefaultFeatureConfig>, Float> feature : treeFeatures)
 			{
-				int n1 = MathHelper.floor(tpc * (n / feature.getB().floatValue()));
+				int n1 = MathHelper.floor(tpc * (feature.getB().floatValue() / this.weightSum));
 				
 				this.parent.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(feature.getA(), FeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(n1, this.extraTreeChance, this.extraTreeCount)));
 			}
 		}
+	}
+	
+	public static enum RiverType
+	{
+		NONE,
+		WATER,
+		ICY;
 	}
 }

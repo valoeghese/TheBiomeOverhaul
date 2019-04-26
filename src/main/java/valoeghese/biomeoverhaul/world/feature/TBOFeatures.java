@@ -16,8 +16,9 @@ public class TBOFeatures
 	public static final Feature<DefaultFeatureConfig> LARGE_SPRUCE_SHRUB;
 	public static final Feature<DefaultFeatureConfig> LARGE_SWAMP_TREE;
 	public static final Feature<DefaultFeatureConfig> PALM;
+	public static final Feature<DefaultFeatureConfig> REDWOOD;
 	public static final Feature<DefaultFeatureConfig> SHRUB;
-	
+	public static final Feature<DefaultFeatureConfig> SMALL_REDWOOD;
 
 	static
 	{
@@ -28,8 +29,10 @@ public class TBOFeatures
 		LARGE_SWAMP_TREE = register("tbo:large_swamp_tree", new LargeSwampTreeFeature(DefaultFeatureConfig::deserialize));
 		LARGE_SHRUB = register("tbo:large_shrub", new LargeShrubFeature(Blocks.OAK_LEAVES.getDefaultState(), DefaultFeatureConfig::deserialize));
 		LARGE_SPRUCE_SHRUB = register("tbo:large_spruce_shrub", new LargeShrubFeature(Blocks.SPRUCE_LEAVES.getDefaultState(), DefaultFeatureConfig::deserialize));
+		REDWOOD = register("tbo:redwood", new RedwoodFeature(DefaultFeatureConfig::deserialize));
 		PALM = register("tbo:palm", new PalmTreeFeature(DefaultFeatureConfig::deserialize));
 		SHRUB = register("tbo:chapparal_shrub", new BushFeature(DefaultFeatureConfig::deserialize));
+		SMALL_REDWOOD = register("tbo:small_redwood", new SmallRedwoodFeature(DefaultFeatureConfig::deserialize));
 	}
 
 	private static <C extends FeatureConfig, F extends Feature<C>> F register(String string_1, F feature_1)

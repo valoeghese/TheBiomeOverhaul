@@ -16,7 +16,7 @@ public class ShrublandBiome extends TBOBiome
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		this.theBiomeFactory.addDefaultMineables();
-		DefaultBiomeFeatures.addDefaultGrass(this);
+		DefaultBiomeFeatures.addSavannaGrass(this);
 		CustomBiomeFeatures.addShrublandShrubs(this);
 		DefaultBiomeFeatures.addDefaultVegetation(this);
 		DefaultBiomeFeatures.addSprings(this);

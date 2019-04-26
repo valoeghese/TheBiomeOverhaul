@@ -22,8 +22,9 @@ public class CustomSurfaceBuilders
 	public static final SurfaceBuilder<TernarySurfaceConfig> GROVE_BUILDER;
 	public static final SurfaceBuilder<TernarySurfaceConfig> RAINFOREST_BUILDER;
 	public static final SurfaceBuilder<TernarySurfaceConfig> GLACIER_BUILDER;
+	public static final SurfaceBuilder<TernarySurfaceConfig> OUTBACK_BUILDER;
 	
-	public static final TernarySurfaceConfig ALPS_CONFIG;
+	public static final TernarySurfaceConfig SNOWY_CONFIG;
 	public static final TernarySurfaceConfig ICY_CONFIG;
 	public static final TernarySurfaceConfig ICY_SNOWY_CONFIG;
 	public static final TernarySurfaceConfig TERRACOTTA_RED_CONFIG;
@@ -32,6 +33,7 @@ public class CustomSurfaceBuilders
 	public static final TernarySurfaceConfig TERRACOTTA_CONFIG;
 	public static final TernarySurfaceConfig CLAY_CONFIG;
 	public static final TernarySurfaceConfig RAINFOREST_CONFIG;
+	public static final TernarySurfaceConfig OUTBACK_CONFIG;
 	
 	private static <C extends SurfaceConfig, F extends SurfaceBuilder<C>> SurfaceBuilder<C> register(String string1, F surfaceBuilder1)
 	{
@@ -40,7 +42,7 @@ public class CustomSurfaceBuilders
 
 	static
 	{
-		ALPS_CONFIG = new TernarySurfaceConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState());
+		SNOWY_CONFIG = new TernarySurfaceConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState());
 		ICY_CONFIG = new TernarySurfaceConfig(Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.BLUE_ICE.getDefaultState());
 		ICY_SNOWY_CONFIG = new TernarySurfaceConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.BLUE_ICE.getDefaultState());
 		TERRACOTTA_RED_CONFIG = new TernarySurfaceConfig(Blocks.RED_TERRACOTTA.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState());
@@ -49,14 +51,16 @@ public class CustomSurfaceBuilders
 		TERRACOTTA_CONFIG = new TernarySurfaceConfig(Blocks.TERRACOTTA.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState());
 		RAINFOREST_CONFIG = new TernarySurfaceConfig(Blocks.GRASS_BLOCK.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState());
 		CLAY_CONFIG = new TernarySurfaceConfig(Blocks.CLAY.getDefaultState(), Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState());
+		OUTBACK_CONFIG = new TernarySurfaceConfig(Blocks.RED_SAND.getDefaultState(), Blocks.TERRACOTTA.getDefaultState(), Blocks.GRAVEL.getDefaultState());
 		
 		SHIELD_BUILDER = register("tbo:valoeghese_shield", new ShieldSurfaceBuilder(TernarySurfaceConfig::deserialize));
 		TUNDRA_BUILDER = register("tbo:valoeghese_tundra", new TundraSurfaceBuilder(TernarySurfaceConfig::deserialize));
 		GROVE_BUILDER = register("tbo:valoeghese_grove", new GroveSurfaceBuilder(TernarySurfaceConfig::deserialize));
 		RAINFOREST_BUILDER = register("tbo:valoeghese_rainforest", new RainforestSurfaceBuilder(TernarySurfaceConfig::deserialize));
 		GLACIER_BUILDER = register("tbo:valoeghese_glacier", new GlacierBuilder(TernarySurfaceConfig::deserialize));
+		OUTBACK_BUILDER = register("tbo:valoeghese_outback", new OutbackBuilder(TernarySurfaceConfig::deserialize));
 	}
-
+	
 	public static class ShieldSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
 	{
 		public ShieldSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function1)
@@ -117,7 +121,7 @@ public class CustomSurfaceBuilders
 				BlockState blockState1, BlockState blockState_2, int int_4, long long1, TernarySurfaceConfig var14) {
 			if (noiseVal > 3.1D)
 			{
-				SurfaceBuilder.DEFAULT.generate(random1, chunk1, biome1, int1, int2, seaLevel, noiseVal, blockState1, blockState_2, int_4, long1, ALPS_CONFIG);
+				SurfaceBuilder.DEFAULT.generate(random1, chunk1, biome1, int1, int2, seaLevel, noiseVal, blockState1, blockState_2, int_4, long1, SNOWY_CONFIG);
 			}
 			else if (noiseVal > 1.4D)
 			{
@@ -146,6 +150,26 @@ public class CustomSurfaceBuilders
 			else
 			{
 				SurfaceBuilder.DEFAULT.generate(random1, chunk1, biome1, int1, int2, seaLevel, noiseVal, blockState1, blockState_2, int_4, long1, SurfaceBuilder.GRASS_CONFIG);
+			}
+		}
+	}
+	public static class OutbackBuilder extends SurfaceBuilder<TernarySurfaceConfig>
+	{
+		public OutbackBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function1)
+		{
+			super(function1);
+		}
+
+		@Override
+		public void generate(Random random1, Chunk chunk1, Biome biome1, int int1, int int2, int seaLevel, double noiseVal,
+				BlockState blockState1, BlockState blockState_2, int int_4, long long1, TernarySurfaceConfig var14) {
+			if (random1.nextInt(3) == 0)
+			{
+				SurfaceBuilder.DEFAULT.generate(random1, chunk1, biome1, int1, int2, seaLevel, noiseVal, blockState1, blockState_2, int_4, long1, SurfaceBuilder.GRASS_CONFIG);
+			}
+			else
+			{
+				SurfaceBuilder.DEFAULT.generate(random1, chunk1, biome1, int1, int2, seaLevel, noiseVal, blockState1, blockState_2, int_4, long1, OUTBACK_CONFIG);
 			}
 		}
 	}

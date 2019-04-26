@@ -3,8 +3,10 @@
   "package": "valoeghese.biomeoverhaul.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BiomesMixin",
-    "OceanTemperatureMixin"
+    "BiomesMixin",	
+    "OceanTemperatureMixin",
+    "ShoreMixin",
+    "RiverMixin"
   ],
   "injectors": {
     "defaultRequire": 1

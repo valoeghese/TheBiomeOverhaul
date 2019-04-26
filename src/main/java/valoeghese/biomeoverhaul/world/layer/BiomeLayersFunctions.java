@@ -1,6 +1,7 @@
 package valoeghese.biomeoverhaul.world.layer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -20,6 +21,7 @@ public class BiomeLayersFunctions
 	public static OpenSimplexNoise NOISE_CLIMATE_FEATURE;
 	public static OpenSimplexNoise NOISE_GENERATION_CATEGORY_A;
 	public static OpenSimplexNoise NOISE_GENERATION_CATEGORY_B;
+	public static OpenSimplexNoise NOISE_GENERATION_CATEGORY_C;
 
 	public static double temperatureOffset;
 
@@ -32,15 +34,16 @@ public class BiomeLayersFunctions
 		NOISE_OCEAN = new OpenSimplexNoise(seed + 2);
 		NOISE_CLIMATE_FEATURE = new OpenSimplexNoise(seed + 3);
 		NOISE_GENERATION_CATEGORY_A = new OpenSimplexNoise(seed + 4);
-		
+
 		NOISE_GENERATION_CATEGORY_B = new OpenSimplexNoise(seed - 1);
+		NOISE_GENERATION_CATEGORY_C = new OpenSimplexNoise(seed - 12);
 	}
 
 	public static final double HILLS_SCALE = 0.06D;
 	public static final double SPECIAL_SCALE = 4.5D;
 	public static final double SWAMP_SCALE = 9D;
 	public static final double HUMIDITY_SCALE = 15D;
-	public static final double OCEAN_SIZE = 17.5D;
+	public static final double OCEAN_SIZE = 17D;
 	public static final double CLIMATE_SIZE = 29D; //The input is already scaled in some way, so this doesn't need to be super large.
 
 
@@ -53,7 +56,7 @@ public class BiomeLayersFunctions
 	public static int getTemperatureAtPos(double x, double z)
 	{
 		double val = NOISE_1.eval((x / CLIMATE_SIZE) - temperatureOffset, (z / CLIMATE_SIZE) - temperatureOffset);
-		
+
 		if (val > 0.62D) return 4;
 		else if (val > 0.28D) return 3;
 		else if (val > -0.28D) return 2;
@@ -61,89 +64,154 @@ public class BiomeLayersFunctions
 		else return 0; // */
 	}
 
-	public static boolean isOcean(double int_1, double int_2)
+	public static boolean isOcean(double noise)
 	{
-		OpenSimplexNoise n = NOISE_OCEAN;
-
-		double noise = 0.8D * n.eval(int_1 / OCEAN_SIZE, int_2 / OCEAN_SIZE) + 0.14D * n.eval(int_1 / (OCEAN_SIZE / 2), int_2 / (OCEAN_SIZE / 2))+ 0.06D * n.eval(int_1 / (OCEAN_SIZE / 4), int_2 / (OCEAN_SIZE / 4));
-
-		if (noise > 0.33D)
+		if (noise > 0.30D)
 			return true;
 		else
 			return false;
 	}
 
-	public static Layer addOcean(int temperature)
+	//TODO add int_1, int_2 noise check
+	public static boolean isBluff(double noise, double int_1, double int_2)
 	{
+		double bluffNoise = 0.83 * NOISE_OCEAN.eval(int_1 / 6D, int_2 / 6D) + 0.17 * NOISE_2.eval(int_1 / 4D, int_2 / 4D);
+
+		if (noise > 0.26D && noise <= 0.30D && bluffNoise > 0.24D)
+			return true;
+		else
+			return false;
+	}
+
+	public static double oceanNoise(double int_1, double int_2)
+	{
+		OpenSimplexNoise n = NOISE_OCEAN;
+
+		return 0.8D * n.eval(int_1 / OCEAN_SIZE, int_2 / OCEAN_SIZE) + 0.14D * n.eval(int_1 / (OCEAN_SIZE / 2), int_2 / (OCEAN_SIZE / 2))+ 0.06D * n.eval(int_1 / (OCEAN_SIZE / 4), int_2 / (OCEAN_SIZE / 4));
+	}
+
+	public static Layer addOcean(int temperature, boolean island, LayerRandomnessSource rand, List<Layer> baseList, double oceanNoise)
+	{
+		Layer layer;
 		switch (temperature)
 		{
 		case 0:
-			return DefaultBiomeLayers.ocean_frozen;
+			layer = DefaultBiomeLayers.ocean_frozen;
+			break;
 		case 1:
-			return DefaultBiomeLayers.ocean_cool;
+			layer = DefaultBiomeLayers.ocean_cool;
+			break;
 		case 2:
-			return DefaultBiomeLayers.ocean_temperate;
+			layer = DefaultBiomeLayers.ocean_temperate;
+			break;
 		case 3:
-			return DefaultBiomeLayers.ocean_warm;
+			layer = DefaultBiomeLayers.ocean_warm;
+			break;
 		case 4:
-			return DefaultBiomeLayers.ocean_warm;
+			layer = DefaultBiomeLayers.ocean_warm;
+			break;
 		default:
-			return DefaultBiomeLayers.ocean_temperate;
+			layer = DefaultBiomeLayers.ocean_temperate;
+			break;
 		}
+
+		if (oceanNoise > 0.5)
+		{
+			switch (temperature)
+			{
+			case 0:
+				layer = DefaultBiomeLayers.deep_ocean_frozen;
+				break;
+			case 1:
+				layer = DefaultBiomeLayers.deep_ocean_cool;
+				break;
+			case 2:
+				layer = DefaultBiomeLayers.deep_ocean_temperate;
+				break;
+			case 3:
+				layer = DefaultBiomeLayers.deep_ocean_warm;
+				break;
+			case 4:
+				layer = DefaultBiomeLayers.deep_ocean_warm;
+				break;
+			default:
+				layer = DefaultBiomeLayers.deep_ocean_temperate;
+				break;
+			}
+		}
+
+		if (!island) return layer;
+
+		List<Layer> fallBack = Arrays.asList(layer);
+
+		List<Layer> returns = getListOf(getUncheckedListForClimateCategory(Categories.bISLAND, baseList), fallBack);
+		return returns.get(rand.nextInt(returns.size()));
 	}
 
-	public static List<Layer> getListForClimateCategory(int temperature, BiomeHumidity humidity, GenerationCategory category)
+	public static List<Layer> getListForClimateCategory(int temperature, BiomeHumidity humidity, GenerationCategory category, int int_1, int int_2, double oceanNoise)
 	{
 		List<Layer> baseList = getListForClimate(temperature, humidity);
+		List<Layer> bluffList = getUncheckedListForClimateCategory(Categories.bBLUFF, baseList);
 
-		return getListForClimateCategory(temperature, humidity, category, baseList);
-	}
-	
-	private static List<Layer> getListForClimateCategory(int temperature, BiomeHumidity humidity, GenerationCategory category, List<Layer> baseList)
-	{
+		if (isBluff(oceanNoise, int_1, int_2) && !bluffList.isEmpty()) return bluffList;
+
 		List<Layer> categoryList = Categories.getListForCategory(category);
 
+		return getListForClimateCategory(temperature, humidity, categoryList, baseList);
+	}
+
+	private static List<Layer> getListForClimateCategory(int temperature, BiomeHumidity humidity, List<Layer> categoryList, List<Layer> baseList)
+	{	
+		List<Layer> list_1 = getUncheckedListForClimateCategory(categoryList, baseList);
+
+		if (list_1.isEmpty())
+		{
+			if (categoryList == Categories.bPLAINS)
+			{
+				System.out.println("[BiomeOverhaul] ERROR: no default PLAINS layers for temperature " + String.valueOf(temperature) + ", humidity " + humidity.toString() + ". Returning list of all layers in that temperature and humidity.");
+				return baseList;
+			}
+			else return getListForClimateCategory(temperature, humidity, Categories.bPLAINS, baseList);
+		}
+		else return list_1;
+	}
+
+	public static List<Layer> getUncheckedListForClimateCategory(List<Layer> categoryList, List<Layer> baseList)
+	{
 		List<Layer> list_1 = new ArrayList<Layer>();
 
 		for (Layer l : baseList)
 			if (categoryList.contains(l)) list_1.add(l);
 
-		if (list_1.isEmpty())
-		{
-			if (category == GenerationCategory.PLAINS)
-			{
-				System.out.println("[BiomeOverhaul] ERROR: no default PLAINS layers for temperature " + String.valueOf(temperature) + ", humidity " + humidity.toString() + ". Returning list of all layers in that temperature and humidity.");
-				return baseList;
-			}
-			else return getListForClimateCategory(temperature, humidity, GenerationCategory.PLAINS, baseList);
-		}
-		else return list_1;
+		return list_1;
 	}
-	
-	public static GenerationCategory getCategoryAtPos(double int_1, double int_2, boolean isOcean, int temperature)
+
+	public static GenerationCategory getCategoryAtPos(double int_1, double int_2, double oceanNoise, int temperature)
 	{
 		OpenSimplexNoise n = NOISE_GENERATION_CATEGORY_A;
 		OpenSimplexNoise m = NOISE_GENERATION_CATEGORY_B;
+		OpenSimplexNoise o = NOISE_GENERATION_CATEGORY_C;
 		
 		double height_noise;
-		
+
 		double forest_noise = 0.9D * n.eval(int_1 / 6.5D, int_2 / 6.5D) + 0.1D * n.eval(int_1, int_2, -2D);
+		double canopy_noise = 0.88D * o.eval(int_1 / 7.5D, int_2 / 7.5D) + 0.12D * n.eval(int_1 / 2D, int_2 / 2D, -2D);
 		double generation_noise_1 = 0.9D * n.eval(int_1 / 8D, int_2 / 8D) + 0.1D * n.eval(int_1 / 4.5D, int_2 / 4.5D);
 		double generation_noise_2 = 0.9D * m.eval(int_1 / 8.2D, int_2 / 8.2D) + 0.1D * m.eval(int_1 / 4.3D, int_2 / 4.3D);
 		double generation_noise_3 = 0.9D * m.eval(int_1 / 11.5D, int_2 / 11.5D) + 0.1D * n.eval(int_1 / 6D, int_2 / 5D);
-		
-		if (!isOcean)
+
+		if (!isOcean(oceanNoise))
 		{
 			height_noise = 0.75D * n.eval(int_1 / 21.5D, int_2 / 21.5D) + 0.24D * n.eval(int_1 / 16D, int_2 / 16D) + 0.03D * n.eval(int_1 / 4D, int_2 / 4D, 2D);
-			
+
 			if (height_noise > 0.23D && height_noise < 0.32D)
 				return GenerationCategory.MOUNTAIN;
 			else if (height_noise > 0.17D && height_noise < 0.38D)
 				return GenerationCategory.FOOTHILLS;
-			
+
 			if (temperature == 2)
 			{
-				if (generation_noise_1 > 0.28)
+				if (generation_noise_1 > 0.3)
 					return GenerationCategory.MEDITERRANEAN;
 			}
 			else if (temperature < 2)
@@ -151,20 +219,22 @@ public class BiomeLayersFunctions
 				if (generation_noise_1 < -0.32D)
 					return GenerationCategory.BOREAL;
 			}
-			
-			if (generation_noise_2 > 0.26D)
+
+			if (generation_noise_2 > 0.29D)
 				return GenerationCategory.RAINFOREST;
-			
+
 			if (forest_noise > 0.1D)
 			{
-				return GenerationCategory.WOODLAND;
+				if (canopy_noise > 0.24D)
+					return GenerationCategory.CANOPY;
+				else return GenerationCategory.WOODLAND;
 			}
-			
+
 			if (height_noise > -0.25D && forest_noise < -0.36D)
 			{
 				return GenerationCategory.BADLANDS;
 			}
-			
+
 			if (forest_noise > -0.2D && generation_noise_3 > 0.3D)
 			{
 				return GenerationCategory.MEADOW;
@@ -172,17 +242,17 @@ public class BiomeLayersFunctions
 		}
 		else
 		{
-			height_noise = 0.76D * n.eval(int_1 / 32.5D, int_2 / 32.5D) + 0.21D * n.eval(int_1 / 8.7D, int_2 / 8.7D, -5D) + 0.03D * n.eval(int_1 / 3D, int_2 / 3D, 2D);
-			
+			height_noise = 0.8 * n.eval(int_1 / 8D, int_2 / 8D) + 0.2 * n.eval(int_1 / 4D, int_2 / 4D, (int_1 + int_2) / 2D);
+
 			Random rand = new Random((long) (int_1 * 5329 + int_2 * 2943));
-			
+
 			boolean generateIsland = (height_noise > 0.27D && height_noise < 0.29D);
-			
+
 			if (generateIsland)
-				generateIsland = !(rand.nextInt(15) == 0);
+				generateIsland = rand.nextInt(15) != 0;
 			else
 				generateIsland = rand.nextInt(25) == 0;
-			
+
 			if (generateIsland)
 				return GenerationCategory.ISLAND;
 		}
@@ -222,7 +292,7 @@ public class BiomeLayersFunctions
 
 	}
 
-	public static List<Layer> addSwamp(int temperature, List<Layer> fallback, LayerRandomnessSource rand)
+	public static List<Layer> addSwamp(int temperature, List<Layer> fallback)
 	{
 
 		switch (temperature)
@@ -269,7 +339,7 @@ public class BiomeLayersFunctions
 			return false;
 
 		double val = NOISE_CLIMATE_FEATURE.eval(x / SWAMP_SCALE, z / SWAMP_SCALE);
-		
+
 		return val < -0.32D;
 	}
 

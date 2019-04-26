@@ -1,17 +1,35 @@
 {
+  "schemaVersion": 1,
   "id": "tbo",
+  "version": "1.1.0+beta",
+  
   "name": "TheBiomeOverhaul",
   "description": "Overhaul of biome generation. Adds some new biomes as well.",
-  "version": "1.0.1 Beta",
-  "side": "universal",
-  "initializers": [
-    "valoeghese.biomeoverhaul.Main"
+  "authors": [
+    "Valoeghese"
   ],
+  "contact": {
+    "homepage": "https://minecraft.curseforge.com/projects/the-biome-overhaul",
+    "sources": "https://github.com/valoeghese/TheBiomeOverhaul",
+    "issues": "https://github.com/valoeghese/TheBiomeOverhaul/issues"
+  },
+  
+  "license": "LGPLv3",
+  
+  "environment": "*",
+  
+  "entrypoints": {
+    "main": [
+      "valoeghese.biomeoverhaul.Main"
+    ]
+  },
+  
   "requires": {
+    "fabricloader": ">=0.4.0",
     "fabric": "*"
   },
-  "mixins": {
-    "client": "modid.client.json",
-    "common": "modid.common.json"
-  }
+  
+  "mixins": [
+    "biomeoverhaul.mixins.json"
+  ]
 }

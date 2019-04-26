@@ -39,7 +39,15 @@ public enum GenerationCategory
 	 */
 	MEADOW,
 	/**
-	 *  Badlands areas. Not used by mesa. (Untested)
+	 *  Badlands areas.
 	 */
-	BADLANDS;
+	BADLANDS,
+	/**
+	 *  Bluff generation: cliffs by the sea.
+	 */
+	BLUFF,
+	/**
+	 * Thicket areas
+	 */
+	CANOPY;
 }

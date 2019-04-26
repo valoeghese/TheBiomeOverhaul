@@ -5,12 +5,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
+import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
 
 public class AlpsEdgeBiome extends TBOBiome
 {
 	public AlpsEdgeBiome()
 	{
-		super(BiomeFactory.create(1.35F, 0.38F, Biome.Precipitation.SNOW, Biome.Category.EXTREME_HILLS).setTemperatureDownfall(-0.3F, 0.2F));
+		super(BiomeFactory.create(1.35F, 0.38F, Biome.Precipitation.SNOW, Biome.Category.EXTREME_HILLS).setRiverType(RiverType.ICY).setTemperatureDownfall(-0.3F, 0.2F));
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		this.theBiomeFactory.addDefaultMineables();

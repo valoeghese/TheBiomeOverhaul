@@ -1,42 +1,21 @@
 package valoeghese.biomeoverhaul.world.biome;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class GrasslandBiome extends Biome
+public class GrasslandBiome extends TBOBiome
 {
 	
-	private final boolean moor;
-	
-	public GrasslandBiome(float baseHeight, float scale, boolean moor)
+	public GrasslandBiome(float baseHeight, float scale)
 	{
-		super(new Biome.Settings().configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG).precipitation(Biome.Precipitation.RAIN).category(Biome.Category.PLAINS).depth(baseHeight).scale(scale).temperature(0.4F).downfall(0.7F).waterColor(4159204).waterFogColor(329011).parent((String)null));
+		super(BiomeFactory.create(baseHeight, scale, Biome.Category.PLAINS).setTemperatureDownfall(0.4F, 0.7F).setColourProperties(0x5dc660, 0x43c633));
 		
-		this.moor = moor;
-		
-		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
-		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
-		DefaultBiomeFeatures.addLandCarvers(this);
-		DefaultBiomeFeatures.addDefaultStructures(this);
-		
-		if (moor) CustomBiomeFeatures.addIncreasedWaterLakes(this);
-		
-		DefaultBiomeFeatures.addDungeons(this);
+		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addPlainsTallGrass(this);
-		DefaultBiomeFeatures.addMineables(this);
-		DefaultBiomeFeatures.addDefaultOres(this);
-		DefaultBiomeFeatures.addDefaultDisks(this);
+		this.theBiomeFactory.addDefaultMineables();
 		CustomBiomeFeatures.addGrasslandFeatures(this);
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
 		DefaultBiomeFeatures.addDefaultVegetation(this);
@@ -57,20 +36,6 @@ public class GrasslandBiome extends Biome
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SLIME, 100, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
-	}
-	
-	@Environment(EnvType.CLIENT)
-	public int getGrassColorAt(BlockPos blockPos_1)
-	{
-		if (!moor) return 0x5dc660;
-		else return super.getGrassColorAt(blockPos_1);
-	}
-	
-	@Environment(EnvType.CLIENT)
-	public int getFoliageColorAt(BlockPos blockPos_1)
-	{
-		if (!moor) return 0x43c633;
-		else return super.getFoliageColorAt(blockPos_1);
 	}
 
 }

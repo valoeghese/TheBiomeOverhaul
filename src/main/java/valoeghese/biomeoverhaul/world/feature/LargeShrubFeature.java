@@ -6,9 +6,9 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
@@ -16,9 +16,9 @@ import net.minecraft.world.ModifiableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import valoeghese.biomeoverhaul.util.BlockGenerator;
-import valoeghese.biomeoverhaul.util.PublicWorldModifier;
+import valoeghese.biomeoverhaul.util.PublicWorldModifierTester;
 
-public class LargeShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements PublicWorldModifier
+public class LargeShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements PublicWorldModifierTester
 {
 	private static final int[][] coords = {{1,1},{1,-1},{-1,1},{-1,-1}};
 	
@@ -29,7 +29,7 @@ public class LargeShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 	{
 		super(function_1, false);
 		
-		LEAVES = leaves.with(LeavesBlock.PERSISTENT, Boolean.valueOf(true));
+		LEAVES = leaves;
 	}
 
 	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random rand, BlockPos blockPos_1)
@@ -37,7 +37,7 @@ public class LargeShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		int height = 3;
 		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);
 
-		BlockGenerator generator = new BlockGenerator(world);
+		BlockGenerator generator = new BlockGenerator(world, set_1);
 
 		if (blockPos_1.getY() >= 1 && blockPos_1.getY() + height + 1 <= 256 && super.isNaturalDirtOrGrass(world, blockPos_1.down()))
 		{
@@ -81,10 +81,23 @@ public class LargeShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 			return false;
 		}
 	}
+	
+	@Override
+	public void setWorldBlockState(Set<BlockPos> set, ModifiableTestableWorld world, BlockPos pos, BlockState state)
+	{
+		if ((canTreeReplace(world, pos) || world.testBlockState(pos, (blockState_1) -> {
+			Block block = blockState_1.getBlock();
+			return block == Blocks.GRASS;
+		})) && world.testBlockState(pos, (blockState_1) -> {
+			Block block = blockState_1.getBlock();
+			return block != Blocks.GRASS_BLOCK && block != Blocks.DIRT && block != Blocks.COARSE_DIRT;
+		}))
+				super.setBlockState(set, world, pos, state);
+	}
 
 	@Override
-	public void setWorldBlockState(ModifiableWorld world, BlockPos pos, BlockState state)
+	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state)
 	{
-		super.setBlockState(world, pos, state);
+		super.setBlockState(set, world, pos, state);
 	}
 }

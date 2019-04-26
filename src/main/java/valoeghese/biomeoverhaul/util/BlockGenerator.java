@@ -2,6 +2,7 @@ package valoeghese.biomeoverhaul.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,12 +16,14 @@ import valoeghese.biomeoverhaul.util.math.Triple;
 public class BlockGenerator
 {
 	protected ModifiableTestableWorld world;
+	public Set<BlockPos> set;
 	protected boolean canGenerate = true;
 	protected List<Triple<BlockPos, BlockState, Boolean>> gen = new ArrayList<>();
 
-	public BlockGenerator(ModifiableTestableWorld world)
+	public BlockGenerator(ModifiableTestableWorld world, Set<BlockPos> set)
 	{
 		this.world = world;
+		this.set = set;
 	}
 
 	public void setBlock(BlockPos pos, BlockState state, boolean ignore)
@@ -61,7 +64,12 @@ public class BlockGenerator
 		{
 			for (Triple<BlockPos, BlockState, Boolean> pair : this.gen)
 				if (pair.getC())
-					generator.setWorldBlockState(this.world, pair.getA(), pair.getB());
+				{
+					if (generator instanceof PublicWorldModifierTester)
+						((PublicWorldModifierTester)generator).setWorldBlockState(this.set, this.world, pair.getA(), pair.getB());
+					else
+						generator.setWorldBlockState(this.set, this.world, pair.getA(), pair.getB());
+				}
 
 			return true;
 		}
