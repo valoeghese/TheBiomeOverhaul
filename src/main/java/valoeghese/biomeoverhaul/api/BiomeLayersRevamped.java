@@ -3,6 +3,7 @@ package valoeghese.biomeoverhaul.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import valoeghese.biomeoverhaul.TheBiomeOverhaul;
 import valoeghese.biomeoverhaul.api.enums.BiomeHumidity;
 import valoeghese.biomeoverhaul.api.enums.BiomeTemperature;
 import valoeghese.biomeoverhaul.api.layer.Layer;
@@ -45,7 +46,7 @@ public class BiomeLayersRevamped
 	public static void addLayer(Layer layer, BiomeTemperature temp, BiomeHumidity humidity, boolean suppressWarnings)
 	{
 		if (layer.categories.isEmpty() && !suppressWarnings)
-			System.out.println("[BiomeOverhaul] WARNING: injected layer " + layer.toString() + " has not been set any GenerationCategories. If this is intentional, please call this method with boolean suppressWarnings set to FALSE");
+			TheBiomeOverhaul.getLogger().error("[BiomeOverhaul] WARNING: injected layer " + layer.toString() + " has not been set any GenerationCategories. If this is intentional, please call this method with boolean suppressWarnings set to FALSE");
 		
 		switch(temp.getId())
 		{
@@ -75,7 +76,7 @@ public class BiomeLayersRevamped
 			else BiomeLayersRevamped.desertBiomesWet.add(layer);
 			break;
 		default:
-			System.out.println("[BiomeOverhaul] ERROR: There was an error in injecting a biomelayer into Temperature " + temp.toString() + ", humidity" + humidity.toString());
+			TheBiomeOverhaul.getLogger().error("There was an error in injecting a biomelayer into Temperature " + temp.toString() + ", humidity" + humidity.toString());
 		}
 	}
 

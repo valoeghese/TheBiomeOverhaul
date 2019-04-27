@@ -6,24 +6,32 @@ import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.layer.LayerRandomnessSource;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import valoeghese.biomeoverhaul.api.BiomeModifier;
 import valoeghese.biomeoverhaul.api.modifier.BiomeModifiers;
 import valoeghese.biomeoverhaul.util.OceanManipulation;
 import valoeghese.biomeoverhaul.util.event.GenerationEventHandler;
 import valoeghese.biomeoverhaul.util.noise.OpenSimplexNoise;
+import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
 import valoeghese.biomeoverhaul.world.layer.BiomeLayersFunctions;
 
-public class Main implements ModInitializer
+public class TheBiomeOverhaul implements ModInitializer
 {
-
+	private static Logger logger = LogManager.getLogger("TheBiomeOverhaul");
 	public static final int PLAINS = Registry.BIOME.getRawId(Biomes.PLAINS);
 	public static final int FOREST = Registry.BIOME.getRawId(Biomes.FOREST);
+
+	public static Logger getLogger() {
+		return logger;
+	}
 
 	@Override
 	public void onInitialize()
 	{
-
-		System.out.println("TheBiomeOverhaul has been enabled!");
+		// Initialize
+		CustomSurfaceBuilders.init();
+		ModBiomes.init();
 
 		//Biome Modifiers
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
@@ -210,5 +218,7 @@ public class Main implements ModInitializer
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
 		
 		Biomes.GIANT_TREE_TAIGA.addStructureFeature(Feature.WOODLAND_MANSION, FeatureConfig.DEFAULT);
+
+		logger.info("*hugs tree*");
 	}
 }
