@@ -80,7 +80,8 @@ public class ModBiomes
 	public static Biome TROPICAL_ISLAND_SHORE;
 	public static Biome WOODED_MOUNTAIN_PEAKS;
 
-	public static void init() {
+	public static void init()
+	{
 		ALPS = BiomeRegistry.register(new AlpsBiome(), "tbo:alps");
 		BAYOU = BiomeRegistry.register(new BayouBiome(), "tbo:bayou");
 		BRUSHLAND = BiomeRegistry.register(new BrushlandBiome(), "tbo:brushland");
