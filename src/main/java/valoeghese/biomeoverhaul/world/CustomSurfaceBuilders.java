@@ -41,7 +41,8 @@ public class CustomSurfaceBuilders
 		return (SurfaceBuilder<C>)Registry.register(Registry.SURFACE_BUILDER, (String)string1, surfaceBuilder1);
 	}
 
-	public static void init() {
+	public static void init()
+	{
 		SNOWY_CONFIG = new TernarySurfaceConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState());
 		ICY_CONFIG = new TernarySurfaceConfig(Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.BLUE_ICE.getDefaultState());
 		ICY_SNOWY_CONFIG = new TernarySurfaceConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.BLUE_ICE.getDefaultState());

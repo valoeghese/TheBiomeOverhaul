@@ -1,13 +1,16 @@
 package valoeghese.biomeoverhaul;
 
+import java.util.Random;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.layer.LayerRandomnessSource;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import valoeghese.biomeoverhaul.api.BiomeModifier;
 import valoeghese.biomeoverhaul.api.modifier.BiomeModifiers;
 import valoeghese.biomeoverhaul.util.OceanManipulation;
@@ -19,17 +22,19 @@ import valoeghese.biomeoverhaul.world.layer.BiomeLayersFunctions;
 public class TheBiomeOverhaul implements ModInitializer
 {
 	private static Logger logger = LogManager.getLogger("TheBiomeOverhaul");
+	
 	public static final int PLAINS = Registry.BIOME.getRawId(Biomes.PLAINS);
 	public static final int FOREST = Registry.BIOME.getRawId(Biomes.FOREST);
 
-	public static Logger getLogger() {
+	public static Logger getLogger()
+	{
 		return logger;
 	}
 
 	@Override
 	public void onInitialize()
 	{
-		// Initialize
+		//Initialize
 		CustomSurfaceBuilders.init();
 		ModBiomes.init();
 
@@ -219,6 +224,6 @@ public class TheBiomeOverhaul implements ModInitializer
 		
 		Biomes.GIANT_TREE_TAIGA.addStructureFeature(Feature.WOODLAND_MANSION, FeatureConfig.DEFAULT);
 
-		logger.info("*hugs tree*");
+		A.b(new Random());
 	}
 }
