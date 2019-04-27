@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.world.biome.layer.LayerRandomnessSource;
+import valoeghese.biomeoverhaul.TheBiomeOverhaul;
 import valoeghese.biomeoverhaul.api.BiomeLayersRevamped;
 import valoeghese.biomeoverhaul.api.enums.BiomeHumidity;
 import valoeghese.biomeoverhaul.api.enums.BiomeTemperature;
@@ -168,7 +169,7 @@ public class BiomeLayersFunctions
 		{
 			if (categoryList == Categories.bPLAINS)
 			{
-				System.out.println("[BiomeOverhaul] ERROR: no default PLAINS layers for temperature " + String.valueOf(temperature) + ", humidity " + humidity.toString() + ". Returning list of all layers in that temperature and humidity.");
+				TheBiomeOverhaul.getLogger().error("[BiomeOverhaul] ERROR: no default PLAINS layers for temperature " + String.valueOf(temperature) + ", humidity " + humidity.toString() + ". Returning list of all layers in that temperature and humidity.");
 				return baseList;
 			}
 			else return getListForClimateCategory(temperature, humidity, Categories.bPLAINS, baseList);

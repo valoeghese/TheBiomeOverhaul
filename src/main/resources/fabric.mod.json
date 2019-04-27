@@ -20,7 +20,7 @@
   
   "entrypoints": {
     "main": [
-      "valoeghese.biomeoverhaul.Main"
+      "valoeghese.biomeoverhaul.TheBiomeOverhaul"
     ]
   },
   

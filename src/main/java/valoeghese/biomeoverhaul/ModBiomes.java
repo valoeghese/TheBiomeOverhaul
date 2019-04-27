@@ -39,49 +39,48 @@ import valoeghese.biomeoverhaul.world.biome.WoodedMountainPeaksBiome;
 
 public class ModBiomes
 {
-	public static final Biome ALPS;
-	public static final Biome ALPS_EDGE;
-	public static final Biome BAYOU;
-	public static final Biome BAYOU_HILLS;
-	public static final Biome BRUSHLAND;
-	public static final Biome CHAPARRAL;
-	public static final Biome CLIFFS;
+	public static Biome ALPS;
+	public static Biome ALPS_EDGE;
+	public static Biome BAYOU;
+	public static Biome BAYOU_HILLS;
+	public static Biome BRUSHLAND;
+	public static Biome CHAPARRAL;
+	public static Biome CLIFFS;
 	//TODO public static final Biome ENCHANTED_MEADOWS; //GenerationCategory MAGICAL
 	//TODO public static final Biome ESTUARY; //Temperate
-	public static final Biome FEN;
-	public static final Biome FORESTED_FEN;
-	public static final Biome GLACIER;
-	public static final Biome GRASSLAND;
-	public static final Biome GRAVELLY_MOUNTAIN_PEAKS;
-	public static final Biome GROVE;
-	public static final Biome HIGHLAND;
-	public static final Biome ICE_PLAINS;
-	public static final Biome MARSH;
-	public static final Biome MIRE;
-	public static final Biome MOOR;
-	public static final Biome MOUNTAIN_PEAKS;
-	public static final Biome OAKEN_THICKET;
-	public static final Biome OASIS;
-	public static final Biome OUTBACK;
-	public static final Biome OUTBACK_ULURU;
+	public static Biome FEN;
+	public static Biome FORESTED_FEN;
+	public static Biome GLACIER;
+	public static Biome GRASSLAND;
+	public static Biome GRAVELLY_MOUNTAIN_PEAKS;
+	public static Biome GROVE;
+	public static Biome HIGHLAND;
+	public static Biome ICE_PLAINS;
+	public static Biome MARSH;
+	public static Biome MIRE;
+	public static Biome MOOR;
+	public static Biome MOUNTAIN_PEAKS;
+	public static Biome OAKEN_THICKET;
+	public static Biome OASIS;
+	public static Biome OUTBACK;
+	public static Biome OUTBACK_ULURU;
 	//TODO public static final Biome PEAT_BOG; //Tropical Estuary?
 	//TODO public static final Biome PRAIRIE; //Meadow Gen, Temperate;
-	public static final Biome RAINFOREST;
-	public static final Biome RAINFOREST_MOUNTAINS;
-	public static final Biome REDWOODS; //3x3 trees
-	public static final Biome SHIELD;
-	public static final Biome SHRUBLAND;
+	public static Biome RAINFOREST;
+	public static Biome RAINFOREST_MOUNTAINS;
+	public static Biome REDWOODS; //3x3 trees
+	public static Biome SHIELD;
+	public static Biome SHRUBLAND;
 	//TODO public static final Biome SPRINGS;
-	public static final Biome STEPPE;
-	public static final Biome SUBTROPICAL_RAINFOREST;
-	public static final Biome TEMPERATE_RAINFOREST;
-	public static final Biome TUNDRA;
-	public static final Biome TROPICAL_ISLAND;
-	public static final Biome TROPICAL_ISLAND_SHORE;
-	public static final Biome WOODED_MOUNTAIN_PEAKS;
-	
-	static
-	{
+	public static Biome STEPPE;
+	public static Biome SUBTROPICAL_RAINFOREST;
+	public static Biome TEMPERATE_RAINFOREST;
+	public static Biome TUNDRA;
+	public static Biome TROPICAL_ISLAND;
+	public static Biome TROPICAL_ISLAND_SHORE;
+	public static Biome WOODED_MOUNTAIN_PEAKS;
+
+	public static void init() {
 		ALPS = BiomeRegistry.register(new AlpsBiome(), "tbo:alps");
 		BAYOU = BiomeRegistry.register(new BayouBiome(), "tbo:bayou");
 		BRUSHLAND = BiomeRegistry.register(new BrushlandBiome(), "tbo:brushland");
@@ -119,5 +118,7 @@ public class ModBiomes
 		OUTBACK_ULURU = BiomeRegistry.register(new OutbackUluruBiome(), "tbo:modified_outback");
 		RAINFOREST_MOUNTAINS = BiomeRegistry.register(new RainforestMountainsBiome(), "tbo:modified_rainforest");
 		WOODED_MOUNTAIN_PEAKS = BiomeRegistry.register(new WoodedMountainPeaksBiome(), "tbo:wooded_mountain_peaks");
+
+		TheBiomeOverhaul.getLogger().debug("Registered Biomes");
 	}
 }

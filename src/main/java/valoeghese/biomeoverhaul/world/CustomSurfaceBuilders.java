@@ -13,35 +13,35 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
+import valoeghese.biomeoverhaul.TheBiomeOverhaul;
 import valoeghese.biomeoverhaul.util.noise.OpenSimplexNoise;
 
 public class CustomSurfaceBuilders
 {
-	public static final SurfaceBuilder<TernarySurfaceConfig> SHIELD_BUILDER;
-	public static final SurfaceBuilder<TernarySurfaceConfig> TUNDRA_BUILDER;
-	public static final SurfaceBuilder<TernarySurfaceConfig> GROVE_BUILDER;
-	public static final SurfaceBuilder<TernarySurfaceConfig> RAINFOREST_BUILDER;
-	public static final SurfaceBuilder<TernarySurfaceConfig> GLACIER_BUILDER;
-	public static final SurfaceBuilder<TernarySurfaceConfig> OUTBACK_BUILDER;
+	public static SurfaceBuilder<TernarySurfaceConfig> SHIELD_BUILDER;
+	public static SurfaceBuilder<TernarySurfaceConfig> TUNDRA_BUILDER;
+	public static SurfaceBuilder<TernarySurfaceConfig> GROVE_BUILDER;
+	public static SurfaceBuilder<TernarySurfaceConfig> RAINFOREST_BUILDER;
+	public static SurfaceBuilder<TernarySurfaceConfig> GLACIER_BUILDER;
+	public static SurfaceBuilder<TernarySurfaceConfig> OUTBACK_BUILDER;
 	
-	public static final TernarySurfaceConfig SNOWY_CONFIG;
-	public static final TernarySurfaceConfig ICY_CONFIG;
-	public static final TernarySurfaceConfig ICY_SNOWY_CONFIG;
-	public static final TernarySurfaceConfig TERRACOTTA_RED_CONFIG;
-	public static final TernarySurfaceConfig TERRACOTTA_ORANGE_CONFIG;
-	public static final TernarySurfaceConfig TERRACOTTA_YELLOW_CONFIG;
-	public static final TernarySurfaceConfig TERRACOTTA_CONFIG;
-	public static final TernarySurfaceConfig CLAY_CONFIG;
-	public static final TernarySurfaceConfig RAINFOREST_CONFIG;
-	public static final TernarySurfaceConfig OUTBACK_CONFIG;
+	public static TernarySurfaceConfig SNOWY_CONFIG;
+	public static TernarySurfaceConfig ICY_CONFIG;
+	public static TernarySurfaceConfig ICY_SNOWY_CONFIG;
+	public static TernarySurfaceConfig TERRACOTTA_RED_CONFIG;
+	public static TernarySurfaceConfig TERRACOTTA_ORANGE_CONFIG;
+	public static TernarySurfaceConfig TERRACOTTA_YELLOW_CONFIG;
+	public static TernarySurfaceConfig TERRACOTTA_CONFIG;
+	public static TernarySurfaceConfig CLAY_CONFIG;
+	public static TernarySurfaceConfig RAINFOREST_CONFIG;
+	public static TernarySurfaceConfig OUTBACK_CONFIG;
 	
 	private static <C extends SurfaceConfig, F extends SurfaceBuilder<C>> SurfaceBuilder<C> register(String string1, F surfaceBuilder1)
 	{
 		return (SurfaceBuilder<C>)Registry.register(Registry.SURFACE_BUILDER, (String)string1, surfaceBuilder1);
 	}
 
-	static
-	{
+	public static void init() {
 		SNOWY_CONFIG = new TernarySurfaceConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.SNOW_BLOCK.getDefaultState(), Blocks.STONE.getDefaultState());
 		ICY_CONFIG = new TernarySurfaceConfig(Blocks.BLUE_ICE.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.BLUE_ICE.getDefaultState());
 		ICY_SNOWY_CONFIG = new TernarySurfaceConfig(Blocks.SNOW_BLOCK.getDefaultState(), Blocks.PACKED_ICE.getDefaultState(), Blocks.BLUE_ICE.getDefaultState());
@@ -59,6 +59,8 @@ public class CustomSurfaceBuilders
 		RAINFOREST_BUILDER = register("tbo:valoeghese_rainforest", new RainforestSurfaceBuilder(TernarySurfaceConfig::deserialize));
 		GLACIER_BUILDER = register("tbo:valoeghese_glacier", new GlacierBuilder(TernarySurfaceConfig::deserialize));
 		OUTBACK_BUILDER = register("tbo:valoeghese_outback", new OutbackBuilder(TernarySurfaceConfig::deserialize));
+
+		TheBiomeOverhaul.getLogger().debug("Registered Surface Builders!");
 	}
 	
 	public static class ShieldSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
