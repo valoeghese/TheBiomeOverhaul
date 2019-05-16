@@ -15,23 +15,23 @@ public class OceanTemperatureMixin
 {
 
 	@Inject(at = @At(value = "HEAD"), method = "sample", cancellable = true)
-	private void addSample(LayerRandomnessSource layerRandomnessSource_1, LayerSampler layerSampler_1, LayerSampler layerSampler_2, int int_1, int int_2,
+	private void addSample(LayerRandomnessSource rand, LayerSampler sampler_1, LayerSampler sampler_2, int x, int z,
 			CallbackInfoReturnable<Integer> info)
 	{
-		int biome = layerSampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(int_1), ApplyOceanTemperatureLayer.INSTANCE.transformZ(int_2));
+		int biome = sampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(x), ApplyOceanTemperatureLayer.INSTANCE.transformZ(z));
 
-		int[] ints_1 = new int[4];
+		int[] samples = new int[4];
 
 		if (isShallowOceanBiome(biome))
 		{
-			ints_1[0] = layerSampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(int_1 + 1), ApplyOceanTemperatureLayer.INSTANCE.transformZ(int_2));
-			ints_1[1] = layerSampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(int_1), ApplyOceanTemperatureLayer.INSTANCE.transformZ(int_2 + 1));
-			ints_1[2] = layerSampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(int_1 - 1), ApplyOceanTemperatureLayer.INSTANCE.transformZ(int_2));
-			ints_1[3] = layerSampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(int_1), ApplyOceanTemperatureLayer.INSTANCE.transformZ(int_2 - 1));
+			samples[0] = sampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(x + 1), ApplyOceanTemperatureLayer.INSTANCE.transformZ(z));
+			samples[1] = sampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(x), ApplyOceanTemperatureLayer.INSTANCE.transformZ(z + 1));
+			samples[2] = sampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(x - 1), ApplyOceanTemperatureLayer.INSTANCE.transformZ(z));
+			samples[3] = sampler_1.sample(ApplyOceanTemperatureLayer.INSTANCE.transformX(x), ApplyOceanTemperatureLayer.INSTANCE.transformZ(z - 1));
 
 			int counter = 0;
 
-			for (int i : ints_1)
+			for (int i : samples)
 			{
 				if (isShallowOceanBiome(i))
 				{
@@ -41,7 +41,7 @@ public class OceanTemperatureMixin
 
 			if (counter > 3)
 			{
-				if (layerRandomnessSource_1.nextInt(10) == 0)
+				if (rand.nextInt(10) == 0)
 				{
 					if (biome == WARM_OCEAN_ID)
 					{

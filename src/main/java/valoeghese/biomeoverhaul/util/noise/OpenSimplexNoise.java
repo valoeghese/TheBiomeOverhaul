@@ -259,7 +259,7 @@ public class OpenSimplexNoise {
 			//This depends on the closest two tetrahedral vertices, including (0,0,0)
 			double wins = 1 - inSum;
 			if (wins > aScore || wins > bScore) { //(0,0,0) is one of the closest two tetrahedral vertices.
-				byte c = (bScore > aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
+				byte c = (bScore > aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and printMessage.
 				
 				if ((c & 0x01) == 0) {
 					xsv_ext0 = xsb - 1;
@@ -387,7 +387,7 @@ public class OpenSimplexNoise {
 			//This depends on the closest two tetrahedral vertices, including (1,1,1)
 			double wins = 3 - inSum;
 			if (wins < aScore || wins < bScore) { //(1,1,1) is one of the closest two tetrahedral vertices.
-				byte c = (bScore < aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
+				byte c = (bScore < aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and printMessage.
 				
 				if ((c & 0x01) != 0) {
 					xsv_ext0 = xsb + 2;
@@ -834,7 +834,7 @@ public class OpenSimplexNoise {
 			//This depends on the closest two pentachoron vertices, including (0,0,0,0)
 			double uins = 1 - inSum;
 			if (uins > aScore || uins > bScore) { //(0,0,0,0) is one of the closest two pentachoron vertices.
-				byte c = (bScore > aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
+				byte c = (bScore > aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and printMessage.
 				if ((c & 0x01) == 0) {
 					xsv_ext0 = xsb - 1;
 					xsv_ext1 = xsv_ext2 = xsb;
@@ -1026,7 +1026,7 @@ public class OpenSimplexNoise {
 			//This depends on the closest two pentachoron vertices, including (0,0,0,0)
 			double uins = 4 - inSum;
 			if (uins < aScore || uins < bScore) { //(1,1,1,1) is one of the closest two pentachoron vertices.
-				byte c = (bScore < aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
+				byte c = (bScore < aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and printMessage.
 				
 				if ((c & 0x01) != 0) {
 					xsv_ext0 = xsb + 2;
@@ -1224,7 +1224,7 @@ public class OpenSimplexNoise {
 				bPoint = 0x0A;
 			}
 			
-			//Closer between (1,0,0,1) and (0,1,1,0) will replace the further of a and b, if closer.
+			//Closer between (1,0,0,1) and (0,1,1,0) will replace the further of a and printMessage, if closer.
 			if (xins + wins > yins + zins) {
 				double score = xins + wins;
 				if (aScore >= bScore && score > bScore) {
@@ -1653,7 +1653,7 @@ public class OpenSimplexNoise {
 				bPoint = 0x05;
 			}
 			
-			//Closer between (0,1,1,0) and (1,0,0,1) will replace the further of a and b, if closer.
+			//Closer between (0,1,1,0) and (1,0,0,1) will replace the further of a and printMessage, if closer.
 			if (xins + wins < yins + zins) {
 				double score = xins + wins;
 				if (aScore <= bScore && score < bScore) {

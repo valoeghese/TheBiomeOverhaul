@@ -26,9 +26,9 @@ public class BiomeLayersFunctions
 
 	public static double temperatureOffset;
 
-	public static void initNoise(long seed, double temperatureOffset_)
+	public static void initNoise(long seed, double tempOffset)
 	{
-		temperatureOffset = temperatureOffset_;
+		temperatureOffset = tempOffset;
 
 		NOISE_1 = new OpenSimplexNoise(seed);
 		NOISE_2 = new OpenSimplexNoise(seed + 1);
@@ -73,10 +73,10 @@ public class BiomeLayersFunctions
 			return false;
 	}
 
-	//TODO add int_1, int_2 noise check
-	public static boolean isBluff(double noise, double int_1, double int_2)
+	//TODO add z, z noise check
+	public static boolean isBluff(double noise, double x, double z)
 	{
-		double bluffNoise = 0.83 * NOISE_OCEAN.eval(int_1 / 6D, int_2 / 6D) + 0.17 * NOISE_2.eval(int_1 / 4D, int_2 / 4D);
+		double bluffNoise = 0.83 * NOISE_OCEAN.eval(x / 6D, z / 6D) + 0.17 * NOISE_2.eval(x / 4D, z / 4D);
 
 		if (noise > 0.26D && noise <= 0.30D && bluffNoise > 0.24D)
 			return true;
@@ -84,11 +84,11 @@ public class BiomeLayersFunctions
 			return false;
 	}
 
-	public static double oceanNoise(double int_1, double int_2)
+	public static double oceanNoise(double x, double z)
 	{
 		OpenSimplexNoise n = NOISE_OCEAN;
 
-		return 0.8D * n.eval(int_1 / OCEAN_SIZE, int_2 / OCEAN_SIZE) + 0.14D * n.eval(int_1 / (OCEAN_SIZE / 2), int_2 / (OCEAN_SIZE / 2))+ 0.06D * n.eval(int_1 / (OCEAN_SIZE / 4), int_2 / (OCEAN_SIZE / 4));
+		return 0.8D * n.eval(x / OCEAN_SIZE, z / OCEAN_SIZE) + 0.14D * n.eval(x / (OCEAN_SIZE / 2), z / (OCEAN_SIZE / 2))+ 0.06D * n.eval(x / (OCEAN_SIZE / 4), z / (OCEAN_SIZE / 4));
 	}
 
 	public static Layer addOcean(int temperature, boolean island, LayerRandomnessSource rand, List<Layer> baseList, double oceanNoise)
@@ -149,12 +149,12 @@ public class BiomeLayersFunctions
 		return returns.get(rand.nextInt(returns.size()));
 	}
 
-	public static List<Layer> getListForClimateCategory(int temperature, BiomeHumidity humidity, GenerationCategory category, int int_1, int int_2, double oceanNoise)
+	public static List<Layer> getListForClimateCategory(int temperature, BiomeHumidity humidity, GenerationCategory category, int x, int z, double oceanNoise)
 	{
 		List<Layer> baseList = getListForClimate(temperature, humidity);
 		List<Layer> bluffList = getUncheckedListForClimateCategory(Categories.bBLUFF, baseList);
 
-		if (isBluff(oceanNoise, int_1, int_2) && !bluffList.isEmpty()) return bluffList;
+		if (isBluff(oceanNoise, x, z) && !bluffList.isEmpty()) return bluffList;
 
 		List<Layer> categoryList = Categories.getListForCategory(category);
 
@@ -163,18 +163,18 @@ public class BiomeLayersFunctions
 
 	private static List<Layer> getListForClimateCategory(int temperature, BiomeHumidity humidity, List<Layer> categoryList, List<Layer> baseList)
 	{	
-		List<Layer> list_1 = getUncheckedListForClimateCategory(categoryList, baseList);
+		List<Layer> layers = getUncheckedListForClimateCategory(categoryList, baseList);
 
-		if (list_1.isEmpty())
+		if (layers.isEmpty())
 		{
 			if (categoryList == Categories.bPLAINS)
 			{
-				TheBiomeOverhaul.getLogger().error("[BiomeOverhaul] ERROR: no default PLAINS layers for temperature " + String.valueOf(temperature) + ", humidity " + humidity.toString() + ". Returning list of all layers in that temperature and humidity.");
+				TheBiomeOverhaul.getLogger().error("[BiomeOverhaul] ERROR: no default PLAINS layers for temperature " + temperature + ", humidity " + humidity.toString() + ". Returning list of all layers in that temperature and humidity.");
 				return baseList;
 			}
 			else return getListForClimateCategory(temperature, humidity, Categories.bPLAINS, baseList);
 		}
-		else return list_1;
+		else return layers;
 	}
 
 	public static List<Layer> getUncheckedListForClimateCategory(List<Layer> categoryList, List<Layer> baseList)
@@ -187,7 +187,7 @@ public class BiomeLayersFunctions
 		return list_1;
 	}
 
-	public static GenerationCategory getCategoryAtPos(double int_1, double int_2, double oceanNoise, int temperature)
+	public static GenerationCategory getCategoryAtPos(double x, double z, double oceanNoise, int temperature)
 	{
 		OpenSimplexNoise n = NOISE_GENERATION_CATEGORY_A;
 		OpenSimplexNoise m = NOISE_GENERATION_CATEGORY_B;
@@ -195,15 +195,15 @@ public class BiomeLayersFunctions
 		
 		double height_noise;
 
-		double forest_noise = 0.9D * n.eval(int_1 / 6.5D, int_2 / 6.5D) + 0.1D * n.eval(int_1, int_2, -2D);
-		double canopy_noise = 0.88D * o.eval(int_1 / 7.5D, int_2 / 7.5D) + 0.12D * n.eval(int_1 / 2D, int_2 / 2D, -2D);
-		double generation_noise_1 = 0.9D * n.eval(int_1 / 8D, int_2 / 8D) + 0.1D * n.eval(int_1 / 4.5D, int_2 / 4.5D);
-		double generation_noise_2 = 0.9D * m.eval(int_1 / 8.2D, int_2 / 8.2D) + 0.1D * m.eval(int_1 / 4.3D, int_2 / 4.3D);
-		double generation_noise_3 = 0.9D * m.eval(int_1 / 11.5D, int_2 / 11.5D) + 0.1D * n.eval(int_1 / 6D, int_2 / 5D);
+		double forest_noise = 0.9D * n.eval(x / 6.5D, z / 6.5D) + 0.1D * n.eval(x, z, -2D);
+		double canopy_noise = 0.88D * o.eval(x / 7.5D, z / 7.5D) + 0.12D * n.eval(x / 2D, z / 2D, -2D);
+		double generation_noise_1 = 0.9D * n.eval(x / 8D, z / 8D) + 0.1D * n.eval(x / 4.5D, z / 4.5D);
+		double generation_noise_2 = 0.9D * m.eval(x / 8.2D, z / 8.2D) + 0.1D * m.eval(x / 4.3D, z / 4.3D);
+		double generation_noise_3 = 0.9D * m.eval(x / 11.5D, z / 11.5D) + 0.1D * n.eval(x / 6D, z / 5D);
 
 		if (!isOcean(oceanNoise))
 		{
-			height_noise = 0.75D * n.eval(int_1 / 21.5D, int_2 / 21.5D) + 0.24D * n.eval(int_1 / 16D, int_2 / 16D) + 0.03D * n.eval(int_1 / 4D, int_2 / 4D, 2D);
+			height_noise = 0.75D * n.eval(x / 21.5D, z / 21.5D) + 0.24D * n.eval(x / 16D, z / 16D) + 0.03D * n.eval(x / 4D, z / 4D, 2D);
 
 			if (height_noise > 0.23D && height_noise < 0.32D)
 				return GenerationCategory.MOUNTAIN;
@@ -243,9 +243,9 @@ public class BiomeLayersFunctions
 		}
 		else
 		{
-			height_noise = 0.8 * n.eval(int_1 / 8D, int_2 / 8D) + 0.2 * n.eval(int_1 / 4D, int_2 / 4D, (int_1 + int_2) / 2D);
+			height_noise = 0.8 * n.eval(x / 8D, z / 8D) + 0.2 * n.eval(x / 4D, z / 4D, (x + z) / 2D);
 
-			Random rand = new Random((long) (int_1 * 5329 + int_2 * 2943));
+			Random rand = new Random((long) (x * 5329 + z * 2943));
 
 			boolean generateIsland = (height_noise > 0.27D && height_noise < 0.29D);
 

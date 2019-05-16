@@ -27,7 +27,7 @@ public class BiomesMixin
 {
 
 	@Inject(at = @At(value = "HEAD"), method = "sample", cancellable = true)
-	private void addSample(LayerRandomnessSource layerRandomnessSource_1, LayerSampler layerSampler_1, LayerSampler layerSampler_2, int int_1, int int_2,
+	private void addSample(LayerRandomnessSource rand, LayerSampler sampler_1, LayerSampler sampler_2, int x, int z,
 			CallbackInfoReturnable<Integer> info)
 	{
 		int int_3;
@@ -35,30 +35,30 @@ public class BiomesMixin
 		if (SoloBiome.isActive())
 			int_3 = SoloBiome.getBiome();
 		else
-			int_3 = this.coreSample(layerRandomnessSource_1, layerSampler_1, layerSampler_2, int_1, int_2);
+			int_3 = this.coreSample(rand, sampler_1, sampler_2, x, z);
 		
 		info.setReturnValue(int_3);
 	}
 
-	public int coreSample(LayerRandomnessSource rand, LayerSampler layerSampler_1, LayerSampler layerSampler_2, int int_1, int int_2)
+	public int coreSample(LayerRandomnessSource rand, LayerSampler sampler_1, LayerSampler sampler_2, int x, int z)
 	{
 		BiomeLayersFunctions.initNoise(MathUtils.fastFloor(3218731280712L * rand.getNoiseSampler().originX + 64207987541L * rand.getNoiseSampler().originZ), rand.getNoiseSampler().originZ);
 
 		//Get possible applied test modules
 		TestModule moduleInUse = TestModuleApplier.getModule();
-		int temp = BiomeLayersFunctions.getTemperatureAtPos(int_1, int_2);
+		int temp = BiomeLayersFunctions.getTemperatureAtPos(x, z);
 		
 		Layer layer;
 		
 		if (!moduleInUse.isEnabled())
 		{
 			//Get further information of biome gen at position
-			BiomeHumidity humidity = BiomeLayersFunctions.getHumidityAtPos(int_1, int_2, rand);
+			BiomeHumidity humidity = BiomeLayersFunctions.getHumidityAtPos(x, z, rand);
 			
-			double oceanNoise = BiomeLayersFunctions.oceanNoise(int_1, int_2);
+			double oceanNoise = BiomeLayersFunctions.oceanNoise(x, z);
 			boolean isOceanBiome = BiomeLayersFunctions.isOcean(oceanNoise);
 
-			GenerationCategory category = BiomeLayersFunctions.getCategoryAtPos(int_1, int_2, oceanNoise, temp);
+			GenerationCategory category = BiomeLayersFunctions.getCategoryAtPos(x, z, oceanNoise, temp);
 
 			//Test for ocean first
 			if (isOceanBiome)
@@ -67,12 +67,12 @@ public class BiomesMixin
 			}
 			else
 			{
-				List<Layer> biomes = BiomeLayersFunctions.getListForClimateCategory(temp, humidity, category, int_1, int_2, oceanNoise);
+				List<Layer> biomes = BiomeLayersFunctions.getListForClimateCategory(temp, humidity, category, x, z, oceanNoise);
 				
-				if (BiomeLayersFunctions.isSwamp(int_1, int_2))
+				if (BiomeLayersFunctions.isSwamp(x, z))
 					biomes = BiomeLayersFunctions.addSwamp(temp, biomes);
 				
-				if (BiomeLayersFunctions.isBadlands(temp, int_1, int_2))
+				if (BiomeLayersFunctions.isBadlands(temp, x, z))
 					biomes = BiomeLayersRevamped.mesaFeatureList;
 				
 				layer = (Layer) biomes.toArray()[rand.nextInt(biomes.size())];
@@ -80,46 +80,46 @@ public class BiomesMixin
 		}
 		else
 		{
-			layer = moduleInUse.getTestBiomeLayer(rand, int_1, int_2);
+			layer = moduleInUse.getTestBiomeLayer(rand, x, z);
 		}
 		
-		double hillsNoise = BiomeLayersFunctions.hills(int_1, int_2);
-		double mutationNoise = BiomeLayersFunctions.mutation(int_1, int_2);
+		double hillsNoise = BiomeLayersFunctions.hills(x, z);
+		double mutationNoise = BiomeLayersFunctions.mutation(x, z);
 
 		if (hillsNoise > 0.54D || hillsNoise < -0.54D)
 		{
-			if (mutationNoise > 0.55 || rand.nextInt(16) == 0) return this.returnBiome(layer.hillmut, rand, temp, true, true, int_1, int_2);
-			else return this.returnBiome(layer.hill, rand, temp, false, true, int_1, int_2);
+			if (mutationNoise > 0.55 || rand.nextInt(16) == 0) return this.returnBiome(layer.hillmut, rand, temp, true, true, x, z);
+			else return this.returnBiome(layer.hill, rand, temp, false, true, x, z);
 		}
 		else
 		{
-			if (mutationNoise > 0.5 || rand.nextInt(16) == 0) return this.returnBiome(layer.biomemut, rand, temp, true, false, int_1, int_2);
-			else return this.returnBiome(layer.biome, rand, temp, false, false, int_1, int_2);
+			if (mutationNoise > 0.5 || rand.nextInt(16) == 0) return this.returnBiome(layer.biomemut, rand, temp, true, false, x, z);
+			else return this.returnBiome(layer.biome, rand, temp, false, false, x, z);
 		}
 	}
 
-	private int returnBiome(int biome, LayerRandomnessSource rand, int temperature, boolean mutation, boolean hills, int int_1, int int_2)
+	private int returnBiome(int biome, LayerRandomnessSource rand, int temperature, boolean mutation, boolean hills, int x, int z)
 	{
-		int biome_1 = biome;
+		int moddedBiome = biome;
 		
 		if (!TestModuleApplier.areModifiersEnabled()) return biome;
 		
 		for (BiomeModifier b : BiomeModifiers.initial_modifiers)
 		{
-			biome_1 = b.setInts(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
+			moddedBiome = b.setInts(x, z).apply(rand, moddedBiome, biome, temperature, mutation, hills);
 			if (b.cancel()) break;
 		}
 		for (BiomeModifier b : BiomeModifiers.standard_modifiers)
 		{
-			biome_1 = b.setInts(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
+			moddedBiome = b.setInts(x, z).apply(rand, moddedBiome, biome, temperature, mutation, hills);
 			if (b.cancel()) break;
 		}
 		for (BiomeModifier b : BiomeModifiers.final_modifiers)
 		{
-			biome_1 = b.setInts(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
+			moddedBiome = b.setInts(x, z).apply(rand, moddedBiome, biome, temperature, mutation, hills);
 			if (b.cancel()) break;
 		}
 
-		return biome_1;
+		return moddedBiome;
 	}
 }

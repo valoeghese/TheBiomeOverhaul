@@ -7,6 +7,7 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -14,19 +15,19 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
 public class EmptyFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 {
-	public EmptyFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1)
+	public EmptyFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> confug)
 	{
-		super(function_1, false);
+		super(confug, false);
 	}
 
-	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1)
+	public boolean generate(Set<BlockPos> positions, ModifiableTestableWorld world, Random rand, BlockPos pos, MutableIntBoundingBox bb)
 	{
 		int height = 3;
-		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);
+		pos = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, pos);
 
-		if (blockPos_1.getY() >= 1 && blockPos_1.getY() + height + 1 <= 256 && super.isNaturalDirtOrGrass(world, blockPos_1.down()))
+		if (pos.getY() >= 1 && pos.getY() + height + 1 <= 256 && super.isNaturalDirtOrGrass(world, pos.down()))
 		{
-			return canTreeReplace(world, blockPos_1);
+			return canTreeReplace(world, pos);
 		}
 		else
 		{

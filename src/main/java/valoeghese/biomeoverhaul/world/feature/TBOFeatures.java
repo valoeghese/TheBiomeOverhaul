@@ -35,8 +35,8 @@ public class TBOFeatures
 		SMALL_REDWOOD = register("tbo:small_redwood", new SmallRedwoodFeature(DefaultFeatureConfig::deserialize));
 	}
 
-	private static <C extends FeatureConfig, F extends Feature<C>> F register(String string_1, F feature_1)
+	private static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature)
 	{
-		return (F)Registry.register(Registry.FEATURE, (String)string_1, feature_1);
+		return Registry.register(Registry.FEATURE, name, feature);
 	}
 }

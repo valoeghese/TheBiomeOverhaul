@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class A
+public class StartupMessage
 {
-	private static final List<String> a, b;
+	private static final List<String> commonLogs, rareLogs;
 	
 	static
 	{
-		a = Arrays.asList(
+		commonLogs = Arrays.asList(
 				"TheBiomeOverhaul has been initialised!",
 				"Deleting 1.12...",
 				"Also try Lil' Tater!",
@@ -18,7 +18,7 @@ public class A
 				"TheBiomeOverhaul has been enabled!"
 		);
 		
-		b = Arrays.asList(
+		rareLogs = Arrays.asList(
 				"*hugs tree*",
 				"Deleting TheBiomeUnderhaul...",
 				"Not TheBiomeUnderhaul!",
@@ -26,13 +26,13 @@ public class A
 		);
 	}
 	
-	public static void b(Random d)
+	public static void printMessage(Random rand)
 	{
-		TheBiomeOverhaul.getLogger().info("[TheBiomeOverhaul] " + c(d));
+		TheBiomeOverhaul.getLogger().info("[TheBiomeOverhaul] " + genMessage(rand));
 	}
 	
-	private static String c(Random d)
+	private static String genMessage(Random rand)
 	{
-		return d.nextInt(10) == 0 ? b.get(d.nextInt(b.size())) : a.get(d.nextInt(a.size()));
+		return rand.nextInt(10) == 0 ? rareLogs.get(rand.nextInt(rareLogs.size())) : commonLogs.get(rand.nextInt(commonLogs.size()));
 	}
 }

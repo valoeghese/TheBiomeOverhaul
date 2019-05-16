@@ -5,11 +5,11 @@ public class MathUtils
 	/**
 	 * MathHelper.fastFloor, but for all sides: both client and server
 	 * 
-	 * @param double_1
+	 * @param input
 	 * @return int, floor
 	 */
-	public static int fastFloor(double double_1)
+	public static int fastFloor(double input)
 	{
-		return (int)(double_1 + 1024.0D) - 1024;
+		return (int)(input + 1024.0D) - 1024;
 	}
 }

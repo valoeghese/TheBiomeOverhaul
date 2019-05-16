@@ -19,10 +19,10 @@ public class RiverMixin
 {
 	
 	@Inject(at = @At(value = "HEAD"), method = "sample", cancellable = true)
-	private void sample(LayerRandomnessSource rand, LayerSampler layerSampler_1, LayerSampler layerSampler_2, int int_1, int int_2,
+	private void sample(LayerRandomnessSource rand, LayerSampler sampler_1, LayerSampler sampler_2, int x, int z,
 			CallbackInfoReturnable<Integer> info)
 	{
-		int biome_id = layerSampler_1.sample(int_1, int_2);
+		int biome_id = sampler_1.sample(x, z);
 		Biome biome = Registry.BIOME.get(biome_id);
 		
 		if (biome instanceof TBOBiome)

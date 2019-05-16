@@ -9,6 +9,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.ModifiableWorld;
@@ -22,30 +23,30 @@ public class BushFeature extends AbstractTreeFeature<DefaultFeatureConfig> imple
 	private static final BlockState LOG = Blocks.OAK_LOG.getDefaultState();
 	private static final BlockState LEAVES = Blocks.OAK_LEAVES.getDefaultState();
 
-	public BushFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1)
+	public BushFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> config)
 	{
-		super(function_1, false);
+		super(config, false);
 	}
 
-	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1)
+	public boolean generate(Set<BlockPos> positions, ModifiableTestableWorld world, Random rand, BlockPos pos, MutableIntBoundingBox bb)
 	{
 		int height = 3;
-		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);
+		pos = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, pos);
 
-		BlockGenerator generator = new BlockGenerator(world, set_1);
+		BlockGenerator generator = new BlockGenerator(world, positions, bb);
 
-		if (blockPos_1.getY() >= 1 && blockPos_1.getY() + height + 1 <= 256 && super.isNaturalDirtOrGrass(world, blockPos_1.down()))
+		if (pos.getY() >= 1 && pos.getY() + height + 1 <= 256 && super.isNaturalDirtOrGrass(world, pos.down()))
 		{
-			generator.setBlock(blockPos_1.down(), Blocks.DIRT.getDefaultState(), true);
+			generator.setBlock(pos.down(), Blocks.DIRT.getDefaultState(), true);
 			
-			generator.setBlock(blockPos_1.add(0, 0, 0), LOG, false);
+			generator.setBlock(pos.add(0, 0, 0), LOG, false);
 			
-			generator.setBlock(blockPos_1.add(1, 0, 0), LEAVES, true);
-			generator.setBlock(blockPos_1.add(-1, 0, 0), LEAVES, true);
-			generator.setBlock(blockPos_1.add(0, 0, 1), LEAVES, true);
-			generator.setBlock(blockPos_1.add(0, 0, -1), LEAVES, true);
+			generator.setBlock(pos.add(1, 0, 0), LEAVES, true);
+			generator.setBlock(pos.add(-1, 0, 0), LEAVES, true);
+			generator.setBlock(pos.add(0, 0, 1), LEAVES, true);
+			generator.setBlock(pos.add(0, 0, -1), LEAVES, true);
 
-			generator.setBlock(blockPos_1.add(0, 1, 0), LEAVES, true);
+			generator.setBlock(pos.add(0, 1, 0), LEAVES, true);
 
 			return generator.generate(this);
 		}
@@ -56,8 +57,8 @@ public class BushFeature extends AbstractTreeFeature<DefaultFeatureConfig> imple
 	}
 
 	@Override
-	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state)
+	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state, MutableIntBoundingBox bb)
 	{
-		super.setBlockState(set, world, pos, state);
+		super.setBlockState(set, world, pos, state, bb);
 	}
 }

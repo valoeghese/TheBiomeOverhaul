@@ -9,6 +9,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.ModifiableWorld;
@@ -22,20 +23,20 @@ public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> im
 	private static final BlockState LOG = Blocks.DARK_OAK_LOG.getDefaultState();
 	private static final BlockState LEAVES = Blocks.SPRUCE_LEAVES.getDefaultState();
 
-	public RedwoodFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1)
+	public RedwoodFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> config)
 	{
-		super(function_1, false);
+		super(config, false);
 	}
 
-	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1)
+	public boolean generate(Set<BlockPos> positions, ModifiableTestableWorld world, Random rand, BlockPos pos, MutableIntBoundingBox bb)
 	{
-		int height = 25 + random_1.nextInt(45);
+		int height = 25 + rand.nextInt(45);
 
-		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);
+		pos = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, pos);
 
-		BlockGenerator generator = new BlockGenerator(world, set_1);
+		BlockGenerator generator = new BlockGenerator(world, positions, bb);
 
-		if (blockPos_1.getY() >= 1 && blockPos_1.getY() + height + 1 <= 256 && super.isNaturalDirtOrGrass(world, blockPos_1.down()))
+		if (pos.getY() >= 1 && pos.getY() + height + 1 <= 256 && super.isNaturalDirtOrGrass(world, pos.down()))
 		{
 
 			//Last 5 layers leaves
@@ -50,14 +51,14 @@ public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> im
 					for (int z = -k; z < k + 1; ++z)
 					{
 						if (Math.sqrt(Math.pow(x, 2) + Math.pow(z, 2)) < k)
-							generator.setBlock(blockPos_1.add(x, i, z), LEAVES, true);
+							generator.setBlock(pos.add(x, i, z), LEAVES, true);
 					}
 			}
 
 			//More leaves lol
 			for (int i = height / 2 - 5; i < height - 5; ++i)
 			{
-				int j = height < 2 * height / 3 ? 3 : 3 + random_1.nextInt(2);
+				int j = height < 2 * height / 3 ? 3 : 3 + rand.nextInt(2);
 				int j1 = height < 2 * height / 3 + 2 ? 3 : 4;
 
 				int k = j + ((height - i) % j1);
@@ -68,7 +69,7 @@ public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> im
 					for (int z = -k; z < k + 1; ++z)
 					{
 						if (Math.sqrt(Math.pow(x, 2) + Math.pow(z, 2)) < k - 1)
-							generator.setBlock(blockPos_1.add(x, i, z), LEAVES, true);
+							generator.setBlock(pos.add(x, i, z), LEAVES, true);
 					}
 			}
 
@@ -77,7 +78,7 @@ public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> im
 			{
 				for (int x = -1; x < 2; ++x)
 					for (int z = -1; z < 2; ++z)
-						generator.setBlock(blockPos_1.add(x, i, z), LOG, i < 1 ? true : false);
+						generator.setBlock(pos.add(x, i, z), LOG, i < 1 ? true : false);
 			}
 
 			return generator.generate(this);
@@ -89,8 +90,8 @@ public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> im
 	}
 
 	@Override
-	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state)
+	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state, MutableIntBoundingBox bb)
 	{
-		super.setBlockState(set, world, pos, state);
+		super.setBlockState(set, world, pos, state, bb);
 	}
 }
