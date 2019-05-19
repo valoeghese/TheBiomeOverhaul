@@ -12,16 +12,18 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
+import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
 
-public class BayouBiome extends TBOBiome
+public class MurkyBayouBiome extends TBOBiome
 {
-	public BayouBiome()
+	public MurkyBayouBiome()
 	{
-		super(BiomeFactory.create(-0.17F, 0.1F, Biome.Category.SWAMP).setTemperatureDownfall(1.0F, 0.8F));
+		super(BiomeFactory.create(-0.14F, 0.1F, Biome.Category.SWAMP).setTemperatureDownfall(0.9F, 0.75F).setWaterProperties(0x2c9943, 0x28b747).setCustomSkyColour(0x7fdbd0).setRiverType(RiverType.NONE).setBaseBiome("tbo:bayou"));
 		
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
 		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
-
+		this.addStructureFeature(Feature.SWAMP_HUT, FeatureConfig.DEFAULT);
+		
 		DefaultBiomeFeatures.addLandCarvers(this);
 		DefaultBiomeFeatures.addDefaultStructures(this);
 		DefaultBiomeFeatures.addDefaultLakes(this);
@@ -30,7 +32,7 @@ public class BayouBiome extends TBOBiome
 		DefaultBiomeFeatures.addMineables(this);
 		DefaultBiomeFeatures.addDefaultOres(this);
 		DefaultBiomeFeatures.addDefaultDisks(this);
-		CustomBiomeFeatures.addBayouFeatures(this);
+		CustomBiomeFeatures.addExtraBayouFeatures(this);
 		DefaultBiomeFeatures.addDefaultFlowers(this);
 		DefaultBiomeFeatures.addForestGrass(this);
 		DefaultBiomeFeatures.addDefaultMushrooms(this);

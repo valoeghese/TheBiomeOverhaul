@@ -47,7 +47,11 @@ public enum GenerationCategory
 	 */
 	BLUFF,
 	/**
-	 * Thicket areas
+	 * Forested areas with large canopy trees
 	 */
-	CANOPY;
+	CANOPY,
+	/**
+	 * Estuary
+	 */
+	ESTUARY;
 }

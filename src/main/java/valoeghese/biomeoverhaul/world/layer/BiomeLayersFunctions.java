@@ -12,6 +12,7 @@ import valoeghese.biomeoverhaul.api.enums.BiomeHumidity;
 import valoeghese.biomeoverhaul.api.enums.BiomeTemperature;
 import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
 import valoeghese.biomeoverhaul.api.layer.Layer;
+import valoeghese.biomeoverhaul.config.OverhaulSettings;
 import valoeghese.biomeoverhaul.util.noise.OpenSimplexNoise;
 
 public class BiomeLayersFunctions
@@ -39,15 +40,16 @@ public class BiomeLayersFunctions
 		NOISE_GENERATION_CATEGORY_B = new OpenSimplexNoise(seed - 1);
 		NOISE_GENERATION_CATEGORY_C = new OpenSimplexNoise(seed - 12);
 	}
-
+	
+	//Many of these are replaced with config values
+	
 	public static final double HILLS_SCALE = 0.06D;
 	public static final double SPECIAL_SCALE = 4.5D;
-	public static final double SWAMP_SCALE = 9D;
-	public static final double HUMIDITY_SCALE = 15D;
-	public static final double OCEAN_SIZE = 17D;
-	public static final double CLIMATE_SIZE = 29D; //The input is already scaled in some way, so this doesn't need to be super large.
-
-
+	//public static final double SWAMP_SCALE = 9D;
+	//public static final double HUMIDITY_SCALE = 15D;
+	//public static final double OCEAN_SIZE = 17D;
+	//public static final double CLIMATE_SIZE = 27.5D; //The input is already scaled in some way, so this doesn't need to be super large.
+	
 	/**
 	 * 
 	 * @param x
@@ -56,29 +58,38 @@ public class BiomeLayersFunctions
 	 */
 	public static int getTemperatureAtPos(double x, double z)
 	{
-		double val = NOISE_1.eval((x / CLIMATE_SIZE) - temperatureOffset, (z / CLIMATE_SIZE) - temperatureOffset);
-
-		if (val > 0.62D) return 4;
-		else if (val > 0.28D) return 3;
-		else if (val > -0.28D) return 2;
-		else if (val > -0.62D) return 1;
+		double val = NOISE_1.eval((x / OverhaulSettings.SETTINGS.climate_scale) - temperatureOffset, (z / OverhaulSettings.SETTINGS.climate_scale) - temperatureOffset);
+		
+		if (val > OverhaulSettings.SETTINGS.desert_cutoff) return 4;
+		else if (val > OverhaulSettings.SETTINGS.tropical_cutoff) return 3;
+		else if (val > OverhaulSettings.SETTINGS.cool_cutoff) return 2;
+		else if (val > OverhaulSettings.SETTINGS.frozen_cutoff) return 1;
 		else return 0; // */
 	}
 
 	public static boolean isOcean(double noise)
 	{
-		if (noise > 0.30D)
+		if (noise > OverhaulSettings.SETTINGS.ocean_cutoff)
 			return true;
 		else
 			return false;
 	}
-
-	//TODO add int_1, int_2 noise check
+	
 	public static boolean isBluff(double noise, double int_1, double int_2)
 	{
 		double bluffNoise = 0.83 * NOISE_OCEAN.eval(int_1 / 6D, int_2 / 6D) + 0.17 * NOISE_2.eval(int_1 / 4D, int_2 / 4D);
 
-		if (noise > 0.26D && noise <= 0.30D && bluffNoise > 0.24D)
+		if (noise > OverhaulSettings.SETTINGS.ocean_bluff_cutoff && noise <= OverhaulSettings.SETTINGS.ocean_cutoff && bluffNoise > 0.24D)
+			return true;
+		else
+			return false;
+	}
+	
+	public static boolean isEstuary(double noise, double int_1, double int_2)
+	{
+		double bluffNoise = 0.83 * NOISE_OCEAN.eval(int_1 / 6D, int_2 / 6D) + 0.17 * NOISE_2.eval(int_1 / 4D, int_2 / 4D);
+
+		if (noise > (OverhaulSettings.SETTINGS.ocean_cutoff - 0.06D) && noise <= OverhaulSettings.SETTINGS.ocean_cutoff && bluffNoise < -0.3D)
 			return true;
 		else
 			return false;
@@ -88,7 +99,7 @@ public class BiomeLayersFunctions
 	{
 		OpenSimplexNoise n = NOISE_OCEAN;
 
-		return 0.8D * n.eval(int_1 / OCEAN_SIZE, int_2 / OCEAN_SIZE) + 0.14D * n.eval(int_1 / (OCEAN_SIZE / 2), int_2 / (OCEAN_SIZE / 2))+ 0.06D * n.eval(int_1 / (OCEAN_SIZE / 4), int_2 / (OCEAN_SIZE / 4));
+		return 0.8D * n.eval(int_1 / OverhaulSettings.SETTINGS.ocean_scale, int_2 / OverhaulSettings.SETTINGS.ocean_scale) + 0.14D * n.eval(int_1 / (OverhaulSettings.SETTINGS.ocean_scale / 2), int_2 / (OverhaulSettings.SETTINGS.ocean_scale / 2))+ 0.06D * n.eval(int_1 / (OverhaulSettings.SETTINGS.ocean_scale / 4), int_2 / (OverhaulSettings.SETTINGS.ocean_scale / 4));
 	}
 
 	public static Layer addOcean(int temperature, boolean island, LayerRandomnessSource rand, List<Layer> baseList, double oceanNoise)
@@ -153,16 +164,18 @@ public class BiomeLayersFunctions
 	{
 		List<Layer> baseList = getListForClimate(temperature, humidity);
 		List<Layer> bluffList = getUncheckedListForClimateCategory(Categories.bBLUFF, baseList);
-
+		List<Layer> estuaryList = getUncheckedListForClimateCategory(Categories.bESTUARY, baseList);
+		
 		if (isBluff(oceanNoise, int_1, int_2) && !bluffList.isEmpty()) return bluffList;
-
+		if (isEstuary(oceanNoise, int_1, int_2) && !estuaryList.isEmpty()) return estuaryList;
+		
 		List<Layer> categoryList = Categories.getListForCategory(category);
 
 		return getListForClimateCategory(temperature, humidity, categoryList, baseList);
 	}
-
+	
 	private static List<Layer> getListForClimateCategory(int temperature, BiomeHumidity humidity, List<Layer> categoryList, List<Layer> baseList)
-	{	
+	{
 		List<Layer> list_1 = getUncheckedListForClimateCategory(categoryList, baseList);
 
 		if (list_1.isEmpty())
@@ -203,7 +216,7 @@ public class BiomeLayersFunctions
 
 		if (!isOcean(oceanNoise))
 		{
-			height_noise = 0.75D * n.eval(int_1 / 21.5D, int_2 / 21.5D) + 0.24D * n.eval(int_1 / 16D, int_2 / 16D) + 0.03D * n.eval(int_1 / 4D, int_2 / 4D, 2D);
+			height_noise = OverhaulSettings.SETTINGS.mountain_main_scale_multiplier * n.eval(int_1 / 21.5D, int_2 / 21.5D) + 0.24D * n.eval(int_1 / 16D, int_2 / 16D) + 0.03D * n.eval(int_1 / 4D, int_2 / 4D, 2D);
 
 			if (height_noise > 0.23D && height_noise < 0.32D)
 				return GenerationCategory.MOUNTAIN;
@@ -221,12 +234,12 @@ public class BiomeLayersFunctions
 					return GenerationCategory.BOREAL;
 			}
 
-			if (generation_noise_2 > 0.29D)
+			if (generation_noise_2 > OverhaulSettings.SETTINGS.rainforest_cutoff)
 				return GenerationCategory.RAINFOREST;
 
-			if (forest_noise > 0.1D)
+			if (forest_noise > OverhaulSettings.SETTINGS.forest_cutoff)
 			{
-				if (canopy_noise > 0.24D)
+				if (canopy_noise > OverhaulSettings.SETTINGS.canopy_cutoff)
 					return GenerationCategory.CANOPY;
 				else return GenerationCategory.WOODLAND;
 			}
@@ -330,7 +343,7 @@ public class BiomeLayersFunctions
 
 	public static boolean isSwamp(double int_1, double int_2)
 	{
-		double val = NOISE_CLIMATE_FEATURE.eval(int_1 / SWAMP_SCALE, int_2 / SWAMP_SCALE);
+		double val = NOISE_CLIMATE_FEATURE.eval(int_1 / OverhaulSettings.SETTINGS.swamp_scale, int_2 / OverhaulSettings.SETTINGS.swamp_scale);
 
 		return val > 0.334D;
 	}
@@ -339,14 +352,14 @@ public class BiomeLayersFunctions
 		if (temperature != BiomeTemperature.DESERT.getId())
 			return false;
 
-		double val = NOISE_CLIMATE_FEATURE.eval(x / SWAMP_SCALE, z / SWAMP_SCALE);
+		double val = NOISE_CLIMATE_FEATURE.eval(x / OverhaulSettings.SETTINGS.swamp_scale, z / OverhaulSettings.SETTINGS.swamp_scale);
 
 		return val < -0.32D;
 	}
 
 	public static BiomeHumidity getHumidityAtPos(double x, double z, LayerRandomnessSource random)
 	{
-		double val =  NOISE_2.eval(x / HUMIDITY_SCALE, z / HUMIDITY_SCALE);
+		double val =  NOISE_2.eval(x / OverhaulSettings.SETTINGS.humidity_scale, z / OverhaulSettings.SETTINGS.humidity_scale);
 
 		if (val > 0.2) return BiomeHumidity.DRY;
 		else if (val < -0.2) return BiomeHumidity.WET;

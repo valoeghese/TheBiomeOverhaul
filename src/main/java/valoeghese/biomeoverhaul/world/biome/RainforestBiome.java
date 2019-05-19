@@ -19,7 +19,7 @@ public class RainforestBiome extends TBOBiome
 
 	public RainforestBiome()
 	{
-		super(BiomeFactory.create(0.15F, 0.3F, Category.JUNGLE).setSurfaceBuilder(CustomSurfaceBuilders.RAINFOREST_BUILDER).setTemperatureDownfall(0.9F, 0.99F).setSpawnChance(0.23F));
+		super(BiomeFactory.create(0.15F, 0.3F, Category.JUNGLE).setSurfaceBuilder(CustomSurfaceBuilders.RAINFOREST_BUILDER).setTemperatureDownfall(0.9F, 0.99F).setSpawnChance(0.23F).setCustomSkyColour(0x6ed3ce));
 		
 		this.addStructureFeature(Feature.JUNGLE_TEMPLE, FeatureConfig.DEFAULT);
 		this.theBiomeFactory.addDefaultGeneration();

@@ -13,6 +13,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import valoeghese.biomeoverhaul.api.BiomeModifier;
 import valoeghese.biomeoverhaul.api.modifier.BiomeModifiers;
+import valoeghese.biomeoverhaul.api.testing.SoloBiome;
 import valoeghese.biomeoverhaul.util.OceanManipulation;
 import valoeghese.biomeoverhaul.util.event.GenerationEventHandler;
 import valoeghese.biomeoverhaul.util.noise.OpenSimplexNoise;
@@ -25,20 +26,26 @@ public class TheBiomeOverhaul implements ModInitializer
 	
 	public static final int PLAINS = Registry.BIOME.getRawId(Biomes.PLAINS);
 	public static final int FOREST = Registry.BIOME.getRawId(Biomes.FOREST);
-
+	
 	public static Logger getLogger()
 	{
 		return logger;
 	}
-
+	
 	@Override
 	public void onInitialize()
 	{
+		//Generation Config
+		OverhaulConfig.init();
+		
 		//Initialize
 		CustomSurfaceBuilders.init();
 		ModBiomes.init();
-
+		
+		
 		//Biome Modifiers
+		
+		//===Giant Taiga Modifier
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
 
 			@Override
@@ -51,7 +58,7 @@ public class TheBiomeOverhaul implements ModInitializer
 					if (biome == Registry.BIOME.getRawId(Biomes.TAIGA) || biome == Registry.BIOME.getRawId(Biomes.TAIGA_HILLS) || biome == Registry.BIOME.getRawId(Biomes.TAIGA_MOUNTAINS))
 					{
 						OpenSimplexNoise noise = BiomeLayersFunctions.NOISE_GENERATION_CATEGORY_A;
-						double eval = 0.82D*noise.eval(this.int_1 / 10D, this.int_2 / 10D) + 0.18D*noise.eval(this.int_1 / 6.5D, this.int_2 / 6.5D, 1D);
+						double eval = 0.82D*noise.eval(this.scaled_X / 10D, this.scaled_Z / 10D) + 0.18D*noise.eval(this.scaled_X / 6.5D, this.scaled_Z / 6.5D, 1D);
 
 						if (eval > 0.37D)
 						{
@@ -70,6 +77,8 @@ public class TheBiomeOverhaul implements ModInitializer
 			}
 
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
+		
+		//===Badlands Modifier
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
 			@Override
 			public int apply(LayerRandomnessSource random, int biome, int unmodifiedBiome, int temperature,
@@ -98,6 +107,30 @@ public class TheBiomeOverhaul implements ModInitializer
 			}
 
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
+		
+		//===Murky Bayou modifier
+		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
+
+			@Override
+			public int apply(LayerRandomnessSource random, int biome, int unmodifiedBiome, int temperature,
+					boolean mutation, boolean hills) {
+
+				int biome_1 = biome;
+
+				if (biome == Registry.BIOME.getRawId(ModBiomes.BAYOU) || biome == Registry.BIOME.getRawId(ModBiomes.BAYOU_HILLS))
+				{
+					if (BiomeLayersFunctions.NOISE_GENERATION_CATEGORY_C.eval(this.scaled_X / 7D, this.scaled_Z / 10D) > 0.23D)
+					{
+						biome_1 = Registry.BIOME.getRawId(ModBiomes.MURKY_BAYOU);
+					}
+				}
+
+				return biome_1;
+			}
+
+		}, GenerationEventHandler.ModifierPriority.STANDARD);
+		
+		//===Bamboo Jungle modifier
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
 
 			@Override
@@ -121,6 +154,8 @@ public class TheBiomeOverhaul implements ModInitializer
 			}
 
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
+		
+		//===Forested Fen modifier
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
 
 			@Override
@@ -140,6 +175,9 @@ public class TheBiomeOverhaul implements ModInitializer
 			}
 
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
+		
+		//=== Wtf is this
+		/*
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
 
 			@Override
@@ -157,6 +195,8 @@ public class TheBiomeOverhaul implements ModInitializer
 			}
 
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
+		*/
+		//===Mushroom Island Modifier
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
 
 			@Override
@@ -176,6 +216,7 @@ public class TheBiomeOverhaul implements ModInitializer
 			}
 
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
+		//===DesertLakes Oasis and Mountains Peaks Modifier
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
 
 			@Override
@@ -202,6 +243,7 @@ public class TheBiomeOverhaul implements ModInitializer
 			}
 
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
+		//===Oasis Modifier
 		BiomeModifiers.INSTANCE.add(new BiomeModifier() {
 
 			@Override

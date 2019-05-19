@@ -7,15 +7,15 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
 
-public class AlpsBiome extends TBOBiome
+public class DunesBiome extends TBOBiome
 {
-	public AlpsBiome()
+	public DunesBiome()
 	{
-		super(BiomeFactory.create(3.8F, 0.12F, Biome.Precipitation.SNOW, Biome.Category.EXTREME_HILLS).setTemperatureDownfall(-0.5F, 0.4F).setRiverType(RiverType.NONE).setSpawnChance(0.07F).setCustomSkyColour(0xddddd2));
+		super(BiomeFactory.create(1.2F, 0.32F, Biome.Precipitation.NONE, Biome.Category.DESERT).setTemperatureDownfall(2.0F, 0.1F).setRiverType(RiverType.NONE).setSpawnChance(0.02F));
 		
-		this.setTopBlock(Blocks.SNOW_BLOCK.getDefaultState());
-		this.setFillerBlock(Blocks.SNOW_BLOCK.getDefaultState());
-		this.setUnderwaterBlock(Blocks.STONE.getDefaultState());
+		this.setTopBlock(Blocks.SAND.getDefaultState());
+		this.setFillerBlock(Blocks.SAND.getDefaultState());
+		this.setUnderwaterBlock(Blocks.SANDSTONE.getDefaultState());
 		
 		this.theBiomeFactory.addDefaultGeneration();
 		this.theBiomeFactory.addDefaultMineables();
@@ -24,6 +24,9 @@ public class AlpsBiome extends TBOBiome
 		
 		this.addSpawn(EntityCategory.AMBIENT, new Biome.SpawnEntry(EntityType.BAT, 10, 8, 8));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SPIDER, 100, 4, 4));
+		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.HUSK, 80, 4, 6));
+		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ZOMBIE, 28, 2, 4));
+		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 2, 2, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SKELETON, 100, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SLIME, 30, 1, 1));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 2, 1, 4));

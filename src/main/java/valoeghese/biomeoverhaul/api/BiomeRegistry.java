@@ -12,7 +12,6 @@ public class BiomeRegistry
 	
 	public static Biome register(Biome biome, String ID)
 	{
-		
 		Registry.register(Registry.BIOME, ID, biome);
 		
 		if (biome.hasParent())

@@ -6,12 +6,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
+import valoeghese.biomeoverhaul.config.OverhaulSettings;
 import valoeghese.biomeoverhaul.world.biome.BiomeFactory.BiomePopulator;
 
 public abstract class TBOBiome extends Biome
-{
-	//TODO decoration/population features. In progress.
-	
+{	
 	public void setTopBlock(BlockState top)
 	{
 		this.theBiomeFactory.surfaceConfig.setTopMaterial(top);
@@ -35,6 +34,16 @@ public abstract class TBOBiome extends Biome
 		factory.setParent(this);
 		theBiomeFactory = factory;
 		theBiomePopulator = factory.createPopulator();
+	}
+	
+	@Override
+	@Environment(EnvType.CLIENT)
+	public int getSkyColor(float temp)
+	{
+		if (OverhaulSettings.SETTINGS.client_tinted_skies && this.theBiomeFactory.hasCustomSkyColour())
+			return this.theBiomeFactory.getCustomSkyColour();
+		else
+			return super.getSkyColor(temp);
 	}
 	
 	@Override

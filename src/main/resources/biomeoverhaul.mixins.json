@@ -6,7 +6,9 @@
     "BiomesMixin",	
     "OceanTemperatureMixin",
     "ShoreMixin",
-    "RiverMixin"
+    "RiverMixin",
+    "AccessorMixin",
+    "SpawnBiomesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

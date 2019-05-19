@@ -11,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.VineBlock;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -26,7 +27,7 @@ public class LargeSwampTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
       super(function_1, false);
    }
 
-   public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld modifiableTestableWorld_1, Random random_1, BlockPos blockPos_1)
+   public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld modifiableTestableWorld_1, Random random_1, BlockPos blockPos_1, MutableIntBoundingBox mibb)
    {
       int height = random_1.nextInt(7) + 5;
       blockPos_1 = modifiableTestableWorld_1.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);
@@ -94,7 +95,7 @@ public class LargeSwampTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
             for(int_14 = 0; int_14 < height; ++int_14) {
                BlockPos blockPos_3 = blockPos_1.up(int_14);
                if (isAirOrLeaves(modifiableTestableWorld_1, blockPos_3) || isWater(modifiableTestableWorld_1, blockPos_3)) {
-                  this.setBlockState(set_1, modifiableTestableWorld_1, blockPos_3, LOG);
+                  this.setBlockState(set_1, modifiableTestableWorld_1, blockPos_3, LOG, mibb);
                }
             }
 

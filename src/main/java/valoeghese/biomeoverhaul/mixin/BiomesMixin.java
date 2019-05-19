@@ -19,17 +19,26 @@ import valoeghese.biomeoverhaul.api.modifier.BiomeModifiers;
 import valoeghese.biomeoverhaul.api.testing.SoloBiome;
 import valoeghese.biomeoverhaul.api.testing.TestModule;
 import valoeghese.biomeoverhaul.api.testing.TestModuleApplier;
+import valoeghese.biomeoverhaul.compat.TraverseVanillaInjectionCompat;
 import valoeghese.biomeoverhaul.util.math.MathUtils;
 import valoeghese.biomeoverhaul.world.layer.BiomeLayersFunctions;
 
 @Mixin(value = AddHillsLayer.class)
 public class BiomesMixin
 {
-
+	//Is the Traverse and other vanilla-biome mod injection compat loaded
+	private static boolean _isLoaded = false;
+	
 	@Inject(at = @At(value = "HEAD"), method = "sample", cancellable = true)
 	private void addSample(LayerRandomnessSource layerRandomnessSource_1, LayerSampler layerSampler_1, LayerSampler layerSampler_2, int int_1, int int_2,
 			CallbackInfoReturnable<Integer> info)
 	{
+		if (!_isLoaded)
+		{
+			TraverseVanillaInjectionCompat.injectModdedBiomes();
+			_isLoaded = true;
+		}
+		
 		int int_3;
 		
 		if (SoloBiome.isActive())
@@ -106,17 +115,17 @@ public class BiomesMixin
 		
 		for (BiomeModifier b : BiomeModifiers.initial_modifiers)
 		{
-			biome_1 = b.setInts(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
+			biome_1 = b.setScaledLocationCoordinates(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
 			if (b.cancel()) break;
 		}
 		for (BiomeModifier b : BiomeModifiers.standard_modifiers)
 		{
-			biome_1 = b.setInts(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
+			biome_1 = b.setScaledLocationCoordinates(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
 			if (b.cancel()) break;
 		}
 		for (BiomeModifier b : BiomeModifiers.final_modifiers)
 		{
-			biome_1 = b.setInts(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
+			biome_1 = b.setScaledLocationCoordinates(int_1, int_2).apply(rand, biome_1, biome, temperature, mutation, hills);
 			if (b.cancel()) break;
 		}
 

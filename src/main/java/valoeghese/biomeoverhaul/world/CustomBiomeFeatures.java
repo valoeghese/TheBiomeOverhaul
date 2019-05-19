@@ -36,6 +36,16 @@ public class CustomBiomeFeatures
 		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.BUSH, new BushFeatureConfig(Blocks.BROWN_MUSHROOM.getDefaultState()), Decorator.COUNT_CHANCE_HEIGHTMAP, new CountChanceDecoratorConfig(10, 0.35F)));
 		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.BUSH, new BushFeatureConfig(Blocks.RED_MUSHROOM.getDefaultState()), Decorator.COUNT_CHANCE_HEIGHTMAP_DOUBLE, new CountChanceDecoratorConfig(10, 0.175F)));
 	}
+	
+	public static void addExtraBayouFeatures(Biome biome_1)
+	{
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(TBOFeatures.LARGE_SWAMP_TREE, FeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(10, 0.1F, 1)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.SWAMP_FLOWER, FeatureConfig.DEFAULT, Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(1)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.GRASS, new GrassFeatureConfig(Blocks.GRASS.getDefaultState()), Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(3)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.WATERLILY, FeatureConfig.DEFAULT, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(15)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.BUSH, new BushFeatureConfig(Blocks.BROWN_MUSHROOM.getDefaultState()), Decorator.COUNT_CHANCE_HEIGHTMAP, new CountChanceDecoratorConfig(13, 0.35F)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.BUSH, new BushFeatureConfig(Blocks.RED_MUSHROOM.getDefaultState()), Decorator.COUNT_CHANCE_HEIGHTMAP_DOUBLE, new CountChanceDecoratorConfig(13, 0.175F)));
+	}
 
 	public static void addIncreasedMushrooms(Biome biome_1)
 	{
@@ -50,12 +60,12 @@ public class CustomBiomeFeatures
 
 	public static void addBrushlandTrees(Biome biome_1)
 	{
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{Feature.SAVANNA_TREE, TBOFeatures.DEAD_TREE_FEATURE, Feature.DARK_OAK_TREE}, createFeatureConfig(3), new float[]{0.08F, 0.2F, 0.08F}, TBOFeatures.SHRUB, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(8, 0.1F, 1)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{Feature.SAVANNA_TREE, TBOFeatures.BRUSHLAND_FEATURE, Feature.DARK_OAK_TREE}, createFeatureConfig(3), new float[]{0.08F, 0.18F, 0.08F}, TBOFeatures.BRUSHLAND_SCRUB, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(9, 0.1F, 1)));
 	}
 
 	public static void addChapparalShrubs(Biome biome_1)
 	{
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(TBOFeatures.SHRUB, FeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(6, 0.1F, 1)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(TBOFeatures.SCRUB, FeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(6, 0.1F, 1)));
 	}
 
 	public static void addShieldTrees(Biome biome_1)
@@ -95,7 +105,7 @@ public class CustomBiomeFeatures
 
 	public static void addShrublandShrubs(Biome biome_1)
 	{
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(TBOFeatures.LARGE_SHRUB, FeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(2, 0.1F, 1)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(TBOFeatures.LARGE_SHRUB, FeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(3, 0.1F, 1)));
 	}
 
 	public static void addSteppeTrees(Biome biome_1)
@@ -105,7 +115,7 @@ public class CustomBiomeFeatures
 
 	public static void addTemperateRainforestTrees(Biome biome_1)
 	{
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{TBOFeatures.LARGE_BOREAL_FEATURE, TBOFeatures.BOREAL_FEATURE, Feature.SPRUCE_TREE, Feature.PINE_TREE, TBOFeatures.LARGE_SHRUB}, new FeatureConfig[]{FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT}, new float[]{0.03F, 0.3F, 0.2F, 0.25F, 0.15F}, Feature.FANCY_TREE, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(6, 0.3F, 6)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{TBOFeatures.FIR_TEMPERATE_RAINFOREST_FEATURE, TBOFeatures.FIR_TREE_FEATURE, Feature.SPRUCE_TREE, Feature.PINE_TREE, TBOFeatures.LARGE_SHRUB}, new FeatureConfig[]{FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT, FeatureConfig.DEFAULT}, new float[]{0.03F, 0.3F, 0.2F, 0.25F, 0.15F}, Feature.FANCY_TREE, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(6, 0.3F, 6)));
 	}
 
 	public static void addMarshShrubs(Biome biome_1)
@@ -130,12 +140,20 @@ public class CustomBiomeFeatures
 	
 	public static void addBorealTrees(Biome biome_1)
 	{
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{TBOFeatures.BOREAL_FEATURE, TBOFeatures.LARGE_SPRUCE_SHRUB}, createFeatureConfig(2), new float[]{0.32F, 0.1F}, Feature.SPRUCE_TREE, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(4, 0.1F, 1)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{TBOFeatures.FIR_TREE_FEATURE, TBOFeatures.LARGE_SPRUCE_SHRUB}, createFeatureConfig(2), new float[]{0.32F, 0.1F}, Feature.SPRUCE_TREE, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(4, 0.1F, 1)));
 	}
 	
 	public static void addWaterlillies(Biome biome_1)
 	{
 		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.WATERLILY, FeatureConfig.DEFAULT, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(4)));
+	}
+	
+	public static void addFlowerFieldFlowers(Biome biome_1)
+	{
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.BUSH, new BushFeatureConfig(Blocks.POPPY.getDefaultState()), Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(55)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.BUSH, new BushFeatureConfig(Blocks.DANDELION.getDefaultState()), Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(49)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.BUSH, new BushFeatureConfig(Blocks.AZURE_BLUET.getDefaultState()), Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(39)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.BUSH, new BushFeatureConfig(Blocks.CORNFLOWER.getDefaultState()), Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(27)));
 	}
 	
 	private static FeatureConfig[] createFeatureConfig(int size)

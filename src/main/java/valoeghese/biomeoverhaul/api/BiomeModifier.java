@@ -8,17 +8,17 @@ public abstract class BiomeModifier
 	/**
 	 * Cast to double, from int. These should be set before apply() and cancel() are called.
 	 */
-	protected double int_1, int_2;
+	protected double scaled_X, scaled_Z;
 	
 	public boolean cancel()
 	{
 		return false;
 	}
 	
-	public BiomeModifier setInts(int int_1, int int_2)
+	public BiomeModifier setScaledLocationCoordinates(int int_1, int int_2)
 	{
-		this.int_1 = int_1;
-		this.int_2 = int_2;
+		this.scaled_X = int_1;
+		this.scaled_Z = int_2;
 		
 		return this;
 	}

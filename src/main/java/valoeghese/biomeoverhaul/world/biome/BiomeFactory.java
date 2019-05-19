@@ -34,7 +34,9 @@ public class BiomeFactory
 
 	private int waterColour = 4159204;
 	private int waterFogColour = 329011;
-
+	
+	private int customSkyColour = -1;
+	
 	private boolean hasCustomColours = false;
 	private int grassColour;
 	private int foliageColour;
@@ -123,6 +125,12 @@ public class BiomeFactory
 		return this;
 	}
 	
+	public BiomeFactory setCustomSkyColour(int colour)
+	{
+		this.customSkyColour = colour;
+		return this;
+	}
+	
 	//==================================================//
 
 	public Biome.Settings build()
@@ -151,6 +159,16 @@ public class BiomeFactory
 	public RiverType getRiverType()
 	{
 		return riverType;
+	}
+	
+	public boolean hasCustomSkyColour()
+	{
+		return this.customSkyColour != -1;
+	}
+	
+	public int getCustomSkyColour()
+	{
+		return this.customSkyColour;
 	}
 	
 	//==================================================//

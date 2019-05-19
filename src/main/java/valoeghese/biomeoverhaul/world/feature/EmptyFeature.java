@@ -7,6 +7,7 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -19,7 +20,7 @@ public class EmptyFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		super(function_1, false);
 	}
 
-	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1)
+	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1, MutableIntBoundingBox mibb)
 	{
 		int height = 3;
 		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);

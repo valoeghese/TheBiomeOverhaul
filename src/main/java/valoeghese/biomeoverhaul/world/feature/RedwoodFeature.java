@@ -9,6 +9,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.ModifiableWorld;
@@ -27,13 +28,13 @@ public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> im
 		super(function_1, false);
 	}
 
-	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1)
+	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1, MutableIntBoundingBox mibb)
 	{
 		int height = 25 + random_1.nextInt(45);
 
 		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);
 
-		BlockGenerator generator = new BlockGenerator(world, set_1);
+		BlockGenerator generator = new BlockGenerator(world, set_1, mibb);
 
 		if (blockPos_1.getY() >= 1 && blockPos_1.getY() + height + 1 <= 256 && super.isNaturalDirtOrGrass(world, blockPos_1.down()))
 		{
@@ -89,8 +90,8 @@ public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> im
 	}
 
 	@Override
-	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state)
+	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state, MutableIntBoundingBox mibb)
 	{
-		super.setBlockState(set, world, pos, state);
+		super.setBlockState(set, world, pos, state, mibb);
 	}
 }

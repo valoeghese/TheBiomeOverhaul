@@ -90,6 +90,7 @@ public class BiomeLayersRevamped
 		
 		desertBiomesDry.add(DefaultBiomeLayers.desert_badlands);
 		desertBiomesDry.add(DefaultBiomeLayers.desert_standard);
+		desertBiomesDry.add(DefaultBiomeLayers.desert_dunes);
 		
 		desertBiomesWet.add(DefaultBiomeLayers.desert_humid);
 		
@@ -104,6 +105,8 @@ public class BiomeLayersRevamped
 		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_jungle);
 		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_darkforest);
 		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_rainforest);
+		
+		tropicalBiomesWet.add(DefaultBiomeLayers.tropical_bog);
 		
 		tropicalBiomesSwamp.add(DefaultBiomeLayers.tropical_bayou);
 		
@@ -123,6 +126,7 @@ public class BiomeLayersRevamped
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_forest);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_redwoods);
 		
+		temperateBiomesWet.add(DefaultBiomeLayers.temperate_spires);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_subtropical_rainforest);
 		temperateBiomesDry.add(DefaultBiomeLayers.temperate_temperate_rainforest);
 		

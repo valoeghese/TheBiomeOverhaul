@@ -24,6 +24,8 @@ public class DefaultBiomeLayers
 	public static final Layer desert_standard = new Layer(Registry.BIOME.getRawId(Biomes.DESERT), Registry.BIOME.getRawId(Biomes.DESERT_HILLS)).withCategories(GenerationCategory.PLAINS);
 	public static final Layer desert_badlands = new Layer(Registry.BIOME.getRawId(Biomes.DESERT), Registry.BIOME.getRawId(Biomes.DESERT_HILLS), Registry.BIOME.getRawId(Biomes.DESERT), Registry.BIOME.getRawId(Biomes.BADLANDS)).withCategories(GenerationCategory.PLAINS);
 	
+	public static final Layer desert_dunes = new Layer(Registry.BIOME.getRawId(ModBiomes.DUNES)).withCategories(GenerationCategory.BADLANDS);
+	
 	public static final Layer tropical_savanna_forest = new Layer(Registry.BIOME.getRawId(Biomes.SAVANNA), Registry.BIOME.getRawId(Biomes.DARK_FOREST)).withCategories(GenerationCategory.WOODLAND);
 	public static final Layer tropical_savanna = new Layer(Registry.BIOME.getRawId(Biomes.SAVANNA), Registry.BIOME.getRawId(Biomes.SAVANNA_PLATEAU), Registry.BIOME.getRawId(Biomes.SHATTERED_SAVANNA), Registry.BIOME.getRawId(Biomes.SHATTERED_SAVANNA_PLATEAU)).withCategories(GenerationCategory.PLAINS);
 	
@@ -38,8 +40,10 @@ public class DefaultBiomeLayers
 	
 	public static final Layer tropical_island = new Layer(Registry.BIOME.getRawId(ModBiomes.TROPICAL_ISLAND), Registry.BIOME.getRawId(Biomes.WARM_OCEAN)).withCategories(GenerationCategory.ISLAND);
 	
+	public static final Layer tropical_bog = new Layer(Registry.BIOME.getRawId(ModBiomes.PEAT_BOG)).withCategories(GenerationCategory.ESTUARY);
+	
 	public static final Layer temperate_plains_dry = new Layer(Registry.BIOME.getRawId(Biomes.PLAINS), Registry.BIOME.getRawId(Biomes.FOREST), Registry.BIOME.getRawId(Biomes.PLAINS), Registry.BIOME.getRawId(Biomes.WOODED_HILLS)).withCategories(GenerationCategory.PLAINS);
-	public static final Layer temperate_plains_plus = new Layer(Registry.BIOME.getRawId(Biomes.PLAINS), Registry.BIOME.getRawId(Biomes.FOREST), Registry.BIOME.getRawId(Biomes.PLAINS), Registry.BIOME.getRawId(Biomes.FLOWER_FOREST)).withCategories(GenerationCategory.PLAINS);
+	public static final Layer temperate_plains_plus = new Layer(Registry.BIOME.getRawId(ModBiomes.FLOWER_FIELD), Registry.BIOME.getRawId(Biomes.FOREST), Registry.BIOME.getRawId(Biomes.PLAINS), Registry.BIOME.getRawId(Biomes.FLOWER_FOREST)).withCategories(GenerationCategory.PLAINS);
 	public static final Layer temperate_forest = new Layer(Registry.BIOME.getRawId(Biomes.FOREST), Registry.BIOME.getRawId(Biomes.WOODED_HILLS), Registry.BIOME.getRawId(Biomes.FOREST), Registry.BIOME.getRawId(Biomes.FLOWER_FOREST)).withCategories(GenerationCategory.WOODLAND);
 	public static final Layer temperate_dry_thicket = new Layer(Registry.BIOME.getRawId(ModBiomes.OAKEN_THICKET)).withCategories(GenerationCategory.WOODLAND);
 	
@@ -49,6 +53,7 @@ public class DefaultBiomeLayers
 	public static final Layer temperate_plains_humid = new Layer(Registry.BIOME.getRawId(ModBiomes.SHRUBLAND), Registry.BIOME.getRawId(Biomes.FOREST), Registry.BIOME.getRawId(ModBiomes.SHRUBLAND), Registry.BIOME.getRawId(Biomes.WOODED_HILLS)).withCategories(GenerationCategory.PLAINS);
 	public static final Layer temperate_forest_humid = new Layer(Registry.BIOME.getRawId(Biomes.BIRCH_FOREST), Registry.BIOME.getRawId(Biomes.BIRCH_FOREST_HILLS), Registry.BIOME.getRawId(Biomes.TALL_BIRCH_FOREST), Registry.BIOME.getRawId(Biomes.TALL_BIRCH_HILLS)).withCategories(GenerationCategory.WOODLAND);
 	public static final Layer temperate_redwoods = new Layer(Registry.BIOME.getRawId(ModBiomes.REDWOODS)).withCategories(GenerationCategory.CANOPY);
+	public static final Layer temperate_spires = new Layer(Registry.BIOME.getRawId(ModBiomes.FORESTED_SPIRES)).withCategories(GenerationCategory.RAINFOREST);
 	
 	public static final Layer temperate_foothills = new Layer(Registry.BIOME.getRawId(Biomes.MOUNTAINS), Registry.BIOME.getRawId(Biomes.WOODED_MOUNTAINS), Registry.BIOME.getRawId(Biomes.GRAVELLY_MOUNTAINS), Registry.BIOME.getRawId(Biomes.MODIFIED_GRAVELLY_MOUNTAINS)).withCategories(GenerationCategory.FOOTHILLS);
 	public static final Layer temperate_mountains = new Layer(Registry.BIOME.getRawId(ModBiomes.WOODED_MOUNTAIN_PEAKS), Registry.BIOME.getRawId(ModBiomes.MOUNTAIN_PEAKS), Registry.BIOME.getRawId(ModBiomes.GRAVELLY_MOUNTAIN_PEAKS), Registry.BIOME.getRawId(ModBiomes.MOUNTAIN_PEAKS)).withCategories(GenerationCategory.MOUNTAIN);
