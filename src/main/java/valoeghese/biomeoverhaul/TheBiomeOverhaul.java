@@ -13,7 +13,6 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import valoeghese.biomeoverhaul.api.BiomeModifier;
 import valoeghese.biomeoverhaul.api.modifier.BiomeModifiers;
-import valoeghese.biomeoverhaul.api.testing.SoloBiome;
 import valoeghese.biomeoverhaul.util.OceanManipulation;
 import valoeghese.biomeoverhaul.util.event.GenerationEventHandler;
 import valoeghese.biomeoverhaul.util.noise.OpenSimplexNoise;
@@ -266,6 +265,6 @@ public class TheBiomeOverhaul implements ModInitializer
 		
 		Biomes.GIANT_TREE_TAIGA.addStructureFeature(Feature.WOODLAND_MANSION, FeatureConfig.DEFAULT);
 
-		A.b(new Random());
+		LoadMessages.b(new Random());
 	}
 }

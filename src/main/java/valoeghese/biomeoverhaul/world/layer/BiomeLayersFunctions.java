@@ -43,7 +43,7 @@ public class BiomeLayersFunctions
 	
 	//Many of these are replaced with config values
 	
-	public static final double HILLS_SCALE = 0.06D;
+	public static final double HILLS_SCALE = 1.5D;
 	public static final double SPECIAL_SCALE = 4.5D;
 	//public static final double SWAMP_SCALE = 9D;
 	//public static final double HUMIDITY_SCALE = 15D;
@@ -236,7 +236,10 @@ public class BiomeLayersFunctions
 
 			if (generation_noise_2 > OverhaulSettings.SETTINGS.rainforest_cutoff)
 				return GenerationCategory.RAINFOREST;
-
+			
+			if (canopy_noise > 0.12D + OverhaulSettings.SETTINGS.canopy_cutoff)
+				return GenerationCategory.CANOPY;
+			
 			if (forest_noise > OverhaulSettings.SETTINGS.forest_cutoff)
 			{
 				if (canopy_noise > OverhaulSettings.SETTINGS.canopy_cutoff)

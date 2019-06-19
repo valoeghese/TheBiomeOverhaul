@@ -17,6 +17,7 @@ public class OceanManipulation
 	public static final int DEEP_FROZEN_OCEAN_ID;
 	
 	public static final int FROZEN_RIVER_ID;
+	public static final int RIVER_ID;
 	
 	static {
 		WARM_OCEAN_ID = Registry.BIOME.getRawId(Biomes.WARM_OCEAN);
@@ -30,6 +31,7 @@ public class OceanManipulation
 		DEEP_COLD_OCEAN_ID = Registry.BIOME.getRawId(Biomes.DEEP_COLD_OCEAN);
 		DEEP_FROZEN_OCEAN_ID = Registry.BIOME.getRawId(Biomes.DEEP_FROZEN_OCEAN);
 		
+		RIVER_ID = Registry.BIOME.getRawId(Biomes.RIVER);
 		FROZEN_RIVER_ID = Registry.BIOME.getRawId(Biomes.FROZEN_RIVER);
 	}
 	

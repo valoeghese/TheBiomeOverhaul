@@ -19,13 +19,13 @@ public class RiverMixin
 {
 	
 	@Inject(at = @At(value = "HEAD"), method = "sample", cancellable = true)
-	private void sample(LayerRandomnessSource rand, LayerSampler layerSampler_1, LayerSampler layerSampler_2, int int_1, int int_2,
+	private void sample(LayerRandomnessSource rand, LayerSampler biomes, LayerSampler noise, int int_1, int int_2,
 			CallbackInfoReturnable<Integer> info)
 	{
-		int biome_id = layerSampler_1.sample(int_1, int_2);
+		int biome_id = biomes.sample(int_1, int_2);
 		Biome biome = Registry.BIOME.get(biome_id);
 		
-		if (biome instanceof TBOBiome)
+		if (biome instanceof TBOBiome && noise.sample(int_1, int_2) == OceanManipulation.RIVER_ID)
 		{
 			RiverType riverType = ((TBOBiome) biome).theBiomeFactory.getRiverType();
 			

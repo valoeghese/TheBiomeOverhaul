@@ -124,6 +124,8 @@ public class BiomeLayersRevamped
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_plains_humid);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_forest_humid);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_forest);
+		
+		temperateBiomesDry.add(DefaultBiomeLayers.temperate_redwoods);
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_redwoods);
 		
 		temperateBiomesWet.add(DefaultBiomeLayers.temperate_spires);

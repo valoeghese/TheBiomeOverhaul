@@ -19,14 +19,13 @@ import valoeghese.biomeoverhaul.api.modifier.BiomeModifiers;
 import valoeghese.biomeoverhaul.api.testing.SoloBiome;
 import valoeghese.biomeoverhaul.api.testing.TestModule;
 import valoeghese.biomeoverhaul.api.testing.TestModuleApplier;
-import valoeghese.biomeoverhaul.compat.TraverseVanillaInjectionCompat;
 import valoeghese.biomeoverhaul.util.math.MathUtils;
 import valoeghese.biomeoverhaul.world.layer.BiomeLayersFunctions;
 
 @Mixin(value = AddHillsLayer.class)
 public class BiomesMixin
 {
-	//Is the Traverse and other vanilla-biome mod injection compat loaded
+	//Is compat loaded
 	private static boolean _isLoaded = false;
 	
 	@Inject(at = @At(value = "HEAD"), method = "sample", cancellable = true)
@@ -35,7 +34,6 @@ public class BiomesMixin
 	{
 		if (!_isLoaded)
 		{
-			TraverseVanillaInjectionCompat.injectModdedBiomes();
 			_isLoaded = true;
 		}
 		
@@ -97,13 +95,13 @@ public class BiomesMixin
 
 		if (hillsNoise > 0.54D || hillsNoise < -0.54D)
 		{
-			if (mutationNoise > 0.55 || rand.nextInt(16) == 0) return this.returnBiome(layer.hillmut, rand, temp, true, true, int_1, int_2);
-			else return this.returnBiome(layer.hill, rand, temp, false, true, int_1, int_2);
+			if (mutationNoise > 0.55 || rand.nextInt(16) == 0) return this.returnBiome(layer.hillsmut(), rand, temp, true, true, int_1, int_2);
+			else return this.returnBiome(layer.hills(), rand, temp, false, true, int_1, int_2);
 		}
 		else
 		{
-			if (mutationNoise > 0.5 || rand.nextInt(16) == 0) return this.returnBiome(layer.biomemut, rand, temp, true, false, int_1, int_2);
-			else return this.returnBiome(layer.biome, rand, temp, false, false, int_1, int_2);
+			if (mutationNoise > 0.5 || rand.nextInt(16) == 0) return this.returnBiome(layer.mut(), rand, temp, true, false, int_1, int_2);
+			else return this.returnBiome(layer.biome(), rand, temp, false, false, int_1, int_2);
 		}
 	}
 

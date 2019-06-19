@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class A
+public class LoadMessages
 {
 	private static final List<String> a, b, c;
 	

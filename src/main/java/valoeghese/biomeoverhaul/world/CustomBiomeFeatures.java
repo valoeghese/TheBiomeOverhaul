@@ -100,7 +100,7 @@ public class CustomBiomeFeatures
 
 	public static void addSubtropicalRainforestTrees(Biome biome_1)
 	{
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{Feature.FANCY_TREE, Feature.MEGA_PINE_TREE, Feature.PINE_TREE, Feature.MEGA_JUNGLE_TREE}, createFeatureConfig(4), new float[]{0.15F, 0.2F, 0.35F, 0.03F}, Feature.JUNGLE_TREE, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(10, 0.3F, 10)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.RANDOM_SELECTOR, new RandomFeatureConfig(new Feature[]{Feature.FANCY_TREE, Feature.MEGA_PINE_TREE, Feature.PINE_TREE}, createFeatureConfig(3), new float[]{0.15F, 0.2F, 0.35F}, Feature.JUNGLE_TREE, FeatureConfig.DEFAULT), Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(10, 0.3F, 10)));
 	}
 
 	public static void addShrublandShrubs(Biome biome_1)

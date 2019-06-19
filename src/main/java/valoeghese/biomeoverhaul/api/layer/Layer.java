@@ -4,33 +4,35 @@ package valoeghese.biomeoverhaul.api.layer;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 import valoeghese.biomeoverhaul.api.enums.GenerationCategory;
 import valoeghese.biomeoverhaul.world.layer.Categories;
 
 public class Layer
 {
-	public final int biome;
-	public final int biomemut;
-	public final int hill;
-	public final int hillmut;
+	private final Biome biome;
+	private final Biome biomemut;
+	private final Biome hill;
+	private final Biome hillmut;
 	
 	public List<GenerationCategory> categories = new ArrayList<GenerationCategory>();
 	
-	public Layer(int biomeID)
+	public Layer(Biome biome)
 	{
-		this(biomeID, biomeID, biomeID, biomeID);
+		this(biome, biome, biome, biome);
 	}
-	public Layer(int biomeID, int hillID)
+	public Layer(Biome biome, Biome hill)
 	{
-		this(biomeID, hillID, biomeID, hillID);
+		this(biome, hill, biome, hill);
 	}
 
-	public Layer(int biomeID, int hillID, int biomeMutID, int hillMutID)
+	public Layer(Biome biome, Biome hill, Biome biomeMut, Biome hillMut)
 	{
-		this.biome = biomeID;
-		this.hill = hillID;
-		this.biomemut = biomeMutID;
-		this.hillmut = hillMutID;
+		this.biome = biome;
+		this.hill = hill;
+		this.biomemut = biomeMut;
+		this.hillmut = hillMut;
 	}
 	
 	public Layer withCategories(GenerationCategory...categories)
@@ -42,5 +44,27 @@ public class Layer
 		}
 		
 		return this;
+	}
+	
+	public int biome()
+	{
+		return idOf(biome);
+	}
+	public int hills()
+	{
+		return idOf(hill);
+	}
+	public int mut()
+	{
+		return idOf(biomemut);
+	}
+	public int hillsmut()
+	{
+		return idOf(hillmut);
+	}
+	
+	private int idOf(Biome b)
+	{
+		return Registry.BIOME.getRawId(b);
 	}
 }
