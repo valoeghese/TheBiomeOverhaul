@@ -10,8 +10,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.layer.AddRiversLayer;
 import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.biome.layer.util.LayerSampler;
+import valoeghese.biomeoverhaul.api.modifier.RiverType;
 import valoeghese.biomeoverhaul.util.OceanManipulation;
-import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
 import valoeghese.biomeoverhaul.world.biome.TBOBiome;
 
 @Mixin(AddRiversLayer.class)

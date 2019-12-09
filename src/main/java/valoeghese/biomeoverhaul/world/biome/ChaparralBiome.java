@@ -13,14 +13,11 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.RandomRandomFeatureConfig;
 import net.minecraft.world.gen.feature.VillageFeatureConfig;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
 public class ChaparralBiome extends TBOBiome {
-	private static final RandomPatchFeatureConfig CORNFLOWER_CONFIG = null;
-
 	public ChaparralBiome() {
 		super(BiomeFactory.create(0.23f, 0.37f, Biome.Category.PLAINS).setTemperatureDownfall(0.7F, 0.6F));
 		
@@ -40,7 +37,7 @@ public class ChaparralBiome extends TBOBiome {
 				ImmutableList.of(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.LILAC_CONFIG),
 						Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.ROSE_BUSH_CONFIG),
 						Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.PEONY_CONFIG),
-						Feature.FLOWER.configure(CORNFLOWER_CONFIG)), 0),
+						Feature.FLOWER.configure(CustomBiomeFeatures.CORNFLOWER)), 0),
 				Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(5)));
 		DefaultBiomeFeatures.addDefaultVegetation(this);
 		DefaultBiomeFeatures.addSprings(this);

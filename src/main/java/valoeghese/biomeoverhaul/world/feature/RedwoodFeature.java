@@ -9,16 +9,15 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.ModifiableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import valoeghese.biomeoverhaul.util.BlockGenerator;
 import valoeghese.biomeoverhaul.util.PublicWorldModifier;
 
-public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements PublicWorldModifier
+public class RedwoodFeature extends TBOTreeFeature<DefaultFeatureConfig> implements PublicWorldModifier
 {
 	private static final BlockState LOG = Blocks.DARK_OAK_LOG.getDefaultState();
 	private static final BlockState LEAVES = Blocks.SPRUCE_LEAVES.getDefaultState();
@@ -28,7 +27,7 @@ public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> im
 		super(function_1, false);
 	}
 
-	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1, MutableIntBoundingBox mibb)
+	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1, BlockBox mibb)
 	{
 		int height = 25 + random_1.nextInt(45);
 
@@ -90,7 +89,7 @@ public class RedwoodFeature extends AbstractTreeFeature<DefaultFeatureConfig> im
 	}
 
 	@Override
-	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state, MutableIntBoundingBox mibb)
+	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state, BlockBox mibb)
 	{
 		super.setBlockState(set, world, pos, state, mibb);
 	}

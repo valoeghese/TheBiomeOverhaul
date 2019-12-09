@@ -8,28 +8,24 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.ModifiableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import valoeghese.biomeoverhaul.util.BlockGenerator;
 import valoeghese.biomeoverhaul.util.PublicWorldModifier;
 
-public class BrushlandFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements PublicWorldModifier
-{
+public class BrushlandFeature extends TBOTreeFeature<DefaultFeatureConfig> implements PublicWorldModifier {
 	private static final BlockState LOG = Blocks.DARK_OAK_LOG.getDefaultState();
 	private static final BlockState LEAVES = Blocks.ACACIA_LEAVES.getDefaultState();
 
-	public BrushlandFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1)
-	{
+	public BrushlandFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1) {
 		super(function_1, false);
 	}
 
-	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1,  MutableIntBoundingBox mibb)
-	{
+	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1, BlockBox mibb) {
 		int height = random_1.nextInt(4) + 4;
 		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);
 
@@ -69,7 +65,7 @@ public class BrushlandFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 	}
 
 	@Override
-	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state,  MutableIntBoundingBox mibb)
+	public void setWorldBlockState(Set<BlockPos> set, ModifiableWorld world, BlockPos pos, BlockState state, BlockBox mibb)
 	{
 		super.setBlockState(set, world, pos, state, mibb);
 	}

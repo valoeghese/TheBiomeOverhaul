@@ -6,21 +6,20 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
-public class EmptyFeature extends AbstractTreeFeature<DefaultFeatureConfig>
+public class EmptyFeature extends TBOTreeFeature<DefaultFeatureConfig>
 {
 	public EmptyFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1)
 	{
 		super(function_1, false);
 	}
 
-	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1, MutableIntBoundingBox mibb)
+	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld world, Random random_1, BlockPos blockPos_1, BlockBox mibb)
 	{
 		int height = 3;
 		blockPos_1 = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, blockPos_1);

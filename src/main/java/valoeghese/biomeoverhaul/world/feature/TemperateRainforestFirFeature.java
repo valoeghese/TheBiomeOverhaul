@@ -8,14 +8,13 @@ import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.MegaTreeFeature;
 
-public class TemperateRainforestFirFeature extends MegaTreeFeature<DefaultFeatureConfig>
+public class TemperateRainforestFirFeature extends OldMegaTreeFeature<DefaultFeatureConfig>
 {
 	private static final BlockState LOG, LEAVES;
 
@@ -24,7 +23,7 @@ public class TemperateRainforestFirFeature extends MegaTreeFeature<DefaultFeatur
 		super(function_1, false, 25, 7, LOG, LEAVES);
 	}
 
-	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld modifiableTestableWorld_1, Random random_1, BlockPos blockPos_1,  MutableIntBoundingBox mibb)
+	public boolean generate(Set<BlockPos> set_1, ModifiableTestableWorld modifiableTestableWorld_1, Random random_1, BlockPos blockPos_1, BlockBox mibb)
 	{
 		int int_1 = this.getHeight(random_1);
 		if (!this.checkTreeFitsAndReplaceGround(modifiableTestableWorld_1, blockPos_1, int_1))
@@ -65,7 +64,7 @@ public class TemperateRainforestFirFeature extends MegaTreeFeature<DefaultFeatur
 		}
 	}
 
-	private void makeTopLeaves(ModifiableTestableWorld modifiableTestableWorld_1, int int_1, int int_2, int int_3, int int_4, Random random_1, MutableIntBoundingBox mibb, Set<BlockPos> set)
+	private void makeTopLeaves(ModifiableTestableWorld modifiableTestableWorld_1, int int_1, int int_2, int int_3, int int_4, Random random_1, BlockBox mibb, Set<BlockPos> set)
 	{
 		int int_5 = random_1.nextInt(5) + (this.baseHeight);
 		int int_6 = 0;

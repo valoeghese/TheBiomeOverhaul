@@ -15,22 +15,22 @@ public class RedwoodsBiome extends TBOBiome
 	public RedwoodsBiome()
 	{
 		super(BiomeFactory.create(0.2F, 0.14F, Category.FOREST).setSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA).setTemperatureDownfall(0.4F, 0.4F).setSpawnChance(0.23F).setBaseBiome("tbo:rainforest"));
-		
+
 		this.addStructureFeature(Feature.WOODLAND_MANSION, FeatureConfig.DEFAULT);
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		this.theBiomeFactory.addDefaultMineables();
-		
+
 		this.theBiomePopulator.treesPerChunk = 30;
-		
+
 		this.theBiomePopulator.addTreeFeature(TBOFeatures.REDWOOD, FeatureConfig.DEFAULT, 0.2F);
 		this.theBiomePopulator.addTreeFeature(TBOFeatures.LARGE_SHRUB, FeatureConfig.DEFAULT, 1.5F);
 		this.theBiomePopulator.addTreeFeature(TBOFeatures.SMALL_REDWOOD, FeatureConfig.DEFAULT, 2);
 		this.theBiomePopulator.addTreeFeature(Feature.NORMAL_TREE, DefaultBiomeFeatures.PINE_TREE_CONFIG, 1);
 		this.theBiomePopulator.addTreeFeature(Feature.DARK_OAK_TREE, DefaultBiomeFeatures.DARK_OAK_TREE_CONFIG, 0.4F);
-		
+
 		this.theBiomePopulator.buildTreeFeatures();
-		
+
 		DefaultBiomeFeatures.addExtraDefaultFlowers(this);
 		DefaultBiomeFeatures.addSavannaGrass(this);
 		DefaultBiomeFeatures.addDefaultMushrooms(this);

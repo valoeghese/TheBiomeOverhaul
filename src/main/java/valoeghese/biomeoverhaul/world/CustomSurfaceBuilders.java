@@ -110,9 +110,9 @@ public class CustomSurfaceBuilders
 				int int_4, long long_1, TernarySurfaceConfig ternarySurfaceConfig_1)
 		{
 			double double_2 = 0.0D;
-			double double_3 = Math.min(Math.abs(double_1), this.field_15623.sample((double)int_1 * 0.25D, (double)int_2 * 0.25D));
+			double double_3 = Math.min(Math.abs(double_1), this.field_15623.sample((double)int_1 * 0.25D, (double)int_2 * 0.25D, false));
 			if (double_3 > 0.0D) {
-				double double_5 = Math.abs(this.field_15618.sample((double)int_1 * 0.001953125D, (double)int_2 * 0.001953125D));
+				double double_5 = Math.abs(this.field_15618.sample((double)int_1 * 0.001953125D, (double)int_2 * 0.001953125D, false));
 				double_2 = double_3 * double_3 * 2.5D;
 				double double_6 = Math.ceil(double_5 * 50.0D) + 14.0D;
 				if (double_2 > double_6) {
