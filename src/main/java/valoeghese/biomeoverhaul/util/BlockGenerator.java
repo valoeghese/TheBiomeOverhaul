@@ -8,8 +8,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import valoeghese.biomeoverhaul.util.math.Triple;
@@ -20,9 +20,9 @@ public class BlockGenerator
 	public Set<BlockPos> set;
 	protected boolean canGenerate = true;
 	protected List<Triple<BlockPos, BlockState, Boolean>> gen = new ArrayList<>();
-	protected MutableIntBoundingBox mibb;
+	protected BlockBox mibb;
 	
-	public BlockGenerator(ModifiableTestableWorld world, Set<BlockPos> set, MutableIntBoundingBox mibb)
+	public BlockGenerator(ModifiableTestableWorld world, Set<BlockPos> set, BlockBox mibb)
 	{
 		this.world = world;
 		this.set = set;
@@ -83,7 +83,7 @@ public class BlockGenerator
 	{
 		return testableWorld_1.testBlockState(blockPos_1, (blockState_1) -> {
 			Block block_1 = blockState_1.getBlock();
-			return blockState_1.isAir() || blockState_1.matches(BlockTags.LEAVES) || block_1 == Blocks.GRASS_BLOCK || Block.isNaturalDirt(block_1) || block_1.matches(BlockTags.LOGS) || block_1.matches(BlockTags.SAPLINGS) || block_1 == Blocks.VINE;
+			return blockState_1.isAir() || blockState_1.matches(BlockTags.LEAVES) || block_1 == Blocks.GRASS_BLOCK || block_1 == Blocks.COARSE_DIRT || block_1 == Blocks.DIRT || block_1.matches(BlockTags.LOGS) || block_1.matches(BlockTags.SAPLINGS) || block_1 == Blocks.VINE;
 		});
 	}
 }

@@ -1,6 +1,6 @@
 package valoeghese.biomeoverhaul.api.testing;
 
-import net.minecraft.world.biome.layer.LayerRandomnessSource;
+import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import valoeghese.biomeoverhaul.api.layer.Layer;
 
 /**

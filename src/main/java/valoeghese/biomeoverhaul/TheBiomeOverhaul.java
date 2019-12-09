@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.biome.layer.LayerRandomnessSource;
+import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import valoeghese.biomeoverhaul.api.BiomeModifier;
@@ -263,7 +263,7 @@ public class TheBiomeOverhaul implements ModInitializer
 
 		}, GenerationEventHandler.ModifierPriority.STANDARD);
 		
-		Biomes.GIANT_TREE_TAIGA.addStructureFeature(Feature.WOODLAND_MANSION, FeatureConfig.DEFAULT);
+		Biomes.GIANT_TREE_TAIGA.addStructureFeature(Feature.WOODLAND_MANSION.configure(FeatureConfig.DEFAULT));
 
 		LoadMessages.b(new Random());
 	}

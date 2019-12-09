@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.layer.AddEdgeBiomesLayer;
-import net.minecraft.world.biome.layer.LayerRandomnessSource;
+import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import valoeghese.biomeoverhaul.ModBiomes;
 import valoeghese.biomeoverhaul.api.modifier.BiomeShores;
 import valoeghese.biomeoverhaul.util.OceanManipulation;

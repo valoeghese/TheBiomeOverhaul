@@ -1,6 +1,6 @@
 package valoeghese.biomeoverhaul.api;
 
-import net.minecraft.world.biome.layer.LayerRandomnessSource;
+import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 
 public abstract class BiomeModifier
 {

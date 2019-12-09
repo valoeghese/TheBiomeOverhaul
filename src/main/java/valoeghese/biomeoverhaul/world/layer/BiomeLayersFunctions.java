@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.world.biome.layer.LayerRandomnessSource;
+import net.minecraft.world.biome.layer.util.LayerRandomnessSource;
 import valoeghese.biomeoverhaul.TheBiomeOverhaul;
 import valoeghese.biomeoverhaul.api.BiomeLayersRevamped;
 import valoeghese.biomeoverhaul.api.enums.BiomeHumidity;
