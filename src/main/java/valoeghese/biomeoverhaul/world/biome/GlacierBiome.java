@@ -6,10 +6,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
 
-public class GlacierBiome extends TBOBiome
-{
-	public GlacierBiome()
-	{
+public class GlacierBiome extends TBOBiome {
+	public GlacierBiome() {
 		super(BiomeFactory.create(1.6F, 0.28F, Biome.Precipitation.SNOW, Biome.Category.ICY).setSurfaceBuilder(CustomSurfaceBuilders.GLACIER_BUILDER).setTemperatureDownfall(-0.1F, 0.2F));
 		this.theBiomeFactory.addDefaultGeneration();
 		this.theBiomeFactory.addDefaultMineables();

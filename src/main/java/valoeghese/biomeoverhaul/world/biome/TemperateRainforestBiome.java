@@ -13,18 +13,15 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class TemperateRainforestBiome extends TBOBiome
-{
-
-	public TemperateRainforestBiome()
-	{
+public class TemperateRainforestBiome extends TBOBiome {
+	public TemperateRainforestBiome() {
 		super(BiomeFactory.create(0.2F, 0.4F, Category.FOREST).setTemperatureDownfall(0.5F, 0.99F).setSpawnChance(0.23F));
-		
+
 		this.addStructureFeature(Feature.JUNGLE_TEMPLE, FeatureConfig.DEFAULT);
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		this.theBiomeFactory.addDefaultMineables();
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Biome.configureFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.CLAY.getDefaultState(), 12), Decorator.COUNT_RANGE, new RangeDecoratorConfig(8, 2, 0, 72)));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, TBOBiome.configure(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.CLAY.getDefaultState(), 12), Decorator.COUNT_RANGE, new RangeDecoratorConfig(8, 2, 0, 72)));
 		CustomBiomeFeatures.addTemperateRainforestTrees(this);
 		DefaultBiomeFeatures.addExtraDefaultFlowers(this);
 		DefaultBiomeFeatures.addJungleGrass(this);

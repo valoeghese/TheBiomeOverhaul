@@ -5,13 +5,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.PillagerOutpostFeatureConfig;
 import net.minecraft.world.gen.feature.VillageFeatureConfig;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
+import valoeghese.biomeoverhaul.world.pseudo.PillagerOutpostFeatureConfig;
 
 public class BrushlandBiome extends TBOBiome
 {
-
 	public BrushlandBiome()
 	{
 		super(BiomeFactory.create(0.125F, 0.05F, Biome.Precipitation.NONE, Biome.Category.SAVANNA).setTemperatureDownfall(2.0F, 0.1F));

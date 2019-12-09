@@ -5,15 +5,12 @@ import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
-import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
+import valoeghese.biomeoverhaul.api.modifier.RiverType;
 
-public class MountainPeaksBiome extends TBOBiome
-{
-
-	public MountainPeaksBiome()
-	{
+public class MountainPeaksBiome extends TBOBiome {
+	public MountainPeaksBiome() {
 		super(BiomeFactory.create(3.2F, 0.4F, Biome.Category.EXTREME_HILLS).setTemperatureDownfall(0.2F, 0.4F).setRiverType(RiverType.NONE).setSpawnChance(0.04F).setBaseBiome("mountains"));
-		
+
 		this.setTopBlock(Blocks.STONE.getDefaultState());
 		this.setFillerBlock(Blocks.STONE.getDefaultState());
 		this.theBiomeFactory.addDefaultGeneration();

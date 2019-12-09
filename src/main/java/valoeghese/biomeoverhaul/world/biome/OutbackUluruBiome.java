@@ -6,14 +6,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.PillagerOutpostFeatureConfig;
-import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
+import valoeghese.biomeoverhaul.api.modifier.RiverType;
+import valoeghese.biomeoverhaul.world.pseudo.PillagerOutpostFeatureConfig;
 
-public class OutbackUluruBiome extends TBOBiome
-{
-
-	public OutbackUluruBiome()
-	{
+public class OutbackUluruBiome extends TBOBiome {
+	public OutbackUluruBiome() {
 		super(BiomeFactory.create(1.9F, 0.18F, Biome.Precipitation.NONE, Biome.Category.SAVANNA).setTemperatureDownfall(1.8F, 0.2F).setRiverType(RiverType.NONE).setSpawnChance(0.03F));
 		
 		this.setTopBlock(Blocks.RED_SANDSTONE.getDefaultState());

@@ -6,15 +6,12 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.PillagerOutpostFeatureConfig;
 import net.minecraft.world.gen.feature.VillageFeatureConfig;
-import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
+import valoeghese.biomeoverhaul.api.modifier.RiverType;
+import valoeghese.biomeoverhaul.world.pseudo.PillagerOutpostFeatureConfig;
 
-public class IcePlainsBiome extends TBOBiome
-{
-
-	public IcePlainsBiome()
-	{
+public class IcePlainsBiome extends TBOBiome {
+	public IcePlainsBiome() {
 		super(BiomeFactory.create(0.122F, 0.07F, Biome.Precipitation.SNOW, Biome.Category.ICY).setRiverType(RiverType.ICY).setTemperatureDownfall(-0.2F, 0.7F).setSpawnChance(0.08F));
 		this.addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/snowy/town_centers", 6));
 		this.addStructureFeature(Feature.IGLOO, FeatureConfig.DEFAULT);

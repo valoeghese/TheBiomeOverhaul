@@ -5,18 +5,15 @@ import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
+import valoeghese.biomeoverhaul.api.modifier.RiverType;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
-import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
 
-public class TropicalIslandBiome extends TBOBiome
-{
-
-	public TropicalIslandBiome()
-	{
+public class TropicalIslandBiome extends TBOBiome {
+	public TropicalIslandBiome() {
 		super(BiomeFactory.create(0.2F, 0.35F, Biome.Category.FOREST).setTemperatureDownfall(1.1F, 0.7F).setRiverType(RiverType.NONE).setWaterProperties(4445678, 270131));
-		
+
 		this.setUnderwaterBlock(Blocks.SAND.getDefaultState());
-		
+
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		this.theBiomeFactory.addDefaultMineables();

@@ -7,11 +7,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class OasisBiome extends TBOBiome
-{
-
-	public OasisBiome()
-	{
+public class OasisBiome extends TBOBiome {
+	public OasisBiome() {
 		super(BiomeFactory.create(0.125F, 0.15F, Biome.Category.DESERT).setTemperatureDownfall(2.0F, 0.3F));
 
 		this.setTopBlock(Blocks.SAND.getDefaultState());

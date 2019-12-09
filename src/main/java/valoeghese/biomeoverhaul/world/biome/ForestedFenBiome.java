@@ -8,21 +8,17 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class ForestedFenBiome extends TBOBiome
-{
-
-	public ForestedFenBiome()
-	{
+public class ForestedFenBiome extends TBOBiome {
+	public ForestedFenBiome() {
 		super(BiomeFactory.create(-0.04F, 0.1F, Biome.Category.SWAMP).setTemperatureDownfall(0.4F, 0.6F).setDarkWaterProperties().setBaseBiome("tbo:fen"));
 		this.theBiomeFactory.addDefaultGeneration();
 		CustomBiomeFeatures.addIncreasedWaterLakes(this);
 		this.theBiomeFactory.addDefaultMineables();
 		CustomBiomeFeatures.addExtraFenTrees(this);
 		CustomBiomeFeatures.addGrasslandFeatures(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.SWAMP_FLOWER, FeatureConfig.DEFAULT, Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(2)));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(DefaultBiomeFeatures.BLUE_ORCHID_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(2))));
 		DefaultBiomeFeatures.addPlainsTallGrass(this);
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
 		DefaultBiomeFeatures.addDefaultVegetation(this);

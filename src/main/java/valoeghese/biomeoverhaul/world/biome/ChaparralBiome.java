@@ -1,6 +1,7 @@
 package valoeghese.biomeoverhaul.world.biome;
 
-import net.minecraft.block.Blocks;
+import com.google.common.collect.ImmutableList;
+
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -8,22 +9,20 @@ import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.feature.DoublePlantFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
+import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.RandomRandomFeatureConfig;
 import net.minecraft.world.gen.feature.VillageFeatureConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class ChaparralBiome extends Biome
-{
-	
-	public ChaparralBiome()
-	{
-		super(new Biome.Settings().configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG).precipitation(Biome.Precipitation.RAIN).category(Biome.Category.PLAINS).depth(0.23F).scale(0.37F).temperature(0.7F).downfall(0.6F).waterColor(4159204).waterFogColor(329011).parent((String)null));
+public class ChaparralBiome extends TBOBiome {
+	private static final RandomPatchFeatureConfig CORNFLOWER_CONFIG = null;
+
+	public ChaparralBiome() {
+		super(BiomeFactory.create(0.23f, 0.37f, Biome.Category.PLAINS).setTemperatureDownfall(0.7F, 0.6F));
 		
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
 		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
@@ -37,7 +36,12 @@ public class ChaparralBiome extends Biome
 		DefaultBiomeFeatures.addMineables(this);
 		DefaultBiomeFeatures.addDefaultOres(this);
 		DefaultBiomeFeatures.addDefaultDisks(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, configureFeature(Feature.RANDOM_RANDOM_SELECTOR, new RandomRandomFeatureConfig(new Feature[]{Feature.DOUBLE_PLANT, Feature.DOUBLE_PLANT, Feature.DOUBLE_PLANT, Feature.GENERAL_FOREST_FLOWER}, new FeatureConfig[]{new DoublePlantFeatureConfig(Blocks.LILAC.getDefaultState()), new DoublePlantFeatureConfig(Blocks.ROSE_BUSH.getDefaultState()), new DoublePlantFeatureConfig(Blocks.PEONY.getDefaultState()), FeatureConfig.DEFAULT}, 2), Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(5)));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TBOBiome.configure(Feature.RANDOM_RANDOM_SELECTOR, new RandomRandomFeatureConfig(
+				ImmutableList.of(Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.LILAC_CONFIG),
+						Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.ROSE_BUSH_CONFIG),
+						Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.PEONY_CONFIG),
+						Feature.FLOWER.configure(CORNFLOWER_CONFIG)), 0),
+				Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(5)));
 		DefaultBiomeFeatures.addDefaultVegetation(this);
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addFrozenTopLayer(this);

@@ -14,18 +14,15 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
 
-public class RainforestBiome extends TBOBiome
-{
-
-	public RainforestBiome()
-	{
+public class RainforestBiome extends TBOBiome {
+	public RainforestBiome() {
 		super(BiomeFactory.create(0.15F, 0.3F, Category.JUNGLE).setSurfaceBuilder(CustomSurfaceBuilders.RAINFOREST_BUILDER).setTemperatureDownfall(0.9F, 0.99F).setSpawnChance(0.23F).setCustomSkyColour(0x6ed3ce));
 		
 		this.addStructureFeature(Feature.JUNGLE_TEMPLE, FeatureConfig.DEFAULT);
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		this.theBiomeFactory.addDefaultMineables();
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Biome.configureFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.CLAY.getDefaultState(), 12), Decorator.COUNT_RANGE, new RangeDecoratorConfig(8, 2, 0, 72)));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, TBOBiome.configure(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.CLAY.getDefaultState(), 12), Decorator.COUNT_RANGE, new RangeDecoratorConfig(8, 2, 0, 72)));
 		DefaultBiomeFeatures.addBamboo(this);
 		CustomBiomeFeatures.addPalms(this);
 		CustomBiomeFeatures.addRainforestTrees(this);

@@ -6,12 +6,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class GrasslandBiome extends TBOBiome
-{
-	
-	public GrasslandBiome(float baseHeight, float scale)
-	{
-		super(BiomeFactory.create(baseHeight, scale, Biome.Category.PLAINS).setTemperatureDownfall(0.4F, 0.7F).setColourProperties(0x5dc660, 0x43c633));
+public class GrasslandBiome extends TBOBiome {
+	public GrasslandBiome(float baseHeight, float scale) {
+		super(BiomeFactory.create(baseHeight, scale, Biome.Category.PLAINS).setTemperatureDownfall(0.4F, 0.7F).setGrassColour(0x5dc660).setFoliageColour(0x43c633));
 		
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addPlainsTallGrass(this);

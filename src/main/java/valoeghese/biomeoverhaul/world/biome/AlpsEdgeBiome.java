@@ -4,8 +4,8 @@ import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
+import valoeghese.biomeoverhaul.api.modifier.RiverType;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
-import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
 
 public class AlpsEdgeBiome extends TBOBiome
 {

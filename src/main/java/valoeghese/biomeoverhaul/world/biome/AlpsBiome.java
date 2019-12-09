@@ -5,12 +5,10 @@ import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
-import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
+import valoeghese.biomeoverhaul.api.modifier.RiverType;
 
-public class AlpsBiome extends TBOBiome
-{
-	public AlpsBiome()
-	{
+public class AlpsBiome extends TBOBiome {
+	public AlpsBiome() {
 		super(BiomeFactory.create(3.8F, 0.12F, Biome.Precipitation.SNOW, Biome.Category.EXTREME_HILLS).setTemperatureDownfall(-0.5F, 0.4F).setRiverType(RiverType.NONE).setSpawnChance(0.07F).setCustomSkyColour(0xddddd2));
 		
 		this.setTopBlock(Blocks.SNOW_BLOCK.getDefaultState());

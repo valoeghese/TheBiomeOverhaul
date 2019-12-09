@@ -4,15 +4,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class BayouHillsBiome extends TBOBiome
-{
-	public BayouHillsBiome()
-	{
+public class BayouHillsBiome extends TBOBiome {
+	public BayouHillsBiome() {
 		super(BiomeFactory.create(-0.1F, 0.3F, Biome.Category.SWAMP).setTemperatureDownfall(1.0F, 0.8F).setBaseBiome("tbo:bayou"));
 		
 		this.theBiomeFactory.addDefaultGeneration();
@@ -42,13 +39,13 @@ public class BayouHillsBiome extends TBOBiome
 	}
 	
 	@Environment(EnvType.CLIENT)
-	public int getGrassColorAt(BlockPos blockPos_1) {
-		double double_1 = FOLIAGE_NOISE.sample((double)blockPos_1.getX() * 0.0225D, (double)blockPos_1.getZ() * 0.0225D);
+	public int getGrassColorAt(double x, double z) {
+		double double_1 = FOLIAGE_NOISE.sample(x * 0.0225D, z * 0.0225D, false);
 		return double_1 < -0.1D ? 0x679147 : 0x99883d;
 	}
 
 	@Environment(EnvType.CLIENT)
-	public int getFoliageColorAt(BlockPos blockPos_1) {
+	public int getFoliageColorAt() {
 		return 0x99883d;
 	}
 

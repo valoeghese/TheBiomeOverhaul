@@ -4,20 +4,17 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
+import valoeghese.biomeoverhaul.api.modifier.RiverType;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
-import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
 
-public class MurkyBayouBiome extends TBOBiome
-{
-	public MurkyBayouBiome()
-	{
+public class MurkyBayouBiome extends TBOBiome {
+	public MurkyBayouBiome() {
 		super(BiomeFactory.create(-0.14F, 0.1F, Biome.Category.SWAMP).setTemperatureDownfall(0.9F, 0.75F).setWaterProperties(0x2c9943, 0x28b747).setCustomSkyColour(0x7fdbd0).setRiverType(RiverType.NONE).setBaseBiome("tbo:bayou"));
 		
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
@@ -51,20 +48,19 @@ public class MurkyBayouBiome extends TBOBiome
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.CREEPER, 65, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SLIME, 30, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 2, 1, 4));
-		
 	}
 	
 	@Environment(EnvType.CLIENT)
 	@Override
-	public int getGrassColorAt(BlockPos blockPos_1)
+	public int getGrassColorAt(double x, double z)
 	{
-		double double_1 = FOLIAGE_NOISE.sample((double)blockPos_1.getX() * 0.0225D, (double)blockPos_1.getZ() * 0.0225D);
+		double double_1 = FOLIAGE_NOISE.sample(x * 0.0225D, z * 0.0225D, false);
 		return double_1 < -0.1D ? 0x679147 : 0x99883d;
 	}
 
 	@Environment(EnvType.CLIENT)
 	@Override
-	public int getFoliageColorAt(BlockPos blockPos_1)
+	public int getFoliageColorAt()
 	{
 		return 0x99883d;
 	}

@@ -6,11 +6,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-public class WoodedMountainPeaksBiome extends TBOBiome
-{
-
-	public WoodedMountainPeaksBiome()
-	{
+public class WoodedMountainPeaksBiome extends TBOBiome {
+	public WoodedMountainPeaksBiome() {
 		super(BiomeFactory.create(2.65F, 0.35F, Biome.Category.EXTREME_HILLS).setSurfaceBuilder(SurfaceBuilder.MOUNTAIN).setTemperatureDownfall(0.2F, 0.4F).setSpawnChance(0.04F).setBaseBiome("mountains"));
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDefaultLakes(this);

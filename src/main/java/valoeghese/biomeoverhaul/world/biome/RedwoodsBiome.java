@@ -23,11 +23,11 @@ public class RedwoodsBiome extends TBOBiome
 		
 		this.theBiomePopulator.treesPerChunk = 30;
 		
-		this.theBiomePopulator.addTreeFeature(TBOFeatures.REDWOOD, 0.2F);
-		this.theBiomePopulator.addTreeFeature(TBOFeatures.LARGE_SHRUB, 1.5F);
-		this.theBiomePopulator.addTreeFeature(TBOFeatures.SMALL_REDWOOD, 2);
-		this.theBiomePopulator.addTreeFeature(Feature.PINE_TREE, 1);
-		this.theBiomePopulator.addTreeFeature(Feature.DARK_OAK_TREE, 0.4F);
+		this.theBiomePopulator.addTreeFeature(TBOFeatures.REDWOOD, FeatureConfig.DEFAULT, 0.2F);
+		this.theBiomePopulator.addTreeFeature(TBOFeatures.LARGE_SHRUB, FeatureConfig.DEFAULT, 1.5F);
+		this.theBiomePopulator.addTreeFeature(TBOFeatures.SMALL_REDWOOD, FeatureConfig.DEFAULT, 2);
+		this.theBiomePopulator.addTreeFeature(Feature.NORMAL_TREE, DefaultBiomeFeatures.PINE_TREE_CONFIG, 1);
+		this.theBiomePopulator.addTreeFeature(Feature.DARK_OAK_TREE, DefaultBiomeFeatures.DARK_OAK_TREE_CONFIG, 0.4F);
 		
 		this.theBiomePopulator.buildTreeFeatures();
 		

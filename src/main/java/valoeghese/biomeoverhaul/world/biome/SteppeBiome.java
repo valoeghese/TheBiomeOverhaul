@@ -5,7 +5,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
@@ -16,16 +15,13 @@ import net.minecraft.world.gen.feature.BoulderFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class SteppeBiome extends TBOBiome
-{
-
-	public SteppeBiome()
-	{
+public class SteppeBiome extends TBOBiome {
+	public SteppeBiome() {
 		super(BiomeFactory.create(0.4F, 0.09F, Biome.Category.PLAINS).setTemperatureDownfall(0.3F, 0.1F));
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDesertLakes(this);
 		this.theBiomeFactory.addDefaultMineables();
-		this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, Biome.configureFeature(Feature.FOREST_ROCK, new BoulderFeatureConfig(Blocks.STONE.getDefaultState(), 0), Decorator.FOREST_ROCK, new CountDecoratorConfig(3)));
+		this.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, TBOBiome.configure(Feature.FOREST_ROCK, new BoulderFeatureConfig(Blocks.STONE.getDefaultState(), 0), Decorator.FOREST_ROCK, new CountDecoratorConfig(3)));
 		CustomBiomeFeatures.addSteppeTrees(this);
 		DefaultBiomeFeatures.addDefaultGrass(this);
 		DefaultBiomeFeatures.addPlainsTallGrass(this);
@@ -50,12 +46,10 @@ public class SteppeBiome extends TBOBiome
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
 	}
-	
+
 	@Override
 	@Environment(EnvType.CLIENT)
-	public int getGrassColorAt(BlockPos pos)
-	{
-		return Biomes.DESERT.getGrassColorAt(pos);
+	public int getGrassColorAt(double x, double z) {
+		return Biomes.DESERT.getGrassColorAt(x, z);
 	}
-
 }

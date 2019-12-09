@@ -8,16 +8,13 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
 
-public class ShieldBiome extends Biome
-{
-	public ShieldBiome()
-	{
-		super(new Biome.Settings().configureSurfaceBuilder(CustomSurfaceBuilders.SHIELD_BUILDER, SurfaceBuilder.GRASS_CONFIG).precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP).depth(-0.075F).scale(0.12F).temperature(0.3F).downfall(0.6F).waterColor(4159204).waterFogColor(329011).parent((String)null));
-		
+public class ShieldBiome extends TBOBiome {
+	public ShieldBiome() {
+		super(BiomeFactory.create(-0.075f, 0.12f, Biome.Category.SWAMP).setSurfaceBuilder(CustomSurfaceBuilders.SHIELD_BUILDER).setTemperatureDownfall(0.3F, 0.6F));
+
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
 		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
 		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
@@ -50,7 +47,7 @@ public class ShieldBiome extends Biome
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.CREEPER, 65, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.SLIME, 30, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 2, 1, 4));
-		
+
 	}
 
 }

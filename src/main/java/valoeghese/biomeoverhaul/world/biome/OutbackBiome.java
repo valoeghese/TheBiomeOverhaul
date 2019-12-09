@@ -8,18 +8,14 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.PillagerOutpostFeatureConfig;
 import net.minecraft.world.gen.feature.VillageFeatureConfig;
+import valoeghese.biomeoverhaul.api.modifier.RiverType;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
-import valoeghese.biomeoverhaul.world.biome.BiomeFactory.RiverType;
+import valoeghese.biomeoverhaul.world.pseudo.PillagerOutpostFeatureConfig;
 
-public class OutbackBiome extends TBOBiome
-{
-
-	public OutbackBiome()
-	{
+public class OutbackBiome extends TBOBiome {
+	public OutbackBiome() {
 		super(BiomeFactory.create(0.125F, 0.05F, Biome.Precipitation.NONE, Biome.Category.SAVANNA).setSurfaceBuilder(CustomSurfaceBuilders.OUTBACK_BUILDER).setTemperatureDownfall(1.8F, 0.3F).setRiverType(RiverType.NONE).setSpawnChance(0.03F));
 
 		this.addStructureFeature(Feature.VILLAGE, new VillageFeatureConfig("village/savanna/town_centers", 3));
@@ -33,7 +29,7 @@ public class OutbackBiome extends TBOBiome
 		DefaultBiomeFeatures.addDesertDeadBushes(this);
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
 		DefaultBiomeFeatures.addDefaultVegetation(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.CACTUS, FeatureConfig.DEFAULT, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(2)));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.CACTUS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(2))));
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addFrozenTopLayer(this);
 		this.addSpawn(EntityCategory.CREATURE, new Biome.SpawnEntry(EntityType.RABBIT, 10, 4, 4));

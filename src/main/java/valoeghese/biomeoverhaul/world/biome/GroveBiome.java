@@ -8,17 +8,13 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
 
-public class GroveBiome extends Biome
-{
-	
-	public GroveBiome()
-	{
-		super(new Biome.Settings().configureSurfaceBuilder(CustomSurfaceBuilders.GROVE_BUILDER, SurfaceBuilder.GRASS_CONFIG).precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST).depth(0.2F).scale(0.09F).temperature(0.68F).downfall(0.65F).waterColor(4159204).waterFogColor(329011).parent((String)null));
-		
+public class GroveBiome extends TBOBiome {
+	public GroveBiome() {
+		super(BiomeFactory.create(0.2f, 0.09f, Biome.Category.FOREST).setSurfaceBuilder(CustomSurfaceBuilders.GROVE_BUILDER).setTemperatureDownfall(0.68F, 0.65F));
+
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
 		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
 		DefaultBiomeFeatures.addLandCarvers(this);

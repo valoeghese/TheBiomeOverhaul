@@ -14,19 +14,16 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import valoeghese.biomeoverhaul.world.CustomBiomeFeatures;
 
-public class SubtropicalRainforestBiome extends TBOBiome
-{
-
-	public SubtropicalRainforestBiome()
-	{
+public class SubtropicalRainforestBiome extends TBOBiome {
+	public SubtropicalRainforestBiome() {
 		super(BiomeFactory.create(0.21F, 0.26F, Category.FOREST).setSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA).setTemperatureDownfall(0.7F, 0.99F).setSpawnChance(0.23F));
-		
+
 		this.addStructureFeature(Feature.WOODLAND_MANSION, FeatureConfig.DEFAULT);
 		this.addStructureFeature(Feature.JUNGLE_TEMPLE, FeatureConfig.DEFAULT);
 		this.theBiomeFactory.addDefaultGeneration();
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		this.theBiomeFactory.addDefaultMineables();
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Biome.configureFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.CLAY.getDefaultState(), 12), Decorator.COUNT_RANGE, new RangeDecoratorConfig(8, 2, 0, 72)));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, TBOBiome.configure(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, Blocks.CLAY.getDefaultState(), 12), Decorator.COUNT_RANGE, new RangeDecoratorConfig(8, 2, 0, 72)));
 		CustomBiomeFeatures.addPalms(this);
 		CustomBiomeFeatures.addSubtropicalRainforestTrees(this);
 		DefaultBiomeFeatures.addExtraDefaultFlowers(this);

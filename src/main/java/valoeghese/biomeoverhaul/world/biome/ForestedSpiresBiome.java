@@ -5,14 +5,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
 import valoeghese.biomeoverhaul.world.feature.TBOFeatures;
 
-public class ForestedSpiresBiome extends TBOBiome
-{
-
-	public ForestedSpiresBiome()
-	{
+public class ForestedSpiresBiome extends TBOBiome {
+	public ForestedSpiresBiome() {
 		super(BiomeFactory.create(0.2F, 0.12F, Category.FOREST).setSurfaceBuilder(CustomSurfaceBuilders.FORESTED_SPIRES_BUILDER).setTemperatureDownfall(0.64F, 0.6F));
 		
 		this.theBiomeFactory.addDefaultGeneration();
@@ -20,11 +18,11 @@ public class ForestedSpiresBiome extends TBOBiome
 		
 		this.theBiomePopulator.treesPerChunk = 18;
 		
-		this.theBiomePopulator.addTreeFeature(TBOFeatures.LARGE_SHRUB, 3);
-		this.theBiomePopulator.addTreeFeature(Feature.JUNGLE_TREE, 3);
-		this.theBiomePopulator.addTreeFeature(Feature.NORMAL_TREE, 3);
-		this.theBiomePopulator.addTreeFeature(Feature.FANCY_TREE, 2);
-		this.theBiomePopulator.addTreeFeature(Feature.DARK_OAK_TREE, 0.1F);
+		this.theBiomePopulator.addTreeFeature(TBOFeatures.LARGE_SHRUB, FeatureConfig.DEFAULT, 3);
+		this.theBiomePopulator.addTreeFeature(Feature.NORMAL_TREE, DefaultBiomeFeatures.JUNGLE_TREE_CONFIG, 3);
+		this.theBiomePopulator.addTreeFeature(Feature.NORMAL_TREE, DefaultBiomeFeatures.OAK_TREE_CONFIG, 3);
+		this.theBiomePopulator.addTreeFeature(Feature.FANCY_TREE, DefaultBiomeFeatures.FANCY_TREE_CONFIG, 2);
+		this.theBiomePopulator.addTreeFeature(Feature.DARK_OAK_TREE, DefaultBiomeFeatures.DARK_OAK_TREE_CONFIG, 0.1F);
 		
 		this.theBiomePopulator.buildTreeFeatures();
 		

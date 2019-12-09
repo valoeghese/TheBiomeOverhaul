@@ -8,15 +8,11 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import valoeghese.biomeoverhaul.world.CustomSurfaceBuilders;
 
-public class TundraBiome extends Biome
-{
-
-	public TundraBiome()
-	{
-		super((new Biome.Settings()).configureSurfaceBuilder(CustomSurfaceBuilders.TUNDRA_BUILDER, SurfaceBuilder.GRASS_CONFIG).precipitation(Biome.Precipitation.RAIN).category(Biome.Category.PLAINS).depth(0.125F).scale(0.08F).temperature(0.3F).downfall(0.5F).waterColor(4159204).waterFogColor(329011).parent((String)null));
+public class TundraBiome extends TBOBiome {
+	public TundraBiome() {
+		super(BiomeFactory.create(0.125F, 0.08F, Biome.Category.PLAINS).setSurfaceBuilder(CustomSurfaceBuilders.TUNDRA_BUILDER).setTemperatureDownfall(0.3F, 0.5F));
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
 		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
 		DefaultBiomeFeatures.addLandCarvers(this);
@@ -45,10 +41,9 @@ public class TundraBiome extends Biome
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
 	}
-	
+
 	@Override
-	public float getMaxSpawnLimit()
-	{
-	      return 0.05F;
+	public float getMaxSpawnLimit() {
+		return 0.05F;
 	}
 }
