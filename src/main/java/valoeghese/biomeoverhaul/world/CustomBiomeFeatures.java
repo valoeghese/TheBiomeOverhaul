@@ -186,10 +186,10 @@ public class CustomBiomeFeatures
 
 	public static void addFlowerFieldFlowers(Biome biome_1)
 	{
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TBOBiome.configure(Feature.RANDOM_PATCH, POPPY, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(55)));
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TBOBiome.configure(Feature.RANDOM_PATCH, DANDELION, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(49)));
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TBOBiome.configure(Feature.RANDOM_PATCH, AZURE_BLUET, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(39)));
-		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TBOBiome.configure(Feature.RANDOM_PATCH, CORNFLOWER, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(27)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TBOBiome.configure(Feature.RANDOM_PATCH, POPPY, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(6)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TBOBiome.configure(Feature.RANDOM_PATCH, DANDELION, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(6)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TBOBiome.configure(Feature.RANDOM_PATCH, AZURE_BLUET, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(3)));
+		biome_1.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TBOBiome.configure(Feature.RANDOM_PATCH, CORNFLOWER, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(2)));
 	}
 
 	public static RandomPatchFeatureConfig createForFlower(BlockState state) {

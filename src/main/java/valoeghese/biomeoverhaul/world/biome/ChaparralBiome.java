@@ -38,7 +38,7 @@ public class ChaparralBiome extends TBOBiome {
 						Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.ROSE_BUSH_CONFIG),
 						Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.PEONY_CONFIG),
 						Feature.FLOWER.configure(CustomBiomeFeatures.CORNFLOWER)), 0),
-				Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(5)));
+				Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(10)));
 		DefaultBiomeFeatures.addDefaultVegetation(this);
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addFrozenTopLayer(this);
